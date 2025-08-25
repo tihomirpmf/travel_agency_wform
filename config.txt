@@ -1,0 +1,3 @@
+Travel Agency
+Data Source=travel_agency.db
+# For MySQL, use: Server=localhost;Database=travel_agency;Uid=username;Pwd=password;
