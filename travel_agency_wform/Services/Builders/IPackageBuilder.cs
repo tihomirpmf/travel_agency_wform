@@ -6,10 +6,12 @@ namespace travel_agency_wform.Services.Builders
     // Purpose: Provides fluent API for complex object creation with different package types
     public interface IPackageBuilder
     {
+        IPackageBuilder SetId(int id);
         IPackageBuilder SetName(string name);
         IPackageBuilder SetPrice(decimal price);
         IPackageBuilder SetDestination(string destination);
         IPackageBuilder SetNumberOfDays(int days);
+        IPackageBuilder SetCreatedAt(DateTime createdAt);
         TravelPackage Build();
     }
 }

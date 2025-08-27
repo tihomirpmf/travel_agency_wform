@@ -18,12 +18,17 @@ namespace travel_agency_wform.Services.Security
         private DataEncryptionService()
         {
             // In a real application, these would be stored securely (e.g., Azure Key Vault, AWS KMS)
-            // For demo purposes, using hardcoded values
+            // For demo purposes, using hardcoded values that are properly sized for AES-256
             var keyString = "YourSecretKey12345678901234567890123456789012"; // 32 bytes for AES-256
             var ivString = "YourSecretIV123456"; // 16 bytes for AES
             
-            _key = Encoding.UTF8.GetBytes(keyString);
-            _iv = Encoding.UTF8.GetBytes(ivString);
+            // Ensure proper key size (32 bytes for AES-256)
+            using var sha256 = SHA256.Create();
+            _key = sha256.ComputeHash(Encoding.UTF8.GetBytes(keyString));
+            
+            // Ensure proper IV size (16 bytes)
+            using var md5 = MD5.Create();
+            _iv = md5.ComputeHash(Encoding.UTF8.GetBytes(ivString));
         }
         
         public string Encrypt(string plainText)

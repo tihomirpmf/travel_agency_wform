@@ -3,6 +3,8 @@ using System.Data.Common;
 
 namespace travel_agency_wform.Services.Database
 {
+    // Strategy Pattern: Concrete implementation for SQLite connection strategy
+    // Purpose: Encapsulates SQLite-specific connection creation and management
     public class SqliteConnectionFactory : IDatabaseConnection
     {
         private readonly string _connectionString;

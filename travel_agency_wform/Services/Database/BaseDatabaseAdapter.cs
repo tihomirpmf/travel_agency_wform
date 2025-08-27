@@ -8,15 +8,15 @@ namespace travel_agency_wform.Services.Database
     // Purpose: Provides common database functionality with database-specific implementations
     public abstract class BaseDatabaseAdapter : IDatabaseAdapter
     {
-        protected readonly string _connectionString;
+        protected readonly IDatabaseConnection _connectionFactory;
         
-        protected BaseDatabaseAdapter(string connectionString)
+        protected BaseDatabaseAdapter(IDatabaseConnection connectionFactory)
         {
-            _connectionString = connectionString;
+            _connectionFactory = connectionFactory;
         }
         
         // Abstract methods for database-specific operations
-        protected abstract DbConnection CreateConnection();
+        protected virtual DbConnection CreateConnection() => _connectionFactory.CreateConnection();
         protected abstract DbCommand CreateCommand(string sql, DbConnection connection);
         protected abstract void AddParameter(DbCommand command, string name, object value);
         protected abstract string GetLastInsertIdSql();
@@ -418,12 +418,12 @@ namespace travel_agency_wform.Services.Database
             var templateType = GetBackupTemplateType();
             if (templateType == "Sqlite")
             {
-                var template = new Templates.SqliteBackupTemplate(_connectionString);
+                var template = new Templates.SqliteBackupTemplate(_connectionFactory.GetConnectionString());
                 return await template.RunAsync();
             }
             else
             {
-                var template = new Templates.MySqlBackupTemplate(_connectionString);
+                var template = new Templates.MySqlBackupTemplate(_connectionFactory.GetConnectionString());
                 return await template.RunAsync();
             }
         }
@@ -448,23 +448,104 @@ namespace travel_agency_wform.Services.Database
             return client;
         }
         
-        protected virtual Reservation CreateReservationFromReader(DbDataReader reader)
+        // Helper methods for null-checking
+        protected virtual string GetStringOrEmpty(DbDataReader reader, string columnName)
         {
-            return new Reservation
-            {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                ClientId = reader.GetInt32(reader.GetOrdinal("ClientId")),
-                PackageId = reader.GetInt32(reader.GetOrdinal("PackageId")),
-                ReservationDate = GetDateTime(reader, "ReservationDate"),
-                NumberOfTravelers = reader.GetInt32(reader.GetOrdinal("NumberOfTravelers")),
-                TotalPrice = reader.GetDecimal(reader.GetOrdinal("TotalPrice")),
-                Status = (ReservationStatus)reader.GetInt32(reader.GetOrdinal("Status")),
-                Client = new Client { FirstName = reader.GetString(reader.GetOrdinal("FirstName")), LastName = reader.GetString(reader.GetOrdinal("LastName")) },
-                Package = new SeasidePackage { Name = reader.GetString(reader.GetOrdinal("PackageName")) }
-            };
+            return reader.IsDBNull(reader.GetOrdinal(columnName)) ? "" : reader.GetString(reader.GetOrdinal(columnName));
         }
         
-        protected abstract TravelPackage? CreatePackageFromReader(DbDataReader reader);
+        protected virtual DateTime GetDateTimeOrMinValue(DbDataReader reader, string columnName)
+        {
+            return reader.IsDBNull(reader.GetOrdinal(columnName)) ? DateTime.MinValue : GetDateTime(reader, columnName);
+        }
+        
+        protected virtual List<string> GetStringListOrEmpty(DbDataReader reader, string columnName)
+        {
+            var value = GetStringOrEmpty(reader, columnName);
+            return string.IsNullOrEmpty(value) ? new List<string>() : value.Split(',').ToList();
+        }
+        
+        // Template method for creating packages from reader
+        protected virtual TravelPackage? CreatePackageFromReader(DbDataReader reader)
+        {
+            var type = (PackageType)reader.GetInt32(reader.GetOrdinal("Type"));
+            var builder = GetPackageBuilder(type);
+            
+            // Set common properties
+            builder.SetId(reader.GetInt32(reader.GetOrdinal("Id")))
+                   .SetName(reader.GetString(reader.GetOrdinal("Name")))
+                   .SetPrice(reader.GetDecimal(reader.GetOrdinal("Price")))
+                   .SetDestination(reader.GetString(reader.GetOrdinal("Destination")))
+                   .SetNumberOfDays(reader.GetInt32(reader.GetOrdinal("NumberOfDays")))
+                   .SetCreatedAt(GetDateTime(reader, "CreatedAt"));
+            
+            // Set type-specific properties using template method pattern
+            SetTypeSpecificProperties(builder, reader, type);
+            
+            return builder.Build();
+        }
+        
+        // Template method for setting type-specific properties
+        protected virtual void SetTypeSpecificProperties(IPackageBuilder builder, DbDataReader reader, PackageType type)
+        {
+            switch (type)
+            {
+                case PackageType.Seaside:
+                    var seasideBuilder = (SeasidePackageBuilder)builder;
+                    seasideBuilder.SetAccommodationType(GetStringOrEmpty(reader, "AccommodationType"))
+                                 .SetTransportationType(GetStringOrEmpty(reader, "TransportationType"));
+                    break;
+                    
+                case PackageType.Mountain:
+                    var mountainBuilder = (MountainPackageBuilder)builder;
+                    mountainBuilder.SetAccommodationType(GetStringOrEmpty(reader, "AccommodationType"))
+                                  .SetTransportationType(GetStringOrEmpty(reader, "TransportationType"))
+                                  .SetActivities(GetStringListOrEmpty(reader, "Activities"));
+                    break;
+                    
+                case PackageType.Excursion:
+                    var excursionBuilder = (ExcursionPackageBuilder)builder;
+                    excursionBuilder.SetTransportationType(GetStringOrEmpty(reader, "TransportationType"))
+                                   .SetGuide(GetStringOrEmpty(reader, "Guide"));
+                    break;
+                    
+                case PackageType.Cruise:
+                    var cruiseBuilder = (CruisePackageBuilder)builder;
+                    cruiseBuilder.SetShip(GetStringOrEmpty(reader, "Ship"))
+                                .SetRoute(GetStringOrEmpty(reader, "Route"))
+                                .SetDepartureDate(GetDateTimeOrMinValue(reader, "DepartureDate"))
+                                .SetCabinType(GetStringOrEmpty(reader, "CabinType"))
+                                .SetTransportationType(GetStringOrEmpty(reader, "TransportationType"));
+                    break;
+            }
+        }
+        
+        protected virtual Reservation CreateReservationFromReader(DbDataReader reader)
+        {
+            return new ReservationBuilder()
+                .SetId(reader.GetInt32(reader.GetOrdinal("Id")))
+                .SetClientId(reader.GetInt32(reader.GetOrdinal("ClientId")))
+                .SetPackageId(reader.GetInt32(reader.GetOrdinal("PackageId")))
+                .SetReservationDate(GetDateTime(reader, "ReservationDate"))
+                .SetNumberOfTravelers(reader.GetInt32(reader.GetOrdinal("NumberOfTravelers")))
+                .SetTotalPrice(reader.GetDecimal(reader.GetOrdinal("TotalPrice")))
+                .SetStatus((ReservationStatus)reader.GetInt32(reader.GetOrdinal("Status")))
+                .SetClient(new Client { FirstName = reader.GetString(reader.GetOrdinal("FirstName")), LastName = reader.GetString(reader.GetOrdinal("LastName")) })
+                .SetPackage(new SeasidePackage { Name = reader.GetString(reader.GetOrdinal("PackageName")) })
+                .Build();
+        }
+        
+        protected virtual IPackageBuilder GetPackageBuilder(PackageType type)
+        {
+            return type switch
+            {
+                PackageType.Seaside => new SeasidePackageBuilder(),
+                PackageType.Mountain => new MountainPackageBuilder(),
+                PackageType.Excursion => new ExcursionPackageBuilder(),
+                PackageType.Cruise => new CruisePackageBuilder(),
+                _ => throw new ArgumentException($"Unknown package type: {type}")
+            };
+        }
         
         // Package type-specific helper methods
         protected virtual string GetAccommodationType(TravelPackage package)

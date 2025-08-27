@@ -1,5 +1,7 @@
 namespace travel_agency_wform
 {
+    // Application Entry Point: Main program class
+    // Purpose: Initializes the Windows Forms application and launches the main form
     internal static class Program
     {
         /// <summary>

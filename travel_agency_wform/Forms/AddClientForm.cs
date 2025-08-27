@@ -1,20 +1,18 @@
 using travel_agency_wform.Models;
 using travel_agency_wform.Services;
-using travel_agency_wform.Services.Observers;
-using travel_agency_wform.Services.Commands;
 
 namespace travel_agency_wform.Forms
 {
+    // Service Layer Integration: Form that uses TravelAgencyService for client operations
+    // Purpose: Demonstrates UI integration with service layer and data validation
     public partial class AddClientForm : Form
     {
         private readonly ITravelAgencyService _agencyService;
-        private readonly CommandInvoker _commandInvoker;
         
         public AddClientForm(ITravelAgencyService agencyService)
         {
             InitializeComponent();
             _agencyService = agencyService;
-            _commandInvoker = CommandInvoker.Instance;
             
             // Set up date picker
             dateTimePickerDateOfBirth.MaxDate = DateTime.Today;
@@ -39,15 +37,13 @@ namespace travel_agency_wform.Forms
                 {
                     _ = Task.Run(async () =>
                     {
-                        // Create and execute command
-                        var command = new AddClientCommand(_agencyService, client);
-                        var success = await _commandInvoker.ExecuteCommandAsync(command);
+                        var success = await _agencyService.AddClientAsync(client);
                         
                         if (InvokeRequired)
                         {
                             Invoke(new Action(() =>
                             {
-                                if (success)
+                                if (success > 0)
                                 {
                                     MessageBox.Show("Client added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     DialogResult = DialogResult.OK;

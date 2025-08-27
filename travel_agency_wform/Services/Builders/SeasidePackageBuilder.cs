@@ -6,12 +6,20 @@ namespace travel_agency_wform.Services.Builders
     // Purpose: Encapsulates SeasidePackage creation logic with fluent interface
     public class SeasidePackageBuilder : IPackageBuilder
     {
+        private int _id;
         private string _name = string.Empty;
         private decimal _price;
         private string _destination = string.Empty;
         private int _numberOfDays;
+        private DateTime _createdAt = DateTime.Now;
         private string _accommodationType = string.Empty;
         private string _transportationType = string.Empty;
+        
+        public IPackageBuilder SetId(int id)
+        {
+            _id = id;
+            return this;
+        }
         
         public IPackageBuilder SetName(string name)
         {
@@ -37,6 +45,12 @@ namespace travel_agency_wform.Services.Builders
             return this;
         }
         
+        public IPackageBuilder SetCreatedAt(DateTime createdAt)
+        {
+            _createdAt = createdAt;
+            return this;
+        }
+        
         public SeasidePackageBuilder SetAccommodationType(string accommodationType)
         {
             _accommodationType = accommodationType;
@@ -53,10 +67,12 @@ namespace travel_agency_wform.Services.Builders
         {
             return new SeasidePackage
             {
+                Id = _id,
                 Name = _name,
                 Price = _price,
                 Destination = _destination,
                 NumberOfDays = _numberOfDays,
+                CreatedAt = _createdAt,
                 Type = PackageType.Seaside,
                 AccommodationType = _accommodationType,
                 TransportationType = _transportationType

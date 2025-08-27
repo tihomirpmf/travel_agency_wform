@@ -19,7 +19,6 @@ namespace travel_agency_wform.Services
             
             // Abstract Factory: choose provider and get matching adapter
             var provider = DatabaseFactory.CreateProvider();
-            _ = provider.CreateConnection(connectionString); // ensure provider is valid; connection can be used as needed
             _databaseAdapter = provider.CreateAdapter(connectionString);
         }
         

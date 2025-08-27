@@ -3,9 +3,11 @@ using travel_agency_wform.Services;
 
 namespace travel_agency_wform.Forms
 {
+    // Service Layer Integration: Form that uses TravelAgencyService for reservation editing
+    // Purpose: Demonstrates UI integration with service layer for data modification operations
     public partial class ReservationEditForm : Form
     {
-        private readonly ITravelAgencyService _service;
+        private readonly ITravelAgencyService _agencyService;
         private readonly Reservation _reservation;
         
         private ComboBox _comboPackages = null!;
@@ -17,7 +19,7 @@ namespace travel_agency_wform.Forms
         
         public ReservationEditForm(ITravelAgencyService service, Reservation reservation)
         {
-            _service = service;
+            _agencyService = service;
             _reservation = reservation;
             InitializeComponent();
         }
@@ -71,7 +73,7 @@ namespace travel_agency_wform.Forms
                     var perPerson = (decimal)_numericPrice.Value;
                     _reservation.TotalPrice = perPerson * _reservation.NumberOfTravelers;
                     
-                    var success = await _service.UpdateReservationAsync(_reservation);
+                    var success = await _agencyService.UpdateReservationAsync(_reservation);
                     if (success)
                     {
                         MessageBox.Show("Reservation updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -114,7 +116,7 @@ namespace travel_agency_wform.Forms
                     }
                     var confirm = MessageBox.Show("Permanently delete this reservation?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (confirm != DialogResult.Yes) return;
-                    var ok = await _service.DeleteReservationAsync(_reservation.Id);
+                    var ok = await _agencyService.DeleteReservationAsync(_reservation.Id);
                     if (ok)
                     {
                         MessageBox.Show("Reservation deleted.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -138,7 +140,7 @@ namespace travel_agency_wform.Forms
             {
                 try
                 {
-                    var packages = await _service.GetAllPackagesAsync();
+                    var packages = await _agencyService.GetAllPackagesAsync();
                     _comboPackages.Items.Clear();
                     foreach (var p in packages)
                     {

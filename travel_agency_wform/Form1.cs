@@ -1,7 +1,6 @@
 using travel_agency_wform.Models;
 using travel_agency_wform.Services;
 using travel_agency_wform.Services.Observers;
-using travel_agency_wform.Services.Commands;
 using travel_agency_wform.Forms;
 
 namespace travel_agency_wform
@@ -12,7 +11,6 @@ namespace travel_agency_wform
     {
         private readonly ITravelAgencyService _agencyService;
         private readonly DataChangeNotifier _dataNotifier;
-        private readonly CommandInvoker _commandInvoker;
         
         private List<Client> _clients = new();
         private List<TravelPackage> _packages = new();
@@ -25,7 +23,6 @@ namespace travel_agency_wform
             
             _agencyService = new TravelAgencyService();
             _dataNotifier = DataChangeNotifier.Instance;
-            _commandInvoker = CommandInvoker.Instance;
             
             // Subscribe to data changes
             _dataNotifier.Subscribe(this);
@@ -35,9 +32,7 @@ namespace travel_agency_wform
 
             // Initialize the form
             InitializeFormAsync();
-            
-            // Initialize command pattern UI
-            InitializeCommandPatternUI();
+
         }
         
         private async void InitializeFormAsync()
@@ -172,53 +167,7 @@ namespace travel_agency_wform
             }
         }
         
-        private void InitializeCommandPatternUI()
-        {
-            // Update undo/redo button states
-            UpdateUndoRedoButtons();
-            
-            // Set up command history display
-            UpdateCommandHistoryDisplay();
-        }
-        
-        private void UpdateUndoRedoButtons()
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action(UpdateUndoRedoButtons));
-                return;
-            }
-            
-            buttonUndo.Enabled = _commandInvoker.CanUndo;
-            buttonRedo.Enabled = _commandInvoker.CanRedo;
-        }
-        
-        private void UpdateCommandHistoryDisplay()
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action(UpdateCommandHistoryDisplay));
-                return;
-            }
-            
-            listBoxCommandHistory.Items.Clear();
-            
-            var undoHistory = _commandInvoker.GetUndoHistory();
-            var redoHistory = _commandInvoker.GetRedoHistory();
-            
-            // Show recent commands (last 10)
-            var recentCommands = undoHistory.Take(10).Reverse();
-            foreach (var command in recentCommands)
-            {
-                listBoxCommandHistory.Items.Add($"✓ {command}");
-            }
-            
-            // Show redo commands
-            foreach (var command in redoHistory.Take(5))
-            {
-                listBoxCommandHistory.Items.Add($"↻ {command}");
-            }
-        }
+
         
 
         
@@ -266,8 +215,6 @@ namespace travel_agency_wform
             if (addClientForm.ShowDialog() == DialogResult.OK)
             {
                 // Data will be refreshed via observer pattern
-                UpdateUndoRedoButtons();
-                UpdateCommandHistoryDisplay();
             }
         }
         
@@ -277,8 +224,6 @@ namespace travel_agency_wform
             if (addPackageForm.ShowDialog() == DialogResult.OK)
             {
                 // Data will be refreshed via observer pattern
-                UpdateUndoRedoButtons();
-                UpdateCommandHistoryDisplay();
             }
         }
         
@@ -312,8 +257,6 @@ namespace travel_agency_wform
                 if (reservationForm.ShowDialog() == DialogResult.OK)
                 {
                     // Data will be refreshed via observer pattern
-                    UpdateUndoRedoButtons();
-                    UpdateCommandHistoryDisplay();
                 }
             }
         }
@@ -337,9 +280,6 @@ namespace travel_agency_wform
                 return;
             }
             
-            // Debug: Show the reservation details
-            System.Diagnostics.Debug.WriteLine($"Selected reservation: ID={selectedReservation.Id}, Status={selectedReservation.Status}, ClientId={selectedReservation.ClientId}, PackageId={selectedReservation.PackageId}");
-            
             // Check if the reservation is already cancelled
             if (selectedReservation.Status != ReservationStatus.Active)
             {
@@ -356,9 +296,7 @@ namespace travel_agency_wform
                 {
                     try
                     {
-                        // Create and execute command
-                        var command = new CancelReservationCommand(_agencyService, selectedReservation.Id);
-                        var success = await _commandInvoker.ExecuteCommandAsync(command);
+                        var success = await _agencyService.CancelReservationAsync(selectedReservation.Id);
                         
                         if (InvokeRequired)
                         {
@@ -367,8 +305,6 @@ namespace travel_agency_wform
                                 if (success)
                                 {
                                     MessageBox.Show("Reservation cancelled successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    UpdateUndoRedoButtons();
-                                    UpdateCommandHistoryDisplay();
                                     // Refresh the data to show the updated status
                                     _ = LoadAllDataAsync();
                                 }
@@ -401,8 +337,7 @@ namespace travel_agency_wform
             var editForm = new ReservationEditForm(_agencyService, reservation);
             if (editForm.ShowDialog() == DialogResult.OK)
             {
-                UpdateUndoRedoButtons();
-                UpdateCommandHistoryDisplay();
+                // Data will be refreshed via observer pattern
             }
         }
         
@@ -453,89 +388,5 @@ namespace travel_agency_wform
             dlg.ShowDialog(this);
         }
         
-        private void buttonUndo_Click(object sender, EventArgs e)
-        {
-            _ = Task.Run(async () =>
-            {
-                var success = await _commandInvoker.UndoAsync();
-                if (InvokeRequired)
-                {
-                    Invoke(new Action(() =>
-                    {
-                        if (success)
-                        {
-                            MessageBox.Show("Operation undone successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            UpdateUndoRedoButtons();
-                            UpdateCommandHistoryDisplay();
-                            // Refresh data to reflect changes
-                            _ = LoadAllDataAsync();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Failed to undo operation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }));
-                }
-            });
-        }
-        
-        private void buttonRedo_Click(object sender, EventArgs e)
-        {
-            _ = Task.Run(async () =>
-            {
-                var success = await _commandInvoker.RedoAsync();
-                if (InvokeRequired)
-                {
-                    Invoke(new Action(() =>
-                    {
-                        if (success)
-                        {
-                            MessageBox.Show("Operation redone successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            UpdateUndoRedoButtons();
-                            UpdateCommandHistoryDisplay();
-                            // Refresh data to reflect changes
-                            _ = LoadAllDataAsync();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Failed to redo operation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }));
-                }
-            });
-        }
-        
-        // Debug method to test database operations
-        private async void TestDatabaseOperations()
-        {
-            try
-            {
-                // Test getting all reservations
-                var allReservations = await _agencyService.GetAllReservationsAsync();
-                System.Diagnostics.Debug.WriteLine($"Total reservations in database: {allReservations.Count}");
-                
-                foreach (var reservation in allReservations)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Reservation ID: {reservation.Id}, Status: {reservation.Status}, ClientId: {reservation.ClientId}, PackageId: {reservation.PackageId}");
-                }
-                
-                // Test getting reservations for the selected client
-                if (_selectedClient != null)
-                {
-                    var clientReservations = allReservations.Where(r => r.ClientId == _selectedClient.Id).ToList();
-                    System.Diagnostics.Debug.WriteLine($"Reservations for client {_selectedClient.Id}: {clientReservations.Count}");
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Database test error: {ex.Message}");
-            }
-        }
-        
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            _dataNotifier.Unsubscribe(this);
-            base.OnFormClosing(e);
-        }
     }
 }

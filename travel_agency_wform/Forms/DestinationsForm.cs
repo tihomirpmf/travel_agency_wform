@@ -2,13 +2,15 @@ using travel_agency_wform.Services;
 
 namespace travel_agency_wform.Forms
 {
+    // Service Layer Integration: Form that uses TravelAgencyService for destination operations
+    // Purpose: Demonstrates UI integration with service layer for data retrieval operations
     public partial class DestinationsForm : Form
     {
-        private readonly ITravelAgencyService _service;
+        private readonly ITravelAgencyService _agencyService;
         
         public DestinationsForm(ITravelAgencyService service)
         {
-            _service = service;
+            _agencyService = service;
             InitializeComponent();
         }
         
@@ -30,7 +32,7 @@ namespace travel_agency_wform.Forms
             {
                 try
                 {
-                    var destinations = await _service.GetAllDestinationsAsync();
+                    var destinations = await _agencyService.GetAllDestinationsAsync();
                     list.Items.Clear();
                     foreach (var d in destinations)
                     {

@@ -1,13 +1,13 @@
 using travel_agency_wform.Models;
 using travel_agency_wform.Services;
-using travel_agency_wform.Services.Commands;
 
 namespace travel_agency_wform.Forms
 {
+    // Service Layer Integration: Form that uses TravelAgencyService for reservation operations
+    // Purpose: Demonstrates UI integration with service layer and business logic coordination
     public partial class ReservationForm : Form
     {
         private readonly ITravelAgencyService _agencyService;
-        private readonly CommandInvoker _commandInvoker;
         private readonly int _clientId;
         private readonly int _packageId;
         private Client? _client;
@@ -17,7 +17,6 @@ namespace travel_agency_wform.Forms
         {
             InitializeComponent();
             _agencyService = agencyService;
-            _commandInvoker = CommandInvoker.Instance;
             _clientId = clientId;
             _packageId = packageId;
             
@@ -80,26 +79,14 @@ namespace travel_agency_wform.Forms
                     var numberOfTravelers = (int)numericUpDownNumberOfTravelers.Value;
                     _ = Task.Run(async () =>
                     {
-                        // Create reservation object
-                        var reservation = new Reservation
-                        {
-                            ClientId = _clientId,
-                            PackageId = _packageId,
-                            ReservationDate = DateTime.Now,
-                            NumberOfTravelers = numberOfTravelers,
-                            TotalPrice = _package!.Price * numberOfTravelers,
-                            Status = ReservationStatus.Active
-                        };
-                        
-                        // Create and execute command
-                        var command = new ReservePackageCommand(_agencyService, reservation);
-                        var success = await _commandInvoker.ExecuteCommandAsync(command);
+                        // Direct service call instead of command pattern
+                        var success = await _agencyService.ReservePackageAsync(_clientId, _packageId, numberOfTravelers);
                         
                         if (InvokeRequired)
                         {
                             Invoke(new Action(() =>
                             {
-                                if (success)
+                                if (success > 0)
                                 {
                                     MessageBox.Show("Reservation confirmed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     DialogResult = DialogResult.OK;

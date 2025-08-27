@@ -6,12 +6,20 @@ namespace travel_agency_wform.Services.Builders
     // Purpose: Encapsulates ExcursionPackage creation logic with fluent interface and validation
     public class ExcursionPackageBuilder : IPackageBuilder
     {
+        private int _id;
         private string _name = string.Empty;
         private decimal _price;
         private string _destination = string.Empty;
         private int _numberOfDays;
+        private DateTime _createdAt = DateTime.Now;
         private string _transportationType = string.Empty;
         private string _guide = string.Empty;
+        
+        public IPackageBuilder SetId(int id)
+        {
+            _id = id;
+            return this;
+        }
         
         public IPackageBuilder SetName(string name)
         {
@@ -38,6 +46,12 @@ namespace travel_agency_wform.Services.Builders
             if (days <= 0)
                 throw new ArgumentException("Number of days must be greater than zero.");
             _numberOfDays = days;
+            return this;
+        }
+        
+        public IPackageBuilder SetCreatedAt(DateTime createdAt)
+        {
+            _createdAt = createdAt;
             return this;
         }
         
@@ -69,11 +83,13 @@ namespace travel_agency_wform.Services.Builders
             
             return new ExcursionPackage
             {
+                Id = _id,
                 Name = _name,
                 Price = _price,
                 Type = PackageType.Excursion,
                 Destination = _destination,
                 NumberOfDays = _numberOfDays,
+                CreatedAt = _createdAt,
                 TransportationType = _transportationType,
                 Guide = _guide
             };

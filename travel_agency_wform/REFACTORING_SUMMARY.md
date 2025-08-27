@@ -149,7 +149,7 @@ The following unused database operations were removed to clean up the codebase:
 - **Fixed builder usage** by calling specific methods before common interface methods
 
 #### **Updated:**
-- `AddClientCommand.UndoAsync()` - Now returns false since client deletion is not supported
+- Command pattern removed - direct service calls used instead
 
 ### Benefits of Cleanup
 - **Reduced code complexity** by removing ~200 lines of unused code

@@ -50,16 +50,13 @@
             this.groupBoxActions = new System.Windows.Forms.GroupBox();
             this.buttonViewDestinations = new System.Windows.Forms.Button();
             this.buttonBackup = new System.Windows.Forms.Button();
-            this.buttonUndo = new System.Windows.Forms.Button();
-            this.buttonRedo = new System.Windows.Forms.Button();
-            this.listBoxCommandHistory = new System.Windows.Forms.ListBox();
-            this.groupBoxCommandHistory = new System.Windows.Forms.GroupBox();
+
             this.groupBoxClients.SuspendLayout();
             this.groupBoxPackages.SuspendLayout();
             this.groupBoxReservations.SuspendLayout();
             this.groupBoxClientInfo.SuspendLayout();
             this.groupBoxActions.SuspendLayout();
-            this.groupBoxCommandHistory.SuspendLayout();
+
             this.SuspendLayout();
             // 
             // listBoxClients
@@ -255,8 +252,7 @@
             // 
             this.groupBoxActions.Controls.Add(this.buttonBackup);
             this.groupBoxActions.Controls.Add(this.buttonViewDestinations);
-            this.groupBoxActions.Controls.Add(this.buttonUndo);
-            this.groupBoxActions.Controls.Add(this.buttonRedo);
+
 
             this.groupBoxActions.Location = new System.Drawing.Point(360, 420);
             this.groupBoxActions.Name = "groupBoxActions";
@@ -274,28 +270,7 @@
             this.buttonViewDestinations.Text = "View Destinations";
             this.buttonViewDestinations.UseVisualStyleBackColor = true;
             this.buttonViewDestinations.Click += new System.EventHandler(this.buttonViewDestinations_Click);
-            // 
-            // buttonUndo
-            // 
-            this.buttonUndo.Enabled = false;
-            this.buttonUndo.Location = new System.Drawing.Point(6, 25);
-            this.buttonUndo.Name = "buttonUndo";
-            this.buttonUndo.Size = new System.Drawing.Size(145, 35);
-            this.buttonUndo.TabIndex = 3;
-            this.buttonUndo.Text = "↶ Undo";
-            this.buttonUndo.UseVisualStyleBackColor = true;
-            this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
-            // 
-            // buttonRedo
-            // 
-            this.buttonRedo.Enabled = false;
-            this.buttonRedo.Location = new System.Drawing.Point(161, 25);
-            this.buttonRedo.Name = "buttonRedo";
-            this.buttonRedo.Size = new System.Drawing.Size(145, 35);
-            this.buttonRedo.TabIndex = 4;
-            this.buttonRedo.Text = "↷ Redo";
-            this.buttonRedo.UseVisualStyleBackColor = true;
-            this.buttonRedo.Click += new System.EventHandler(this.buttonRedo_Click);
+
             // 
             // buttonBackup
             // 
@@ -306,32 +281,14 @@
             this.buttonBackup.Text = "Create Database Backup";
             this.buttonBackup.UseVisualStyleBackColor = true;
             this.buttonBackup.Click += new System.EventHandler(this.buttonBackup_Click);
-            // 
-                         // groupBoxCommandHistory
-             // 
-             this.groupBoxCommandHistory.Controls.Add(this.listBoxCommandHistory);
-             this.groupBoxCommandHistory.Location = new System.Drawing.Point(708, 420);
-             this.groupBoxCommandHistory.Name = "groupBoxCommandHistory";
-             this.groupBoxCommandHistory.Size = new System.Drawing.Size(320, 150);
-             this.groupBoxCommandHistory.TabIndex = 8;
-             this.groupBoxCommandHistory.TabStop = false;
-             this.groupBoxCommandHistory.Text = "Command History";
-            // 
-                         // listBoxCommandHistory
-             // 
-             this.listBoxCommandHistory.FormattingEnabled = true;
-             this.listBoxCommandHistory.ItemHeight = 15;
-             this.listBoxCommandHistory.Location = new System.Drawing.Point(6, 25);
-             this.listBoxCommandHistory.Name = "listBoxCommandHistory";
-             this.listBoxCommandHistory.Size = new System.Drawing.Size(308, 119);
-             this.listBoxCommandHistory.TabIndex = 0;
+            
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1180, 700);
-            this.Controls.Add(this.groupBoxCommandHistory);
+
             this.Controls.Add(this.groupBoxActions);
             this.Controls.Add(this.groupBoxClientInfo);
             this.Controls.Add(this.groupBoxReservations);
@@ -347,7 +304,7 @@
             this.groupBoxClientInfo.ResumeLayout(false);
             this.groupBoxClientInfo.PerformLayout();
             this.groupBoxActions.ResumeLayout(false);
-            this.groupBoxCommandHistory.ResumeLayout(false);
+
             this.ResumeLayout(false);
 
         }
@@ -375,10 +332,7 @@
         private System.Windows.Forms.Label labelClientPhone;
         private System.Windows.Forms.GroupBox groupBoxActions;
         private System.Windows.Forms.Button buttonBackup;
-        private System.Windows.Forms.Button buttonUndo;
-        private System.Windows.Forms.Button buttonRedo;
-        private System.Windows.Forms.ListBox listBoxCommandHistory;
-        private System.Windows.Forms.GroupBox groupBoxCommandHistory;
+
         private System.Windows.Forms.Button buttonViewDestinations;
     }
 }

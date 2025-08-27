@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace travel_agency_wform.Models
 {
+    // Data Validation Pattern + Singleton Integration: Client entity with validation and encryption
+    // Purpose: Demonstrates data validation through attributes and secure data handling
     public class Client
     {
         
