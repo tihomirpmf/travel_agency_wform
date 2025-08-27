@@ -6,14 +6,14 @@ namespace travel_agency_wform.Forms
 {
     public partial class ReservationForm : Form
     {
-        private readonly TravelAgencyService _agencyService;
+        private readonly ITravelAgencyService _agencyService;
         private readonly CommandInvoker _commandInvoker;
         private readonly int _clientId;
         private readonly int _packageId;
         private Client? _client;
         private TravelPackage? _package;
         
-        public ReservationForm(TravelAgencyService agencyService, int clientId, int packageId)
+        public ReservationForm(ITravelAgencyService agencyService, int clientId, int packageId)
         {
             InitializeComponent();
             _agencyService = agencyService;

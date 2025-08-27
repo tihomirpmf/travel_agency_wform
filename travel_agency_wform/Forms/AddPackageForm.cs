@@ -3,11 +3,13 @@ using travel_agency_wform.Services;
 
 namespace travel_agency_wform.Forms
 {
+    // Builder Pattern Usage: Form that creates different package types using builders
+    // Purpose: Demonstrates how the Builder pattern is used in the UI layer
     public partial class AddPackageForm : Form
     {
-        private readonly TravelAgencyService _agencyService;
+        private readonly ITravelAgencyService _agencyService;
         
-        public AddPackageForm(TravelAgencyService agencyService)
+        public AddPackageForm(ITravelAgencyService agencyService)
         {
             InitializeComponent();
             _agencyService = agencyService;
@@ -40,6 +42,7 @@ namespace travel_agency_wform.Forms
         
         private void ComboBoxPackageType_SelectedIndexChanged(object? sender, EventArgs? e)
         {
+            if (comboBoxPackageType.SelectedItem == null) return;
             var selectedType = (PackageType)comboBoxPackageType.SelectedItem;
             
             // Hide all type-specific panels first
@@ -72,6 +75,11 @@ namespace travel_agency_wform.Forms
             {
                 try
                 {
+                    if (comboBoxPackageType.SelectedItem == null)
+                    {
+                        MessageBox.Show("Please select a package type.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     var packageType = (PackageType)comboBoxPackageType.SelectedItem;
                     TravelPackage package;
                     
@@ -183,6 +191,11 @@ namespace travel_agency_wform.Forms
                 return false;
             }
             
+            if (comboBoxPackageType.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a package type.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
             var packageType = (PackageType)comboBoxPackageType.SelectedItem;
             
             switch (packageType)

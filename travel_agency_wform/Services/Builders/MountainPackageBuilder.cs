@@ -2,6 +2,8 @@ using travel_agency_wform.Models;
 
 namespace travel_agency_wform.Services.Builders
 {
+    // Builder Pattern: Concrete builder for MountainPackage objects
+    // Purpose: Encapsulates MountainPackage creation logic with fluent interface
     public class MountainPackageBuilder : IPackageBuilder
     {
         private string _name = string.Empty;

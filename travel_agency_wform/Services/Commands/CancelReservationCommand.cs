@@ -2,14 +2,16 @@ using travel_agency_wform.Models;
 
 namespace travel_agency_wform.Services.Commands
 {
+    // Command Pattern: Concrete command for canceling reservations
+    // Purpose: Encapsulates reservation cancellation with undo capability
     public class CancelReservationCommand : ICommand
     {
-        private readonly TravelAgencyService _service;
+        private readonly ITravelAgencyService _service;
         private readonly int _reservationId;
         private ReservationStatus _originalStatus;
         private bool _wasExecuted = false;
         
-        public CancelReservationCommand(TravelAgencyService service, int reservationId)
+        public CancelReservationCommand(ITravelAgencyService service, int reservationId)
         {
             _service = service;
             _reservationId = reservationId;

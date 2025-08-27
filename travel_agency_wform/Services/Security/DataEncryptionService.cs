@@ -3,6 +3,8 @@ using System.Text;
 
 namespace travel_agency_wform.Services.Security
 {
+    // Singleton Pattern: Ensures only one encryption service instance exists
+    // Purpose: Centralized encryption/decryption functionality with lazy initialization
     public class DataEncryptionService
     {
         private static readonly Lazy<DataEncryptionService> _instance = 

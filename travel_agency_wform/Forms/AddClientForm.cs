@@ -7,10 +7,10 @@ namespace travel_agency_wform.Forms
 {
     public partial class AddClientForm : Form
     {
-        private readonly TravelAgencyService _agencyService;
+        private readonly ITravelAgencyService _agencyService;
         private readonly CommandInvoker _commandInvoker;
         
-        public AddClientForm(TravelAgencyService agencyService)
+        public AddClientForm(ITravelAgencyService agencyService)
         {
             InitializeComponent();
             _agencyService = agencyService;

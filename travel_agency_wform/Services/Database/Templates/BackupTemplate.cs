@@ -2,6 +2,8 @@ using System.Text;
 
 namespace travel_agency_wform.Services.Database.Templates
 {
+    // Template Method Pattern: Defines backup algorithm skeleton
+    // Purpose: Provides consistent backup process structure with customizable steps
     public abstract class BackupTemplate
     {
         public async Task<bool> RunAsync()

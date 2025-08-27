@@ -1,5 +1,7 @@
 namespace travel_agency_wform.Models
 {
+    // Inheritance and Polymorphism Pattern: Abstract base class for travel packages
+    // Purpose: Provides common interface and behavior for different package types
     public abstract class TravelPackage
     {
         public int Id { get; set; }
@@ -23,6 +25,7 @@ namespace travel_agency_wform.Models
         Cruise
     }
     
+    // Inheritance and Polymorphism Pattern: Concrete implementation for seaside packages
     public class SeasidePackage : TravelPackage
     {
         public string AccommodationType { get; set; } = string.Empty;
@@ -34,6 +37,7 @@ namespace travel_agency_wform.Models
         }
     }
     
+    // Inheritance and Polymorphism Pattern: Concrete implementation for mountain packages
     public class MountainPackage : TravelPackage
     {
         public string AccommodationType { get; set; } = string.Empty;
@@ -47,6 +51,7 @@ namespace travel_agency_wform.Models
         }
     }
     
+    // Inheritance and Polymorphism Pattern: Concrete implementation for excursion packages
     public class ExcursionPackage : TravelPackage
     {
         public string TransportationType { get; set; } = string.Empty;
@@ -58,6 +63,7 @@ namespace travel_agency_wform.Models
         }
     }
     
+    // Inheritance and Polymorphism Pattern: Concrete implementation for cruise packages
     public class CruisePackage : TravelPackage
     {
         public string Ship { get; set; } = string.Empty;

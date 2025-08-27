@@ -2,6 +2,8 @@ using Microsoft.Data.Sqlite;
 
 namespace travel_agency_wform.Services.Database.Templates
 {
+    // Template Method Pattern: Concrete implementation for SQLite backup operations
+    // Purpose: Provides SQLite-specific backup functionality
     public class SqliteBackupTemplate : BackupTemplate
     {
         private readonly string _connectionString;

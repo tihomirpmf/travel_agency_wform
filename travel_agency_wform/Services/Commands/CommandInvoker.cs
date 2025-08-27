@@ -2,6 +2,8 @@ using System.Collections.Concurrent;
 
 namespace travel_agency_wform.Services.Commands
 {
+    // Command Pattern + Singleton Pattern: Manages command execution with undo/redo functionality
+    // Purpose: Centralized command management with history tracking and rollback capabilities
     public class CommandInvoker
     {
         private static readonly Lazy<CommandInvoker> _instance = 

@@ -2,6 +2,8 @@ using System.Collections.Concurrent;
 
 namespace travel_agency_wform.Services.Observers
 {
+    // Observer Pattern + Singleton Pattern: Subject that manages observer subscriptions and notifications
+    // Purpose: Centralized notification system for data changes across the application
     public class DataChangeNotifier
     {
         private static readonly Lazy<DataChangeNotifier> _instance = 
@@ -65,36 +67,6 @@ namespace travel_agency_wform.Services.Observers
             }
         }
         
-        public void NotifyClientUpdated(int clientId)
-        {
-            foreach (var observer in _observers)
-            {
-                try
-                {
-                    observer.OnClientUpdated(clientId);
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Error notifying observer: {ex.Message}");
-                }
-            }
-        }
-        
-        public void NotifyClientDeleted(int clientId)
-        {
-            foreach (var observer in _observers)
-            {
-                try
-                {
-                    observer.OnClientDeleted(clientId);
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Error notifying observer: {ex.Message}");
-                }
-            }
-        }
-        
         public void NotifyPackageAdded(int packageId)
         {
             foreach (var observer in _observers)
@@ -102,36 +74,6 @@ namespace travel_agency_wform.Services.Observers
                 try
                 {
                     observer.OnPackageAdded(packageId);
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Error notifying observer: {ex.Message}");
-                }
-            }
-        }
-        
-        public void NotifyPackageUpdated(int packageId)
-        {
-            foreach (var observer in _observers)
-            {
-                try
-                {
-                    observer.OnPackageUpdated(packageId);
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Error notifying observer: {ex.Message}");
-                }
-            }
-        }
-        
-        public void NotifyPackageDeleted(int packageId)
-        {
-            foreach (var observer in _observers)
-            {
-                try
-                {
-                    observer.OnPackageDeleted(packageId);
                 }
                 catch (Exception ex)
                 {

@@ -6,9 +6,11 @@ using travel_agency_wform.Forms;
 
 namespace travel_agency_wform
 {
+    // Observer Pattern: Main form implements IDataObserver to react to data changes
+    // Purpose: Enables automatic UI updates when underlying data changes
     public partial class Form1 : Form, IDataObserver
     {
-        private readonly TravelAgencyService _agencyService;
+        private readonly ITravelAgencyService _agencyService;
         private readonly DataChangeNotifier _dataNotifier;
         private readonly CommandInvoker _commandInvoker;
         
@@ -233,11 +235,7 @@ namespace travel_agency_wform
         }
         
         public void OnClientAdded(int clientId) => OnDataChanged("clients");
-        public void OnClientUpdated(int clientId) => OnDataChanged("clients");
-        public void OnClientDeleted(int clientId) => OnDataChanged("clients");
         public void OnPackageAdded(int packageId) => OnDataChanged("packages");
-        public void OnPackageUpdated(int packageId) => OnDataChanged("packages");
-        public void OnPackageDeleted(int packageId) => OnDataChanged("packages");
         public void OnReservationAdded(int reservationId) => OnDataChanged("reservations");
         public void OnReservationUpdated(int reservationId) => OnDataChanged("reservations");
         public void OnReservationCancelled(int reservationId) => OnDataChanged("reservations");
@@ -245,9 +243,9 @@ namespace travel_agency_wform
         // Event handlers
         private void listBoxClients_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxClients.SelectedIndex >= 0)
+            if (listBoxClients.SelectedIndex >= 0 && listBoxClients.SelectedItem != null)
             {
-                var selectedText = listBoxClients.SelectedItem.ToString();
+                var selectedText = listBoxClients.SelectedItem?.ToString() ?? "";
                 var passportNumber = selectedText.Split(" - ").Last();
                 _selectedClient = _clients.FirstOrDefault(c => c.PassportNumber == passportNumber);
                 
@@ -298,7 +296,7 @@ namespace travel_agency_wform
                 return;
             }
             
-            var selectedText = listBoxPackages.SelectedItem.ToString();
+            var selectedText = listBoxPackages.SelectedItem?.ToString() ?? "";
             if (selectedText.StartsWith("==="))
             {
                 MessageBox.Show("Please select a specific package, not a category header.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -395,7 +393,7 @@ namespace travel_agency_wform
             }
         }
 
-        private void listBoxReservations_DoubleClick(object sender, EventArgs e)
+        private void listBoxReservations_DoubleClick(object? sender, EventArgs e)
         {
             var reservation = listBoxReservations.SelectedItem as Reservation;
             if (reservation == null)
