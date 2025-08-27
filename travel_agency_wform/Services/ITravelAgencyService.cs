@@ -16,11 +16,11 @@ namespace travel_agency_wform.Services
         MountainPackageBuilder CreateMountainPackage();
         ExcursionPackageBuilder CreateExcursionPackage();
         CruisePackageBuilder CreateCruisePackage();
+        ClientBuilder CreateClient();
         
         // Client Management
         Task<List<Client>> GetAllClientsAsync();
         Task<Client?> GetClientByIdAsync(int id);
-        Task<Client?> GetClientByPassportAsync(string passportNumber);
         Task<int> AddClientAsync(Client client);
         
         // Package Management

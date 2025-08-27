@@ -8,6 +8,5 @@ namespace travel_agency_wform.Services.Database
     {
         DbConnection CreateConnection();
         string GetConnectionString();
-        bool TestConnection();
     }
 }

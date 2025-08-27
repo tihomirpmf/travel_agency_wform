@@ -3,8 +3,8 @@ using travel_agency_wform.Models;
 namespace travel_agency_wform.Services.Builders
 {
     // Builder Pattern: Concrete builder for ExcursionPackage objects
-    // Purpose: Encapsulates ExcursionPackage creation logic with fluent interface and validation
-    public class ExcursionPackageBuilder : IPackageBuilder
+    // Purpose: Encapsulates ExcursionPackage creation logic with fluent interface
+    public class ExcursionPackageBuilder
     {
         private int _id;
         private string _name = string.Empty;
@@ -15,41 +15,37 @@ namespace travel_agency_wform.Services.Builders
         private string _transportationType = string.Empty;
         private string _guide = string.Empty;
         
-        public IPackageBuilder SetId(int id)
+        public ExcursionPackageBuilder SetId(int id)
         {
             _id = id;
             return this;
         }
         
-        public IPackageBuilder SetName(string name)
+        public ExcursionPackageBuilder SetName(string name)
         {
-            _name = name ?? throw new ArgumentNullException(nameof(name));
+            _name = name ?? string.Empty;
             return this;
         }
         
-        public IPackageBuilder SetPrice(decimal price)
+        public ExcursionPackageBuilder SetPrice(decimal price)
         {
-            if (price <= 0)
-                throw new ArgumentException("Price must be greater than zero.");
             _price = price;
             return this;
         }
         
-        public IPackageBuilder SetDestination(string destination)
+        public ExcursionPackageBuilder SetDestination(string destination)
         {
-            _destination = destination ?? throw new ArgumentNullException(nameof(destination));
+            _destination = destination ?? string.Empty;
             return this;
         }
         
-        public IPackageBuilder SetNumberOfDays(int days)
+        public ExcursionPackageBuilder SetNumberOfDays(int days)
         {
-            if (days <= 0)
-                throw new ArgumentException("Number of days must be greater than zero.");
             _numberOfDays = days;
             return this;
         }
         
-        public IPackageBuilder SetCreatedAt(DateTime createdAt)
+        public ExcursionPackageBuilder SetCreatedAt(DateTime createdAt)
         {
             _createdAt = createdAt;
             return this;
@@ -57,30 +53,18 @@ namespace travel_agency_wform.Services.Builders
         
         public ExcursionPackageBuilder SetTransportationType(string transportationType)
         {
-            _transportationType = transportationType ?? throw new ArgumentNullException(nameof(transportationType));
+            _transportationType = transportationType ?? string.Empty;
             return this;
         }
         
         public ExcursionPackageBuilder SetGuide(string guide)
         {
-            _guide = guide ?? throw new ArgumentNullException(nameof(guide));
+            _guide = guide ?? string.Empty;
             return this;
         }
         
         public TravelPackage Build()
         {
-            if (string.IsNullOrWhiteSpace(_name))
-                throw new InvalidOperationException("Package name is required.");
-            
-            if (string.IsNullOrWhiteSpace(_destination))
-                throw new InvalidOperationException("Destination is required.");
-            
-            if (string.IsNullOrWhiteSpace(_transportationType))
-                throw new InvalidOperationException("Transportation type is required.");
-            
-            if (string.IsNullOrWhiteSpace(_guide))
-                throw new InvalidOperationException("Guide is required.");
-            
             return new ExcursionPackage
             {
                 Id = _id,

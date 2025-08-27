@@ -28,511 +28,475 @@ namespace travel_agency_wform.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBoxPackageType = new System.Windows.Forms.ComboBox();
-            this.labelPackageType = new System.Windows.Forms.Label();
-            this.labelPackageName = new System.Windows.Forms.Label();
-            this.textBoxPackageName = new System.Windows.Forms.TextBox();
-            this.labelPrice = new System.Windows.Forms.Label();
-            this.numericUpDownPrice = new System.Windows.Forms.NumericUpDown();
-            this.labelDestination = new System.Windows.Forms.Label();
-            this.textBoxDestination = new System.Windows.Forms.TextBox();
-            this.labelNumberOfDays = new System.Windows.Forms.Label();
-            this.numericUpDownNumberOfDays = new System.Windows.Forms.NumericUpDown();
-            this.labelNumberOfTravelers = new System.Windows.Forms.Label();
-            this.numericUpDownNumberOfTravelers = new System.Windows.Forms.NumericUpDown();
-            this.panelSeaside = new System.Windows.Forms.Panel();
-            this.labelSeasideAccommodationType = new System.Windows.Forms.Label();
-            this.textBoxSeasideAccommodationType = new System.Windows.Forms.TextBox();
-            this.labelSeasideTransportationType = new System.Windows.Forms.Label();
-            this.textBoxSeasideTransportationType = new System.Windows.Forms.TextBox();
-            this.panelMountain = new System.Windows.Forms.Panel();
-            this.labelMountainActivities = new System.Windows.Forms.Label();
-            this.textBoxMountainActivities = new System.Windows.Forms.TextBox();
-            this.labelMountainTransportation = new System.Windows.Forms.Label();
-            this.textBoxMountainTransportation = new System.Windows.Forms.TextBox();
-            this.labelMountainAccommodationType = new System.Windows.Forms.Label();
-            this.textBoxMountainAccommodationType = new System.Windows.Forms.TextBox();
-            this.panelExcursion = new System.Windows.Forms.Panel();
-            this.labelExcursionGuide = new System.Windows.Forms.Label();
-            this.textBoxExcursionGuide = new System.Windows.Forms.TextBox();
-            this.labelExcursionTransportation = new System.Windows.Forms.Label();
-            this.textBoxExcursionTransportation = new System.Windows.Forms.TextBox();
-            this.panelCruise = new System.Windows.Forms.Panel();
-            this.labelCruiseShip = new System.Windows.Forms.Label();
-            this.textBoxCruiseShip = new System.Windows.Forms.TextBox();
-            this.labelCruiseRoute = new System.Windows.Forms.Label();
-            this.textBoxCruiseRoute = new System.Windows.Forms.TextBox();
-            this.labelCruiseDepartureDate = new System.Windows.Forms.Label();
-            this.dateTimePickerCruiseDepartureDate = new System.Windows.Forms.DateTimePicker();
-            this.labelCruiseCabinType = new System.Windows.Forms.Label();
-            this.textBoxCruiseCabinType = new System.Windows.Forms.TextBox();
-            this.labelCruiseTransportation = new System.Windows.Forms.Label();
-            this.textBoxCruiseTransportation = new System.Windows.Forms.TextBox();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfDays)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfTravelers)).BeginInit();
-            this.panelSeaside.SuspendLayout();
-            this.panelMountain.SuspendLayout();
-            this.panelExcursion.SuspendLayout();
-            this.panelCruise.SuspendLayout();
-            this.SuspendLayout();
+            comboBoxPackageType = new ComboBox();
+            labelPackageType = new Label();
+            labelPackageName = new Label();
+            textBoxPackageName = new TextBox();
+            labelPrice = new Label();
+            numericUpDownPrice = new NumericUpDown();
+            labelDestination = new Label();
+            textBoxDestination = new TextBox();
+            labelNumberOfDays = new Label();
+            numericUpDownNumberOfDays = new NumericUpDown();
+            labelNumberOfTravelers = new Label();
+            numericUpDownNumberOfTravelers = new NumericUpDown();
+            panelSeaside = new Panel();
+            textBoxSeasideTransportationType = new TextBox();
+            labelSeasideTransportationType = new Label();
+            textBoxSeasideAccommodationType = new TextBox();
+            labelSeasideAccommodationType = new Label();
+            panelMountain = new Panel();
+            textBoxMountainActivities = new TextBox();
+            labelMountainActivities = new Label();
+            textBoxMountainTransportation = new TextBox();
+            labelMountainTransportation = new Label();
+            textBoxMountainAccommodationType = new TextBox();
+            labelMountainAccommodationType = new Label();
+            panelExcursion = new Panel();
+            textBoxExcursionGuide = new TextBox();
+            labelExcursionGuide = new Label();
+            textBoxExcursionTransportation = new TextBox();
+            labelExcursionTransportation = new Label();
+            panelCruise = new Panel();
+            textBoxCruiseTransportation = new TextBox();
+            labelCruiseTransportation = new Label();
+            textBoxCruiseCabinType = new TextBox();
+            labelCruiseCabinType = new Label();
+            dateTimePickerCruiseDepartureDate = new DateTimePicker();
+            labelCruiseDepartureDate = new Label();
+            textBoxCruiseRoute = new TextBox();
+            labelCruiseRoute = new Label();
+            textBoxCruiseShip = new TextBox();
+            labelCruiseShip = new Label();
+            buttonSave = new Button();
+            buttonCancel = new Button();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownNumberOfDays).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownNumberOfTravelers).BeginInit();
+            panelSeaside.SuspendLayout();
+            panelMountain.SuspendLayout();
+            panelExcursion.SuspendLayout();
+            panelCruise.SuspendLayout();
+            SuspendLayout();
             // 
             // comboBoxPackageType
             // 
-            this.comboBoxPackageType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPackageType.FormattingEnabled = true;
-            this.comboBoxPackageType.Location = new System.Drawing.Point(120, 20);
-            this.comboBoxPackageType.Name = "comboBoxPackageType";
-            this.comboBoxPackageType.Size = new System.Drawing.Size(200, 23);
-            this.comboBoxPackageType.TabIndex = 0;
+            comboBoxPackageType.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxPackageType.FormattingEnabled = true;
+            comboBoxPackageType.Location = new Point(140, 20);
+            comboBoxPackageType.Name = "comboBoxPackageType";
+            comboBoxPackageType.Size = new Size(200, 23);
+            comboBoxPackageType.TabIndex = 0;
             // 
             // labelPackageType
             // 
-            this.labelPackageType.AutoSize = true;
-            this.labelPackageType.Location = new System.Drawing.Point(20, 23);
-            this.labelPackageType.Name = "labelPackageType";
-            this.labelPackageType.Size = new System.Drawing.Size(80, 15);
-            this.labelPackageType.TabIndex = 1;
-            this.labelPackageType.Text = "Package Type:";
+            labelPackageType.AutoSize = true;
+            labelPackageType.Location = new Point(20, 23);
+            labelPackageType.Name = "labelPackageType";
+            labelPackageType.Size = new Size(82, 15);
+            labelPackageType.TabIndex = 1;
+            labelPackageType.Text = "Package Type:";
             // 
             // labelPackageName
             // 
-            this.labelPackageName.AutoSize = true;
-            this.labelPackageName.Location = new System.Drawing.Point(20, 60);
-            this.labelPackageName.Name = "labelPackageName";
-            this.labelPackageName.Size = new System.Drawing.Size(90, 15);
-            this.labelPackageName.TabIndex = 2;
-            this.labelPackageName.Text = "Package Name:";
+            labelPackageName.AutoSize = true;
+            labelPackageName.Location = new Point(20, 60);
+            labelPackageName.Name = "labelPackageName";
+            labelPackageName.Size = new Size(89, 15);
+            labelPackageName.TabIndex = 2;
+            labelPackageName.Text = "Package Name:";
             // 
             // textBoxPackageName
             // 
-            this.textBoxPackageName.Location = new System.Drawing.Point(120, 57);
-            this.textBoxPackageName.Name = "textBoxPackageName";
-            this.textBoxPackageName.Size = new System.Drawing.Size(200, 23);
-            this.textBoxPackageName.TabIndex = 3;
+            textBoxPackageName.Location = new Point(140, 57);
+            textBoxPackageName.Name = "textBoxPackageName";
+            textBoxPackageName.Size = new Size(200, 23);
+            textBoxPackageName.TabIndex = 3;
+            textBoxPackageName.TextChanged += textBoxPackageName_TextChanged;
             // 
             // labelPrice
             // 
-            this.labelPrice.AutoSize = true;
-            this.labelPrice.Location = new System.Drawing.Point(20, 100);
-            this.labelPrice.Name = "labelPrice";
-            this.labelPrice.Size = new System.Drawing.Size(36, 15);
-            this.labelPrice.TabIndex = 4;
-            this.labelPrice.Text = "Price:";
+            labelPrice.AutoSize = true;
+            labelPrice.Location = new Point(20, 100);
+            labelPrice.Name = "labelPrice";
+            labelPrice.Size = new Size(36, 15);
+            labelPrice.TabIndex = 4;
+            labelPrice.Text = "Price:";
             // 
             // numericUpDownPrice
             // 
-            this.numericUpDownPrice.Location = new System.Drawing.Point(120, 97);
-            this.numericUpDownPrice.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericUpDownPrice.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownPrice.Name = "numericUpDownPrice";
-            this.numericUpDownPrice.Size = new System.Drawing.Size(200, 23);
-            this.numericUpDownPrice.TabIndex = 5;
-            this.numericUpDownPrice.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
+            numericUpDownPrice.Location = new Point(140, 98);
+            numericUpDownPrice.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            numericUpDownPrice.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDownPrice.Name = "numericUpDownPrice";
+            numericUpDownPrice.Size = new Size(200, 23);
+            numericUpDownPrice.TabIndex = 5;
+            numericUpDownPrice.Value = new decimal(new int[] { 1000, 0, 0, 0 });
             // 
             // labelDestination
             // 
-            this.labelDestination.AutoSize = true;
-            this.labelDestination.Location = new System.Drawing.Point(20, 140);
-            this.labelDestination.Name = "labelDestination";
-            this.labelDestination.Size = new System.Drawing.Size(70, 15);
-            this.labelDestination.TabIndex = 6;
-            this.labelDestination.Text = "Destination:";
+            labelDestination.AutoSize = true;
+            labelDestination.Location = new Point(20, 140);
+            labelDestination.Name = "labelDestination";
+            labelDestination.Size = new Size(70, 15);
+            labelDestination.TabIndex = 6;
+            labelDestination.Text = "Destination:";
             // 
             // textBoxDestination
             // 
-            this.textBoxDestination.Location = new System.Drawing.Point(120, 137);
-            this.textBoxDestination.Name = "textBoxDestination";
-            this.textBoxDestination.Size = new System.Drawing.Size(200, 23);
-            this.textBoxDestination.TabIndex = 7;
+            textBoxDestination.Location = new Point(140, 137);
+            textBoxDestination.Name = "textBoxDestination";
+            textBoxDestination.Size = new Size(200, 23);
+            textBoxDestination.TabIndex = 7;
             // 
             // labelNumberOfDays
             // 
-            this.labelNumberOfDays.AutoSize = true;
-            this.labelNumberOfDays.Location = new System.Drawing.Point(20, 180);
-            this.labelNumberOfDays.Name = "labelNumberOfDays";
-            this.labelNumberOfDays.Size = new System.Drawing.Size(100, 15);
-            this.labelNumberOfDays.TabIndex = 8;
-            this.labelNumberOfDays.Text = "Number of Days:";
+            labelNumberOfDays.AutoSize = true;
+            labelNumberOfDays.Location = new Point(20, 180);
+            labelNumberOfDays.Name = "labelNumberOfDays";
+            labelNumberOfDays.Size = new Size(96, 15);
+            labelNumberOfDays.TabIndex = 8;
+            labelNumberOfDays.Text = "Number of Days:";
             // 
             // numericUpDownNumberOfDays
             // 
-            this.numericUpDownNumberOfDays.Location = new System.Drawing.Point(120, 177);
-            this.numericUpDownNumberOfDays.Maximum = new decimal(new int[] {
-            365,
-            0,
-            0,
-            0});
-            this.numericUpDownNumberOfDays.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownNumberOfDays.Name = "numericUpDownNumberOfDays";
-            this.numericUpDownNumberOfDays.Size = new System.Drawing.Size(200, 23);
-            this.numericUpDownNumberOfDays.TabIndex = 9;
-            this.numericUpDownNumberOfDays.Value = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
+            numericUpDownNumberOfDays.Location = new Point(140, 178);
+            numericUpDownNumberOfDays.Maximum = new decimal(new int[] { 365, 0, 0, 0 });
+            numericUpDownNumberOfDays.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDownNumberOfDays.Name = "numericUpDownNumberOfDays";
+            numericUpDownNumberOfDays.Size = new Size(200, 23);
+            numericUpDownNumberOfDays.TabIndex = 9;
+            numericUpDownNumberOfDays.Value = new decimal(new int[] { 7, 0, 0, 0 });
             // 
             // labelNumberOfTravelers
             // 
-            this.labelNumberOfTravelers.AutoSize = true;
-            this.labelNumberOfTravelers.Location = new System.Drawing.Point(20, 220);
-            this.labelNumberOfTravelers.Name = "labelNumberOfTravelers";
-            this.labelNumberOfTravelers.Size = new System.Drawing.Size(120, 15);
-            this.labelNumberOfTravelers.TabIndex = 10;
-            this.labelNumberOfTravelers.Text = "Number of Travelers:";
+            labelNumberOfTravelers.AutoSize = true;
+            labelNumberOfTravelers.Location = new Point(20, 220);
+            labelNumberOfTravelers.Name = "labelNumberOfTravelers";
+            labelNumberOfTravelers.Size = new Size(117, 15);
+            labelNumberOfTravelers.TabIndex = 10;
+            labelNumberOfTravelers.Text = "Number of Travelers:";
             // 
             // numericUpDownNumberOfTravelers
             // 
-            this.numericUpDownNumberOfTravelers.Location = new System.Drawing.Point(120, 217);
-            this.numericUpDownNumberOfTravelers.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericUpDownNumberOfTravelers.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownNumberOfTravelers.Name = "numericUpDownNumberOfTravelers";
-            this.numericUpDownNumberOfTravelers.Size = new System.Drawing.Size(200, 23);
-            this.numericUpDownNumberOfTravelers.TabIndex = 11;
-            this.numericUpDownNumberOfTravelers.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            numericUpDownNumberOfTravelers.Location = new Point(140, 218);
+            numericUpDownNumberOfTravelers.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDownNumberOfTravelers.Name = "numericUpDownNumberOfTravelers";
+            numericUpDownNumberOfTravelers.Size = new Size(200, 23);
+            numericUpDownNumberOfTravelers.TabIndex = 11;
+            numericUpDownNumberOfTravelers.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // panelSeaside
             // 
-            this.panelSeaside.Controls.Add(this.textBoxSeasideTransportationType);
-            this.panelSeaside.Controls.Add(this.labelSeasideTransportationType);
-            this.panelSeaside.Controls.Add(this.textBoxSeasideAccommodationType);
-            this.panelSeaside.Controls.Add(this.labelSeasideAccommodationType);
-            this.panelSeaside.Location = new System.Drawing.Point(20, 260);
-            this.panelSeaside.Name = "panelSeaside";
-            this.panelSeaside.Size = new System.Drawing.Size(400, 100);
-            this.panelSeaside.TabIndex = 12;
-            this.panelSeaside.Visible = false;
-            // 
-            // labelSeasideAccommodationType
-            // 
-            this.labelSeasideAccommodationType.AutoSize = true;
-            this.labelSeasideAccommodationType.Location = new System.Drawing.Point(0, 10);
-            this.labelSeasideAccommodationType.Name = "labelSeasideAccommodationType";
-            this.labelSeasideAccommodationType.Size = new System.Drawing.Size(110, 15);
-            this.labelSeasideAccommodationType.TabIndex = 0;
-            this.labelSeasideAccommodationType.Text = "Accommodation:";
-            // 
-            // textBoxSeasideAccommodationType
-            // 
-            this.textBoxSeasideAccommodationType.Location = new System.Drawing.Point(120, 7);
-            this.textBoxSeasideAccommodationType.Name = "textBoxSeasideAccommodationType";
-            this.textBoxSeasideAccommodationType.Size = new System.Drawing.Size(200, 23);
-            this.textBoxSeasideAccommodationType.TabIndex = 1;
-            // 
-            // labelSeasideTransportationType
-            // 
-            this.labelSeasideTransportationType.AutoSize = true;
-            this.labelSeasideTransportationType.Location = new System.Drawing.Point(0, 40);
-            this.labelSeasideTransportationType.Name = "labelSeasideTransportationType";
-            this.labelSeasideTransportationType.Size = new System.Drawing.Size(90, 15);
-            this.labelSeasideTransportationType.TabIndex = 2;
-            this.labelSeasideTransportationType.Text = "Transportation:";
+            panelSeaside.Controls.Add(textBoxSeasideTransportationType);
+            panelSeaside.Controls.Add(labelSeasideTransportationType);
+            panelSeaside.Controls.Add(textBoxSeasideAccommodationType);
+            panelSeaside.Controls.Add(labelSeasideAccommodationType);
+            panelSeaside.Location = new Point(20, 260);
+            panelSeaside.Name = "panelSeaside";
+            panelSeaside.Size = new Size(336, 100);
+            panelSeaside.TabIndex = 12;
+            panelSeaside.Visible = false;
             // 
             // textBoxSeasideTransportationType
             // 
-            this.textBoxSeasideTransportationType.Location = new System.Drawing.Point(120, 37);
-            this.textBoxSeasideTransportationType.Name = "textBoxSeasideTransportationType";
-            this.textBoxSeasideTransportationType.Size = new System.Drawing.Size(200, 23);
-            this.textBoxSeasideTransportationType.TabIndex = 3;
+            textBoxSeasideTransportationType.Location = new Point(120, 37);
+            textBoxSeasideTransportationType.Name = "textBoxSeasideTransportationType";
+            textBoxSeasideTransportationType.Size = new Size(200, 23);
+            textBoxSeasideTransportationType.TabIndex = 3;
+            // 
+            // labelSeasideTransportationType
+            // 
+            labelSeasideTransportationType.AutoSize = true;
+            labelSeasideTransportationType.Location = new Point(0, 40);
+            labelSeasideTransportationType.Name = "labelSeasideTransportationType";
+            labelSeasideTransportationType.Size = new Size(87, 15);
+            labelSeasideTransportationType.TabIndex = 2;
+            labelSeasideTransportationType.Text = "Transportation:";
+            // 
+            // textBoxSeasideAccommodationType
+            // 
+            textBoxSeasideAccommodationType.Location = new Point(120, 7);
+            textBoxSeasideAccommodationType.Name = "textBoxSeasideAccommodationType";
+            textBoxSeasideAccommodationType.Size = new Size(200, 23);
+            textBoxSeasideAccommodationType.TabIndex = 1;
+            // 
+            // labelSeasideAccommodationType
+            // 
+            labelSeasideAccommodationType.AutoSize = true;
+            labelSeasideAccommodationType.Location = new Point(0, 10);
+            labelSeasideAccommodationType.Name = "labelSeasideAccommodationType";
+            labelSeasideAccommodationType.Size = new Size(100, 15);
+            labelSeasideAccommodationType.TabIndex = 0;
+            labelSeasideAccommodationType.Text = "Accommodation:";
             // 
             // panelMountain
             // 
-            this.panelMountain.Controls.Add(this.textBoxMountainActivities);
-            this.panelMountain.Controls.Add(this.labelMountainActivities);
-            this.panelMountain.Controls.Add(this.textBoxMountainTransportation);
-            this.panelMountain.Controls.Add(this.labelMountainTransportation);
-            this.panelMountain.Controls.Add(this.textBoxMountainAccommodationType);
-            this.panelMountain.Controls.Add(this.labelMountainAccommodationType);
-            this.panelMountain.Location = new System.Drawing.Point(20, 260);
-            this.panelMountain.Name = "panelMountain";
-            this.panelMountain.Size = new System.Drawing.Size(400, 130);
-            this.panelMountain.TabIndex = 13;
-            this.panelMountain.Visible = false;
-            // 
-            // labelMountainActivities
-            // 
-            this.labelMountainActivities.AutoSize = true;
-            this.labelMountainActivities.Location = new System.Drawing.Point(0, 10);
-            this.labelMountainActivities.Name = "labelMountainActivities";
-            this.labelMountainActivities.Size = new System.Drawing.Size(60, 15);
-            this.labelMountainActivities.TabIndex = 0;
-            this.labelMountainActivities.Text = "Activities:";
+            panelMountain.Controls.Add(textBoxMountainActivities);
+            panelMountain.Controls.Add(labelMountainActivities);
+            panelMountain.Controls.Add(textBoxMountainTransportation);
+            panelMountain.Controls.Add(labelMountainTransportation);
+            panelMountain.Controls.Add(textBoxMountainAccommodationType);
+            panelMountain.Controls.Add(labelMountainAccommodationType);
+            panelMountain.Location = new Point(20, 260);
+            panelMountain.Name = "panelMountain";
+            panelMountain.Size = new Size(336, 130);
+            panelMountain.TabIndex = 13;
+            panelMountain.Visible = false;
             // 
             // textBoxMountainActivities
             // 
-            this.textBoxMountainActivities.Location = new System.Drawing.Point(120, 7);
-            this.textBoxMountainActivities.Name = "textBoxMountainActivities";
-            this.textBoxMountainActivities.Size = new System.Drawing.Size(200, 23);
-            this.textBoxMountainActivities.TabIndex = 1;
+            textBoxMountainActivities.Location = new Point(120, 7);
+            textBoxMountainActivities.Name = "textBoxMountainActivities";
+            textBoxMountainActivities.Size = new Size(200, 23);
+            textBoxMountainActivities.TabIndex = 1;
             // 
-            // labelMountainTransportation
+            // labelMountainActivities
             // 
-            this.labelMountainTransportation.AutoSize = true;
-            this.labelMountainTransportation.Location = new System.Drawing.Point(0, 70);
-            this.labelMountainTransportation.Name = "labelMountainTransportation";
-            this.labelMountainTransportation.Size = new System.Drawing.Size(90, 15);
-            this.labelMountainTransportation.TabIndex = 4;
-            this.labelMountainTransportation.Text = "Transportation:";
+            labelMountainActivities.AutoSize = true;
+            labelMountainActivities.Location = new Point(0, 10);
+            labelMountainActivities.Name = "labelMountainActivities";
+            labelMountainActivities.Size = new Size(58, 15);
+            labelMountainActivities.TabIndex = 0;
+            labelMountainActivities.Text = "Activities:";
             // 
             // textBoxMountainTransportation
             // 
-            this.textBoxMountainTransportation.Location = new System.Drawing.Point(120, 67);
-            this.textBoxMountainTransportation.Name = "textBoxMountainTransportation";
-            this.textBoxMountainTransportation.Size = new System.Drawing.Size(200, 23);
-            this.textBoxMountainTransportation.TabIndex = 5;
+            textBoxMountainTransportation.Location = new Point(120, 67);
+            textBoxMountainTransportation.Name = "textBoxMountainTransportation";
+            textBoxMountainTransportation.Size = new Size(200, 23);
+            textBoxMountainTransportation.TabIndex = 5;
             // 
-            // labelMountainAccommodationType
+            // labelMountainTransportation
             // 
-            this.labelMountainAccommodationType.AutoSize = true;
-            this.labelMountainAccommodationType.Location = new System.Drawing.Point(0, 40);
-            this.labelMountainAccommodationType.Name = "labelMountainAccommodationType";
-            this.labelMountainAccommodationType.Size = new System.Drawing.Size(110, 15);
-            this.labelMountainAccommodationType.TabIndex = 2;
-            this.labelMountainAccommodationType.Text = "Accommodation:";
+            labelMountainTransportation.AutoSize = true;
+            labelMountainTransportation.Location = new Point(0, 70);
+            labelMountainTransportation.Name = "labelMountainTransportation";
+            labelMountainTransportation.Size = new Size(87, 15);
+            labelMountainTransportation.TabIndex = 4;
+            labelMountainTransportation.Text = "Transportation:";
             // 
             // textBoxMountainAccommodationType
             // 
-            this.textBoxMountainAccommodationType.Location = new System.Drawing.Point(120, 37);
-            this.textBoxMountainAccommodationType.Name = "textBoxMountainAccommodationType";
-            this.textBoxMountainAccommodationType.Size = new System.Drawing.Size(200, 23);
-            this.textBoxMountainAccommodationType.TabIndex = 3;
+            textBoxMountainAccommodationType.Location = new Point(120, 37);
+            textBoxMountainAccommodationType.Name = "textBoxMountainAccommodationType";
+            textBoxMountainAccommodationType.Size = new Size(200, 23);
+            textBoxMountainAccommodationType.TabIndex = 3;
+            // 
+            // labelMountainAccommodationType
+            // 
+            labelMountainAccommodationType.AutoSize = true;
+            labelMountainAccommodationType.Location = new Point(0, 40);
+            labelMountainAccommodationType.Name = "labelMountainAccommodationType";
+            labelMountainAccommodationType.Size = new Size(100, 15);
+            labelMountainAccommodationType.TabIndex = 2;
+            labelMountainAccommodationType.Text = "Accommodation:";
             // 
             // panelExcursion
             // 
-            this.panelExcursion.Controls.Add(this.textBoxExcursionGuide);
-            this.panelExcursion.Controls.Add(this.labelExcursionGuide);
-            this.panelExcursion.Controls.Add(this.textBoxExcursionTransportation);
-            this.panelExcursion.Controls.Add(this.labelExcursionTransportation);
-            this.panelExcursion.Location = new System.Drawing.Point(20, 260);
-            this.panelExcursion.Name = "panelExcursion";
-            this.panelExcursion.Size = new System.Drawing.Size(400, 100);
-            this.panelExcursion.TabIndex = 14;
-            this.panelExcursion.Visible = false;
-            // 
-            // labelExcursionGuide
-            // 
-            this.labelExcursionGuide.AutoSize = true;
-            this.labelExcursionGuide.Location = new System.Drawing.Point(0, 10);
-            this.labelExcursionGuide.Name = "labelExcursionGuide";
-            this.labelExcursionGuide.Size = new System.Drawing.Size(40, 15);
-            this.labelExcursionGuide.TabIndex = 0;
-            this.labelExcursionGuide.Text = "Guide:";
+            panelExcursion.Controls.Add(textBoxExcursionGuide);
+            panelExcursion.Controls.Add(labelExcursionGuide);
+            panelExcursion.Controls.Add(textBoxExcursionTransportation);
+            panelExcursion.Controls.Add(labelExcursionTransportation);
+            panelExcursion.Location = new Point(20, 260);
+            panelExcursion.Name = "panelExcursion";
+            panelExcursion.Size = new Size(336, 100);
+            panelExcursion.TabIndex = 14;
+            panelExcursion.Visible = false;
             // 
             // textBoxExcursionGuide
             // 
-            this.textBoxExcursionGuide.Location = new System.Drawing.Point(120, 7);
-            this.textBoxExcursionGuide.Name = "textBoxExcursionGuide";
-            this.textBoxExcursionGuide.Size = new System.Drawing.Size(200, 23);
-            this.textBoxExcursionGuide.TabIndex = 1;
+            textBoxExcursionGuide.Location = new Point(120, 7);
+            textBoxExcursionGuide.Name = "textBoxExcursionGuide";
+            textBoxExcursionGuide.Size = new Size(200, 23);
+            textBoxExcursionGuide.TabIndex = 1;
             // 
-            // labelExcursionTransportation
+            // labelExcursionGuide
             // 
-            this.labelExcursionTransportation.AutoSize = true;
-            this.labelExcursionTransportation.Location = new System.Drawing.Point(0, 40);
-            this.labelExcursionTransportation.Name = "labelExcursionTransportation";
-            this.labelExcursionTransportation.Size = new System.Drawing.Size(90, 15);
-            this.labelExcursionTransportation.TabIndex = 2;
-            this.labelExcursionTransportation.Text = "Transportation:";
+            labelExcursionGuide.AutoSize = true;
+            labelExcursionGuide.Location = new Point(0, 10);
+            labelExcursionGuide.Name = "labelExcursionGuide";
+            labelExcursionGuide.Size = new Size(41, 15);
+            labelExcursionGuide.TabIndex = 0;
+            labelExcursionGuide.Text = "Guide:";
             // 
             // textBoxExcursionTransportation
             // 
-            this.textBoxExcursionTransportation.Location = new System.Drawing.Point(120, 37);
-            this.textBoxExcursionTransportation.Name = "textBoxExcursionTransportation";
-            this.textBoxExcursionTransportation.Size = new System.Drawing.Size(200, 23);
-            this.textBoxExcursionTransportation.TabIndex = 3;
+            textBoxExcursionTransportation.Location = new Point(120, 37);
+            textBoxExcursionTransportation.Name = "textBoxExcursionTransportation";
+            textBoxExcursionTransportation.Size = new Size(200, 23);
+            textBoxExcursionTransportation.TabIndex = 3;
+            // 
+            // labelExcursionTransportation
+            // 
+            labelExcursionTransportation.AutoSize = true;
+            labelExcursionTransportation.Location = new Point(0, 40);
+            labelExcursionTransportation.Name = "labelExcursionTransportation";
+            labelExcursionTransportation.Size = new Size(87, 15);
+            labelExcursionTransportation.TabIndex = 2;
+            labelExcursionTransportation.Text = "Transportation:";
             // 
             // panelCruise
             // 
-            this.panelCruise.Controls.Add(this.textBoxCruiseTransportation);
-            this.panelCruise.Controls.Add(this.labelCruiseTransportation);
-            this.panelCruise.Controls.Add(this.textBoxCruiseCabinType);
-            this.panelCruise.Controls.Add(this.labelCruiseCabinType);
-            this.panelCruise.Controls.Add(this.dateTimePickerCruiseDepartureDate);
-            this.panelCruise.Controls.Add(this.labelCruiseDepartureDate);
-            this.panelCruise.Controls.Add(this.textBoxCruiseRoute);
-            this.panelCruise.Controls.Add(this.labelCruiseRoute);
-            this.panelCruise.Controls.Add(this.textBoxCruiseShip);
-            this.panelCruise.Controls.Add(this.labelCruiseShip);
-            this.panelCruise.Location = new System.Drawing.Point(20, 260);
-            this.panelCruise.Name = "panelCruise";
-            this.panelCruise.Size = new System.Drawing.Size(400, 160);
-            this.panelCruise.TabIndex = 15;
-            this.panelCruise.Visible = false;
-            // 
-            // labelCruiseShip
-            // 
-            this.labelCruiseShip.AutoSize = true;
-            this.labelCruiseShip.Location = new System.Drawing.Point(0, 10);
-            this.labelCruiseShip.Name = "labelCruiseShip";
-            this.labelCruiseShip.Size = new System.Drawing.Size(35, 15);
-            this.labelCruiseShip.TabIndex = 0;
-            this.labelCruiseShip.Text = "Ship:";
-            // 
-            // textBoxCruiseShip
-            // 
-            this.textBoxCruiseShip.Location = new System.Drawing.Point(120, 7);
-            this.textBoxCruiseShip.Name = "textBoxCruiseShip";
-            this.textBoxCruiseShip.Size = new System.Drawing.Size(200, 23);
-            this.textBoxCruiseShip.TabIndex = 1;
-            // 
-            // labelCruiseRoute
-            // 
-            this.labelCruiseRoute.AutoSize = true;
-            this.labelCruiseRoute.Location = new System.Drawing.Point(0, 40);
-            this.labelCruiseRoute.Name = "labelCruiseRoute";
-            this.labelCruiseRoute.Size = new System.Drawing.Size(45, 15);
-            this.labelCruiseRoute.TabIndex = 2;
-            this.labelCruiseRoute.Text = "Route:";
-            // 
-            // textBoxCruiseRoute
-            // 
-            this.textBoxCruiseRoute.Location = new System.Drawing.Point(120, 37);
-            this.textBoxCruiseRoute.Name = "textBoxCruiseRoute";
-            this.textBoxCruiseRoute.Size = new System.Drawing.Size(200, 23);
-            this.textBoxCruiseRoute.TabIndex = 3;
-            // 
-            // labelCruiseDepartureDate
-            // 
-            this.labelCruiseDepartureDate.AutoSize = true;
-            this.labelCruiseDepartureDate.Location = new System.Drawing.Point(0, 70);
-            this.labelCruiseDepartureDate.Name = "labelCruiseDepartureDate";
-            this.labelCruiseDepartureDate.Size = new System.Drawing.Size(90, 15);
-            this.labelCruiseDepartureDate.TabIndex = 4;
-            this.labelCruiseDepartureDate.Text = "Departure Date:";
-            // 
-            // dateTimePickerCruiseDepartureDate
-            // 
-            this.dateTimePickerCruiseDepartureDate.Location = new System.Drawing.Point(120, 67);
-            this.dateTimePickerCruiseDepartureDate.MinDate = new System.DateTime(2024, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerCruiseDepartureDate.Name = "dateTimePickerCruiseDepartureDate";
-            this.dateTimePickerCruiseDepartureDate.Size = new System.Drawing.Size(200, 23);
-            this.dateTimePickerCruiseDepartureDate.TabIndex = 5;
-            // 
-            // labelCruiseCabinType
-            // 
-            this.labelCruiseCabinType.AutoSize = true;
-            this.labelCruiseCabinType.Location = new System.Drawing.Point(0, 100);
-            this.labelCruiseCabinType.Name = "labelCruiseCabinType";
-            this.labelCruiseCabinType.Size = new System.Drawing.Size(70, 15);
-            this.labelCruiseCabinType.TabIndex = 6;
-            this.labelCruiseCabinType.Text = "Cabin Type:";
-            // 
-            // textBoxCruiseCabinType
-            // 
-            this.textBoxCruiseCabinType.Location = new System.Drawing.Point(120, 97);
-            this.textBoxCruiseCabinType.Name = "textBoxCruiseCabinType";
-            this.textBoxCruiseCabinType.Size = new System.Drawing.Size(200, 23);
-            this.textBoxCruiseCabinType.TabIndex = 7;
-            // 
-            // labelCruiseTransportation
-            // 
-            this.labelCruiseTransportation.AutoSize = true;
-            this.labelCruiseTransportation.Location = new System.Drawing.Point(0, 130);
-            this.labelCruiseTransportation.Name = "labelCruiseTransportation";
-            this.labelCruiseTransportation.Size = new System.Drawing.Size(90, 15);
-            this.labelCruiseTransportation.TabIndex = 8;
-            this.labelCruiseTransportation.Text = "Transportation:";
+            panelCruise.Controls.Add(textBoxCruiseTransportation);
+            panelCruise.Controls.Add(labelCruiseTransportation);
+            panelCruise.Controls.Add(textBoxCruiseCabinType);
+            panelCruise.Controls.Add(labelCruiseCabinType);
+            panelCruise.Controls.Add(dateTimePickerCruiseDepartureDate);
+            panelCruise.Controls.Add(labelCruiseDepartureDate);
+            panelCruise.Controls.Add(textBoxCruiseRoute);
+            panelCruise.Controls.Add(labelCruiseRoute);
+            panelCruise.Controls.Add(textBoxCruiseShip);
+            panelCruise.Controls.Add(labelCruiseShip);
+            panelCruise.Location = new Point(20, 260);
+            panelCruise.Name = "panelCruise";
+            panelCruise.Size = new Size(336, 160);
+            panelCruise.TabIndex = 15;
+            panelCruise.Visible = false;
             // 
             // textBoxCruiseTransportation
             // 
-            this.textBoxCruiseTransportation.Location = new System.Drawing.Point(120, 127);
-            this.textBoxCruiseTransportation.Name = "textBoxCruiseTransportation";
-            this.textBoxCruiseTransportation.Size = new System.Drawing.Size(200, 23);
-            this.textBoxCruiseTransportation.TabIndex = 9;
+            textBoxCruiseTransportation.Location = new Point(120, 127);
+            textBoxCruiseTransportation.Name = "textBoxCruiseTransportation";
+            textBoxCruiseTransportation.Size = new Size(200, 23);
+            textBoxCruiseTransportation.TabIndex = 9;
+            // 
+            // labelCruiseTransportation
+            // 
+            labelCruiseTransportation.AutoSize = true;
+            labelCruiseTransportation.Location = new Point(0, 130);
+            labelCruiseTransportation.Name = "labelCruiseTransportation";
+            labelCruiseTransportation.Size = new Size(87, 15);
+            labelCruiseTransportation.TabIndex = 8;
+            labelCruiseTransportation.Text = "Transportation:";
+            // 
+            // textBoxCruiseCabinType
+            // 
+            textBoxCruiseCabinType.Location = new Point(120, 97);
+            textBoxCruiseCabinType.Name = "textBoxCruiseCabinType";
+            textBoxCruiseCabinType.Size = new Size(200, 23);
+            textBoxCruiseCabinType.TabIndex = 7;
+            // 
+            // labelCruiseCabinType
+            // 
+            labelCruiseCabinType.AutoSize = true;
+            labelCruiseCabinType.Location = new Point(0, 100);
+            labelCruiseCabinType.Name = "labelCruiseCabinType";
+            labelCruiseCabinType.Size = new Size(69, 15);
+            labelCruiseCabinType.TabIndex = 6;
+            labelCruiseCabinType.Text = "Cabin Type:";
+            // 
+            // dateTimePickerCruiseDepartureDate
+            // 
+            dateTimePickerCruiseDepartureDate.Location = new Point(120, 67);
+            dateTimePickerCruiseDepartureDate.MinDate = new DateTime(2024, 1, 1, 0, 0, 0, 0);
+            dateTimePickerCruiseDepartureDate.Name = "dateTimePickerCruiseDepartureDate";
+            dateTimePickerCruiseDepartureDate.Size = new Size(200, 23);
+            dateTimePickerCruiseDepartureDate.TabIndex = 5;
+            // 
+            // labelCruiseDepartureDate
+            // 
+            labelCruiseDepartureDate.AutoSize = true;
+            labelCruiseDepartureDate.Location = new Point(0, 70);
+            labelCruiseDepartureDate.Name = "labelCruiseDepartureDate";
+            labelCruiseDepartureDate.Size = new Size(89, 15);
+            labelCruiseDepartureDate.TabIndex = 4;
+            labelCruiseDepartureDate.Text = "Departure Date:";
+            // 
+            // textBoxCruiseRoute
+            // 
+            textBoxCruiseRoute.Location = new Point(120, 37);
+            textBoxCruiseRoute.Name = "textBoxCruiseRoute";
+            textBoxCruiseRoute.Size = new Size(200, 23);
+            textBoxCruiseRoute.TabIndex = 3;
+            // 
+            // labelCruiseRoute
+            // 
+            labelCruiseRoute.AutoSize = true;
+            labelCruiseRoute.Location = new Point(0, 40);
+            labelCruiseRoute.Name = "labelCruiseRoute";
+            labelCruiseRoute.Size = new Size(41, 15);
+            labelCruiseRoute.TabIndex = 2;
+            labelCruiseRoute.Text = "Route:";
+            // 
+            // textBoxCruiseShip
+            // 
+            textBoxCruiseShip.Location = new Point(120, 7);
+            textBoxCruiseShip.Name = "textBoxCruiseShip";
+            textBoxCruiseShip.Size = new Size(200, 23);
+            textBoxCruiseShip.TabIndex = 1;
+            // 
+            // labelCruiseShip
+            // 
+            labelCruiseShip.AutoSize = true;
+            labelCruiseShip.Location = new Point(0, 10);
+            labelCruiseShip.Name = "labelCruiseShip";
+            labelCruiseShip.Size = new Size(33, 15);
+            labelCruiseShip.TabIndex = 0;
+            labelCruiseShip.Text = "Ship:";
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(120, 440);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 16;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            buttonSave.Location = new Point(20, 440);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(75, 23);
+            buttonSave.TabIndex = 16;
+            buttonSave.Text = "Save";
+            buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSave_Click;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(220, 440);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 17;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            buttonCancel.Location = new Point(129, 440);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(75, 23);
+            buttonCancel.TabIndex = 17;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // AddPackageForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 490);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.panelCruise);
-            this.Controls.Add(this.panelExcursion);
-            this.Controls.Add(this.panelMountain);
-            this.Controls.Add(this.panelSeaside);
-            this.Controls.Add(this.numericUpDownNumberOfTravelers);
-            this.Controls.Add(this.labelNumberOfTravelers);
-            this.Controls.Add(this.numericUpDownNumberOfDays);
-            this.Controls.Add(this.labelNumberOfDays);
-            this.Controls.Add(this.textBoxDestination);
-            this.Controls.Add(this.labelDestination);
-            this.Controls.Add(this.numericUpDownPrice);
-            this.Controls.Add(this.labelPrice);
-            this.Controls.Add(this.textBoxPackageName);
-            this.Controls.Add(this.labelPackageName);
-            this.Controls.Add(this.labelPackageType);
-            this.Controls.Add(this.comboBoxPackageType);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "AddPackageForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add Travel Package";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfDays)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfTravelers)).EndInit();
-            this.panelSeaside.ResumeLayout(false);
-            this.panelSeaside.PerformLayout();
-            this.panelMountain.ResumeLayout(false);
-            this.panelMountain.PerformLayout();
-            this.panelExcursion.ResumeLayout(false);
-            this.panelExcursion.PerformLayout();
-            this.panelCruise.ResumeLayout(false);
-            this.panelCruise.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(379, 474);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonSave);
+            Controls.Add(panelCruise);
+            Controls.Add(panelExcursion);
+            Controls.Add(panelMountain);
+            Controls.Add(panelSeaside);
+            Controls.Add(numericUpDownNumberOfTravelers);
+            Controls.Add(labelNumberOfTravelers);
+            Controls.Add(numericUpDownNumberOfDays);
+            Controls.Add(labelNumberOfDays);
+            Controls.Add(textBoxDestination);
+            Controls.Add(labelDestination);
+            Controls.Add(numericUpDownPrice);
+            Controls.Add(labelPrice);
+            Controls.Add(textBoxPackageName);
+            Controls.Add(labelPackageName);
+            Controls.Add(labelPackageType);
+            Controls.Add(comboBoxPackageType);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "AddPackageForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Add Travel Package";
+            ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownNumberOfDays).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownNumberOfTravelers).EndInit();
+            panelSeaside.ResumeLayout(false);
+            panelSeaside.PerformLayout();
+            panelMountain.ResumeLayout(false);
+            panelMountain.PerformLayout();
+            panelExcursion.ResumeLayout(false);
+            panelExcursion.PerformLayout();
+            panelCruise.ResumeLayout(false);
+            panelCruise.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

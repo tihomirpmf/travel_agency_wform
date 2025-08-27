@@ -28,168 +28,154 @@ namespace travel_agency_wform.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelClientInfo = new System.Windows.Forms.Label();
-            this.labelPackageInfo = new System.Windows.Forms.Label();
-            this.labelNumberOfTravelers = new System.Windows.Forms.Label();
-            this.numericUpDownNumberOfTravelers = new System.Windows.Forms.NumericUpDown();
-            this.labelTotalPrice = new System.Windows.Forms.Label();
-            this.textBoxTotalPrice = new System.Windows.Forms.TextBox();
-            this.buttonConfirm = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.groupBoxClientDetails = new System.Windows.Forms.GroupBox();
-            this.groupBoxPackageDetails = new System.Windows.Forms.GroupBox();
-            this.groupBoxReservationDetails = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfTravelers)).BeginInit();
-            this.groupBoxClientDetails.SuspendLayout();
-            this.groupBoxPackageDetails.SuspendLayout();
-            this.groupBoxReservationDetails.SuspendLayout();
-            this.SuspendLayout();
+            labelClientInfo = new Label();
+            labelPackageInfo = new Label();
+            labelNumberOfTravelers = new Label();
+            numericUpDownNumberOfTravelers = new NumericUpDown();
+            labelTotalPrice = new Label();
+            textBoxTotalPrice = new TextBox();
+            buttonConfirm = new Button();
+            buttonCancel = new Button();
+            groupBoxClientDetails = new GroupBox();
+            groupBoxPackageDetails = new GroupBox();
+            groupBoxReservationDetails = new GroupBox();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownNumberOfTravelers).BeginInit();
+            groupBoxClientDetails.SuspendLayout();
+            groupBoxPackageDetails.SuspendLayout();
+            groupBoxReservationDetails.SuspendLayout();
+            SuspendLayout();
             // 
             // labelClientInfo
             // 
-            this.labelClientInfo.AutoSize = true;
-            this.labelClientInfo.Location = new System.Drawing.Point(20, 30);
-            this.labelClientInfo.Name = "labelClientInfo";
-            this.labelClientInfo.Size = new System.Drawing.Size(200, 15);
-            this.labelClientInfo.TabIndex = 0;
-            this.labelClientInfo.Text = "Client: [Client Name]";
+            labelClientInfo.AutoSize = true;
+            labelClientInfo.Location = new Point(20, 30);
+            labelClientInfo.Name = "labelClientInfo";
+            labelClientInfo.Size = new Size(118, 15);
+            labelClientInfo.TabIndex = 0;
+            labelClientInfo.Text = "Client: [Client Name]";
             // 
             // labelPackageInfo
             // 
-            this.labelPackageInfo.AutoSize = true;
-            this.labelPackageInfo.Location = new System.Drawing.Point(20, 30);
-            this.labelPackageInfo.Name = "labelPackageInfo";
-            this.labelPackageInfo.Size = new System.Drawing.Size(200, 15);
-            this.labelPackageInfo.TabIndex = 0;
-            this.labelPackageInfo.Text = "Package: [Package Name]";
+            labelPackageInfo.AutoSize = true;
+            labelPackageInfo.Location = new Point(20, 30);
+            labelPackageInfo.Name = "labelPackageInfo";
+            labelPackageInfo.Size = new Size(144, 15);
+            labelPackageInfo.TabIndex = 0;
+            labelPackageInfo.Text = "Package: [Package Name]";
             // 
             // labelNumberOfTravelers
             // 
-            this.labelNumberOfTravelers.AutoSize = true;
-            this.labelNumberOfTravelers.Location = new System.Drawing.Point(20, 30);
-            this.labelNumberOfTravelers.Name = "labelNumberOfTravelers";
-            this.labelNumberOfTravelers.Size = new System.Drawing.Size(120, 15);
-            this.labelNumberOfTravelers.TabIndex = 0;
-            this.labelNumberOfTravelers.Text = "Number of Travelers:";
+            labelNumberOfTravelers.AutoSize = true;
+            labelNumberOfTravelers.Location = new Point(20, 30);
+            labelNumberOfTravelers.Name = "labelNumberOfTravelers";
+            labelNumberOfTravelers.Size = new Size(117, 15);
+            labelNumberOfTravelers.TabIndex = 0;
+            labelNumberOfTravelers.Text = "Number of Travelers:";
             // 
             // numericUpDownNumberOfTravelers
             // 
-            this.numericUpDownNumberOfTravelers.Location = new System.Drawing.Point(150, 27);
-            this.numericUpDownNumberOfTravelers.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericUpDownNumberOfTravelers.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownNumberOfTravelers.Name = "numericUpDownNumberOfTravelers";
-            this.numericUpDownNumberOfTravelers.Size = new System.Drawing.Size(100, 23);
-            this.numericUpDownNumberOfTravelers.TabIndex = 1;
-            this.numericUpDownNumberOfTravelers.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-
+            numericUpDownNumberOfTravelers.Location = new Point(150, 27);
+            numericUpDownNumberOfTravelers.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDownNumberOfTravelers.Name = "numericUpDownNumberOfTravelers";
+            numericUpDownNumberOfTravelers.Size = new Size(100, 23);
+            numericUpDownNumberOfTravelers.TabIndex = 1;
+            numericUpDownNumberOfTravelers.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // labelTotalPrice
             // 
-            this.labelTotalPrice.AutoSize = true;
-            this.labelTotalPrice.Location = new System.Drawing.Point(20, 70);
-            this.labelTotalPrice.Name = "labelTotalPrice";
-            this.labelTotalPrice.Size = new System.Drawing.Size(70, 15);
-            this.labelTotalPrice.TabIndex = 2;
-            this.labelTotalPrice.Text = "Total Price:";
+            labelTotalPrice.AutoSize = true;
+            labelTotalPrice.Location = new Point(20, 70);
+            labelTotalPrice.Name = "labelTotalPrice";
+            labelTotalPrice.Size = new Size(65, 15);
+            labelTotalPrice.TabIndex = 2;
+            labelTotalPrice.Text = "Total Price:";
             // 
             // textBoxTotalPrice
             // 
-            this.textBoxTotalPrice.Location = new System.Drawing.Point(150, 67);
-            this.textBoxTotalPrice.Name = "textBoxTotalPrice";
-            this.textBoxTotalPrice.ReadOnly = true;
-            this.textBoxTotalPrice.Size = new System.Drawing.Size(100, 23);
-            this.textBoxTotalPrice.TabIndex = 3;
-            this.textBoxTotalPrice.Text = "$0.00";
+            textBoxTotalPrice.Location = new Point(150, 67);
+            textBoxTotalPrice.Name = "textBoxTotalPrice";
+            textBoxTotalPrice.ReadOnly = true;
+            textBoxTotalPrice.Size = new Size(100, 23);
+            textBoxTotalPrice.TabIndex = 3;
+            textBoxTotalPrice.Text = "$0.00";
             // 
             // buttonConfirm
             // 
-            this.buttonConfirm.Location = new System.Drawing.Point(100, 300);
-            this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(75, 23);
-            this.buttonConfirm.TabIndex = 4;
-            this.buttonConfirm.Text = "Confirm";
-            this.buttonConfirm.UseVisualStyleBackColor = true;
-            this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
+            buttonConfirm.Location = new Point(20, 300);
+            buttonConfirm.Name = "buttonConfirm";
+            buttonConfirm.Size = new Size(75, 23);
+            buttonConfirm.TabIndex = 4;
+            buttonConfirm.Text = "Confirm";
+            buttonConfirm.UseVisualStyleBackColor = true;
+            buttonConfirm.Click += buttonConfirm_Click;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(200, 300);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 5;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            buttonCancel.Location = new Point(130, 300);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(75, 23);
+            buttonCancel.TabIndex = 5;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // groupBoxClientDetails
             // 
-            this.groupBoxClientDetails.Controls.Add(this.labelClientInfo);
-            this.groupBoxClientDetails.Location = new System.Drawing.Point(20, 20);
-            this.groupBoxClientDetails.Name = "groupBoxClientDetails";
-            this.groupBoxClientDetails.Size = new System.Drawing.Size(350, 70);
-            this.groupBoxClientDetails.TabIndex = 6;
-            this.groupBoxClientDetails.TabStop = false;
-            this.groupBoxClientDetails.Text = "Client Details";
+            groupBoxClientDetails.Controls.Add(labelClientInfo);
+            groupBoxClientDetails.Location = new Point(20, 20);
+            groupBoxClientDetails.Name = "groupBoxClientDetails";
+            groupBoxClientDetails.Size = new Size(442, 70);
+            groupBoxClientDetails.TabIndex = 6;
+            groupBoxClientDetails.TabStop = false;
+            groupBoxClientDetails.Text = "Client Details";
             // 
             // groupBoxPackageDetails
             // 
-            this.groupBoxPackageDetails.Controls.Add(this.labelPackageInfo);
-            this.groupBoxPackageDetails.Location = new System.Drawing.Point(20, 100);
-            this.groupBoxPackageDetails.Name = "groupBoxPackageDetails";
-            this.groupBoxPackageDetails.Size = new System.Drawing.Size(350, 70);
-            this.groupBoxPackageDetails.TabIndex = 7;
-            this.groupBoxPackageDetails.TabStop = false;
-            this.groupBoxPackageDetails.Text = "Package Details";
+            groupBoxPackageDetails.Controls.Add(labelPackageInfo);
+            groupBoxPackageDetails.Location = new Point(20, 100);
+            groupBoxPackageDetails.Name = "groupBoxPackageDetails";
+            groupBoxPackageDetails.Size = new Size(442, 70);
+            groupBoxPackageDetails.TabIndex = 7;
+            groupBoxPackageDetails.TabStop = false;
+            groupBoxPackageDetails.Text = "Package Details";
             // 
             // groupBoxReservationDetails
             // 
-            this.groupBoxReservationDetails.Controls.Add(this.textBoxTotalPrice);
-            this.groupBoxReservationDetails.Controls.Add(this.labelTotalPrice);
-            this.groupBoxReservationDetails.Controls.Add(this.numericUpDownNumberOfTravelers);
-            this.groupBoxReservationDetails.Controls.Add(this.labelNumberOfTravelers);
-            this.groupBoxReservationDetails.Location = new System.Drawing.Point(20, 180);
-            this.groupBoxReservationDetails.Name = "groupBoxReservationDetails";
-            this.groupBoxReservationDetails.Size = new System.Drawing.Size(350, 110);
-            this.groupBoxReservationDetails.TabIndex = 8;
-            this.groupBoxReservationDetails.TabStop = false;
-            this.groupBoxReservationDetails.Text = "Reservation Details";
+            groupBoxReservationDetails.Controls.Add(textBoxTotalPrice);
+            groupBoxReservationDetails.Controls.Add(labelTotalPrice);
+            groupBoxReservationDetails.Controls.Add(numericUpDownNumberOfTravelers);
+            groupBoxReservationDetails.Controls.Add(labelNumberOfTravelers);
+            groupBoxReservationDetails.Location = new Point(20, 180);
+            groupBoxReservationDetails.Name = "groupBoxReservationDetails";
+            groupBoxReservationDetails.Size = new Size(442, 110);
+            groupBoxReservationDetails.TabIndex = 8;
+            groupBoxReservationDetails.TabStop = false;
+            groupBoxReservationDetails.Text = "Reservation Details";
             // 
             // ReservationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 350);
-            this.Controls.Add(this.groupBoxReservationDetails);
-            this.Controls.Add(this.groupBoxPackageDetails);
-            this.Controls.Add(this.groupBoxClientDetails);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonConfirm);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "ReservationForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Make Reservation";
-            this.groupBoxClientDetails.ResumeLayout(false);
-            this.groupBoxClientDetails.PerformLayout();
-            this.groupBoxPackageDetails.ResumeLayout(false);
-            this.groupBoxPackageDetails.PerformLayout();
-            this.groupBoxReservationDetails.ResumeLayout(false);
-            this.groupBoxReservationDetails.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberOfTravelers)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(474, 336);
+            Controls.Add(groupBoxReservationDetails);
+            Controls.Add(groupBoxPackageDetails);
+            Controls.Add(groupBoxClientDetails);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonConfirm);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "ReservationForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Make Reservation";
+            ((System.ComponentModel.ISupportInitialize)numericUpDownNumberOfTravelers).EndInit();
+            groupBoxClientDetails.ResumeLayout(false);
+            groupBoxClientDetails.PerformLayout();
+            groupBoxPackageDetails.ResumeLayout(false);
+            groupBoxPackageDetails.PerformLayout();
+            groupBoxReservationDetails.ResumeLayout(false);
+            groupBoxReservationDetails.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion

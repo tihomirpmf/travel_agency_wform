@@ -77,31 +77,56 @@ namespace travel_agency_wform.Forms
                 try
                 {
                     var numberOfTravelers = (int)numericUpDownNumberOfTravelers.Value;
+                    
+                    // Show loading message
+                    buttonConfirm.Enabled = false;
+                    buttonConfirm.Text = "Processing...";
+                    
                     _ = Task.Run(async () =>
                     {
-                        // Direct service call instead of command pattern
-                        var success = await _agencyService.ReservePackageAsync(_clientId, _packageId, numberOfTravelers);
-                        
-                        if (InvokeRequired)
+                        try
                         {
-                            Invoke(new Action(() =>
+                            // Direct service call instead of command pattern
+                            var success = await _agencyService.ReservePackageAsync(_clientId, _packageId, numberOfTravelers);
+                            
+                            if (InvokeRequired)
                             {
-                                if (success > 0)
+                                Invoke(new Action(() =>
                                 {
-                                    MessageBox.Show("Reservation confirmed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    DialogResult = DialogResult.OK;
-                                    Close();
-                                }
-                                else
+                                    buttonConfirm.Enabled = true;
+                                    buttonConfirm.Text = "Confirm";
+                                    
+                                    if (success > 0)
+                                    {
+                                        MessageBox.Show($"Reservation confirmed successfully! Reservation ID: {success}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        DialogResult = DialogResult.OK;
+                                        Close();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Failed to confirm reservation. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }));
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (InvokeRequired)
+                            {
+                                Invoke(new Action(() =>
                                 {
-                                    MessageBox.Show("Failed to confirm reservation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-                            }));
+                                    buttonConfirm.Enabled = true;
+                                    buttonConfirm.Text = "Confirm";
+                                    MessageBox.Show($"Error confirming reservation: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }));
+                            }
                         }
                     });
                 }
                 catch (Exception ex)
                 {
+                    buttonConfirm.Enabled = true;
+                    buttonConfirm.Text = "Confirm";
                     MessageBox.Show($"Error confirming reservation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

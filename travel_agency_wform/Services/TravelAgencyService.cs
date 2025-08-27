@@ -17,9 +17,8 @@ namespace travel_agency_wform.Services
             _configManager = ConfigurationManager.Instance;
             var connectionString = _configManager.ConnectionString;
             
-            // Abstract Factory: choose provider and get matching adapter
-            var provider = DatabaseFactory.CreateProvider();
-            _databaseAdapter = provider.CreateAdapter(connectionString);
+            // Factory Method: create appropriate database adapter
+            _databaseAdapter = DatabaseFactory.CreateAdapter(connectionString);
         }
         
         public async Task<bool> InitializeAsync()
@@ -48,6 +47,11 @@ namespace travel_agency_wform.Services
             return new CruisePackageBuilder();
         }
         
+        public ClientBuilder CreateClient()
+        {
+            return new ClientBuilder();
+        }
+        
         // Client Management
         public async Task<List<Client>> GetAllClientsAsync()
         {
@@ -59,10 +63,7 @@ namespace travel_agency_wform.Services
             return await _databaseAdapter.GetClientByIdAsync(id);
         }
         
-        public async Task<Client?> GetClientByPassportAsync(string passportNumber)
-        {
-            return await _databaseAdapter.GetClientByPassportAsync(passportNumber);
-        }
+
         
         public async Task<int> AddClientAsync(Client client)
         {
@@ -76,10 +77,7 @@ namespace travel_agency_wform.Services
             if (string.IsNullOrWhiteSpace(client.Email))
                 throw new ArgumentException("Email is required.");
             
-            // Check if passport number already exists
-            var existingClient = await _databaseAdapter.GetClientByPassportAsync(client.PassportNumber);
-            if (existingClient != null)
-                throw new InvalidOperationException("A client with this passport number already exists.");
+
             
             var clientId = await _databaseAdapter.AddClientAsync(client);
             
@@ -141,36 +139,49 @@ namespace travel_agency_wform.Services
         
         public async Task<int> ReservePackageAsync(int clientId, int packageId, int numberOfTravelers)
         {
-            // Validate client and package exist
-            var client = await _databaseAdapter.GetClientByIdAsync(clientId);
-            if (client == null)
-                throw new ArgumentException("Client not found.");
-            
-            var package = await _databaseAdapter.GetPackageByIdAsync(packageId);
-            if (package == null)
-                throw new ArgumentException("Package not found.");
-            
-            if (numberOfTravelers <= 0)
-                throw new ArgumentException("Number of travelers must be greater than zero.");
-            
-            // Calculate total price
-            var totalPrice = package.Price * numberOfTravelers;
-            
-            var reservation = new Reservation
+            try
             {
-                ClientId = clientId,
-                PackageId = packageId,
-                NumberOfTravelers = numberOfTravelers,
-                TotalPrice = totalPrice,
-                Status = ReservationStatus.Active
-            };
-            
-            var reservationId = await _databaseAdapter.AddReservationAsync(reservation);
-            
-            // Notify observers about the change
-            DataChangeNotifier.Instance.NotifyReservationAdded(reservationId);
-            
-            return reservationId;
+                // Validate client and package exist
+                var client = await _databaseAdapter.GetClientByIdAsync(clientId);
+                if (client == null)
+                    throw new ArgumentException("Client not found.");
+                
+                var package = await _databaseAdapter.GetPackageByIdAsync(packageId);
+                if (package == null)
+                    throw new ArgumentException("Package not found.");
+                
+                if (numberOfTravelers <= 0)
+                    throw new ArgumentException("Number of travelers must be greater than zero.");
+                
+                // Calculate total price
+                var totalPrice = package.Price * numberOfTravelers;
+                
+                var reservation = new Reservation
+                {
+                    ClientId = clientId,
+                    PackageId = packageId,
+                    NumberOfTravelers = numberOfTravelers,
+                    TotalPrice = totalPrice,
+                    Status = ReservationStatus.Active
+                };
+                
+                System.Diagnostics.Debug.WriteLine($"Creating reservation: ClientId={clientId}, PackageId={packageId}, Travelers={numberOfTravelers}, TotalPrice={totalPrice}");
+                
+                var reservationId = await _databaseAdapter.AddReservationAsync(reservation);
+                
+                System.Diagnostics.Debug.WriteLine($"Reservation created with ID: {reservationId}");
+                
+                // Notify observers about the change
+                DataChangeNotifier.Instance.NotifyReservationAdded(reservationId);
+                
+                return reservationId;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in ReservePackageAsync: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
+                throw;
+            }
         }
         
         public async Task<bool> CancelReservationAsync(int reservationId)

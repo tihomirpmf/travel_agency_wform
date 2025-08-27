@@ -4,7 +4,7 @@ namespace travel_agency_wform.Services.Builders
 {
     // Builder Pattern: Concrete builder for SeasidePackage objects
     // Purpose: Encapsulates SeasidePackage creation logic with fluent interface
-    public class SeasidePackageBuilder : IPackageBuilder
+    public class SeasidePackageBuilder
     {
         private int _id;
         private string _name = string.Empty;
@@ -15,37 +15,37 @@ namespace travel_agency_wform.Services.Builders
         private string _accommodationType = string.Empty;
         private string _transportationType = string.Empty;
         
-        public IPackageBuilder SetId(int id)
+        public SeasidePackageBuilder SetId(int id)
         {
             _id = id;
             return this;
         }
         
-        public IPackageBuilder SetName(string name)
+        public SeasidePackageBuilder SetName(string name)
         {
-            _name = name;
+            _name = name ?? string.Empty;
             return this;
         }
         
-        public IPackageBuilder SetPrice(decimal price)
+        public SeasidePackageBuilder SetPrice(decimal price)
         {
             _price = price;
             return this;
         }
         
-        public IPackageBuilder SetDestination(string destination)
+        public SeasidePackageBuilder SetDestination(string destination)
         {
-            _destination = destination;
+            _destination = destination ?? string.Empty;
             return this;
         }
         
-        public IPackageBuilder SetNumberOfDays(int days)
+        public SeasidePackageBuilder SetNumberOfDays(int days)
         {
             _numberOfDays = days;
             return this;
         }
         
-        public IPackageBuilder SetCreatedAt(DateTime createdAt)
+        public SeasidePackageBuilder SetCreatedAt(DateTime createdAt)
         {
             _createdAt = createdAt;
             return this;
@@ -53,13 +53,13 @@ namespace travel_agency_wform.Services.Builders
         
         public SeasidePackageBuilder SetAccommodationType(string accommodationType)
         {
-            _accommodationType = accommodationType;
+            _accommodationType = accommodationType ?? string.Empty;
             return this;
         }
         
         public SeasidePackageBuilder SetTransportationType(string transportationType)
         {
-            _transportationType = transportationType;
+            _transportationType = transportationType ?? string.Empty;
             return this;
         }
         

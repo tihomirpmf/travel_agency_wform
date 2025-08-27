@@ -28,284 +28,277 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBoxClients = new System.Windows.Forms.ListBox();
-            this.listBoxPackages = new System.Windows.Forms.ListBox();
-            this.listBoxReservations = new System.Windows.Forms.ListBox();
-            this.groupBoxClients = new System.Windows.Forms.GroupBox();
-            this.textBoxSearch = new System.Windows.Forms.TextBox();
-            this.buttonSearch = new System.Windows.Forms.Button();
-            this.buttonAddClient = new System.Windows.Forms.Button();
-            this.groupBoxPackages = new System.Windows.Forms.GroupBox();
-            this.buttonAddPackage = new System.Windows.Forms.Button();
-            this.groupBoxReservations = new System.Windows.Forms.GroupBox();
-            this.buttonReservePackage = new System.Windows.Forms.Button();
-            this.buttonCancelReservation = new System.Windows.Forms.Button();
-            this.groupBoxClientInfo = new System.Windows.Forms.GroupBox();
-            this.textBoxClientName = new System.Windows.Forms.TextBox();
-            this.textBoxClientEmail = new System.Windows.Forms.TextBox();
-            this.textBoxClientPhone = new System.Windows.Forms.TextBox();
-            this.labelClientName = new System.Windows.Forms.Label();
-            this.labelClientEmail = new System.Windows.Forms.Label();
-            this.labelClientPhone = new System.Windows.Forms.Label();
-            this.groupBoxActions = new System.Windows.Forms.GroupBox();
-            this.buttonViewDestinations = new System.Windows.Forms.Button();
-            this.buttonBackup = new System.Windows.Forms.Button();
-
-            this.groupBoxClients.SuspendLayout();
-            this.groupBoxPackages.SuspendLayout();
-            this.groupBoxReservations.SuspendLayout();
-            this.groupBoxClientInfo.SuspendLayout();
-            this.groupBoxActions.SuspendLayout();
-
-            this.SuspendLayout();
+            listBoxClients = new ListBox();
+            listBoxPackages = new ListBox();
+            listBoxReservations = new ListBox();
+            groupBoxClients = new GroupBox();
+            textBoxSearch = new TextBox();
+            buttonSearch = new Button();
+            buttonAddClient = new Button();
+            groupBoxPackages = new GroupBox();
+            buttonAddPackage = new Button();
+            groupBoxReservations = new GroupBox();
+            buttonReservePackage = new Button();
+            buttonCancelReservation = new Button();
+            groupBoxClientInfo = new GroupBox();
+            labelClientPhone = new Label();
+            labelClientEmail = new Label();
+            labelClientName = new Label();
+            textBoxClientPhone = new TextBox();
+            textBoxClientEmail = new TextBox();
+            textBoxClientName = new TextBox();
+            groupBoxActions = new GroupBox();
+            buttonBackup = new Button();
+            buttonViewDestinations = new Button();
+            groupBoxClients.SuspendLayout();
+            groupBoxPackages.SuspendLayout();
+            groupBoxReservations.SuspendLayout();
+            groupBoxClientInfo.SuspendLayout();
+            groupBoxActions.SuspendLayout();
+            SuspendLayout();
             // 
             // listBoxClients
             // 
-            this.listBoxClients.FormattingEnabled = true;
-            this.listBoxClients.ItemHeight = 15;
-            this.listBoxClients.Location = new System.Drawing.Point(6, 50);
-            this.listBoxClients.Name = "listBoxClients";
-            this.listBoxClients.Size = new System.Drawing.Size(300, 240);
-            this.listBoxClients.TabIndex = 0;
-            this.listBoxClients.SelectedIndexChanged += new System.EventHandler(this.listBoxClients_SelectedIndexChanged);
+            listBoxClients.FormattingEnabled = true;
+            listBoxClients.ItemHeight = 15;
+            listBoxClients.Location = new Point(6, 50);
+            listBoxClients.Name = "listBoxClients";
+            listBoxClients.Size = new Size(300, 229);
+            listBoxClients.TabIndex = 0;
+            listBoxClients.SelectedIndexChanged += listBoxClients_SelectedIndexChanged;
             // 
             // listBoxPackages
             // 
-            this.listBoxPackages.FormattingEnabled = true;
-            this.listBoxPackages.ItemHeight = 15;
-            this.listBoxPackages.Location = new System.Drawing.Point(6, 50);
-            this.listBoxPackages.Name = "listBoxPackages";
-            this.listBoxPackages.Size = new System.Drawing.Size(340, 240);
-            this.listBoxPackages.TabIndex = 1;
+            listBoxPackages.FormattingEnabled = true;
+            listBoxPackages.ItemHeight = 15;
+            listBoxPackages.Location = new Point(6, 50);
+            listBoxPackages.Name = "listBoxPackages";
+            listBoxPackages.Size = new Size(387, 229);
+            listBoxPackages.TabIndex = 1;
             // 
             // listBoxReservations
             // 
-            this.listBoxReservations.FormattingEnabled = true;
-            this.listBoxReservations.ItemHeight = 15;
-            this.listBoxReservations.Location = new System.Drawing.Point(6, 50);
-            this.listBoxReservations.Name = "listBoxReservations";
-            this.listBoxReservations.Size = new System.Drawing.Size(340, 240);
-            this.listBoxReservations.TabIndex = 2;
+            listBoxReservations.FormattingEnabled = true;
+            listBoxReservations.ItemHeight = 15;
+            listBoxReservations.Location = new Point(6, 50);
+            listBoxReservations.Name = "listBoxReservations";
+            listBoxReservations.Size = new Size(391, 229);
+            listBoxReservations.TabIndex = 2;
             // 
             // groupBoxClients
             // 
-            this.groupBoxClients.Controls.Add(this.listBoxClients);
-            this.groupBoxClients.Controls.Add(this.textBoxSearch);
-            this.groupBoxClients.Controls.Add(this.buttonSearch);
-            this.groupBoxClients.Controls.Add(this.buttonAddClient);
-            this.groupBoxClients.Location = new System.Drawing.Point(12, 12);
-            this.groupBoxClients.Name = "groupBoxClients";
-            this.groupBoxClients.Size = new System.Drawing.Size(320, 360);
-            this.groupBoxClients.TabIndex = 3;
-            this.groupBoxClients.TabStop = false;
-            this.groupBoxClients.Text = "Clients";
+            groupBoxClients.Controls.Add(listBoxClients);
+            groupBoxClients.Controls.Add(textBoxSearch);
+            groupBoxClients.Controls.Add(buttonSearch);
+            groupBoxClients.Controls.Add(buttonAddClient);
+            groupBoxClients.Location = new Point(12, 12);
+            groupBoxClients.Name = "groupBoxClients";
+            groupBoxClients.Size = new Size(320, 334);
+            groupBoxClients.TabIndex = 3;
+            groupBoxClients.TabStop = false;
+            groupBoxClients.Text = "Clients";
             // 
             // textBoxSearch
             // 
-            this.textBoxSearch.Location = new System.Drawing.Point(6, 22);
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.PlaceholderText = "Search by name, surname, or passport...";
-            this.textBoxSearch.Size = new System.Drawing.Size(200, 23);
-            this.textBoxSearch.TabIndex = 3;
+            textBoxSearch.Location = new Point(6, 22);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.PlaceholderText = "Search by name or surname";
+            textBoxSearch.Size = new Size(200, 23);
+            textBoxSearch.TabIndex = 3;
+            textBoxSearch.TextChanged += textBoxSearch_TextChanged;
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(212, 22);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(94, 23);
-            this.buttonSearch.TabIndex = 4;
-            this.buttonSearch.Text = "Search";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            buttonSearch.Location = new Point(212, 22);
+            buttonSearch.Name = "buttonSearch";
+            buttonSearch.Size = new Size(94, 23);
+            buttonSearch.TabIndex = 4;
+            buttonSearch.Text = "Search";
+            buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonSearch_Click;
             // 
             // buttonAddClient
             // 
-            this.buttonAddClient.Location = new System.Drawing.Point(6, 296);
-            this.buttonAddClient.Name = "buttonAddClient";
-            this.buttonAddClient.Size = new System.Drawing.Size(300, 38);
-            this.buttonAddClient.TabIndex = 5;
-            this.buttonAddClient.Text = "Add New Client";
-            this.buttonAddClient.UseVisualStyleBackColor = true;
-            this.buttonAddClient.Click += new System.EventHandler(this.buttonAddClient_Click);
+            buttonAddClient.Location = new Point(6, 285);
+            buttonAddClient.Name = "buttonAddClient";
+            buttonAddClient.Size = new Size(160, 35);
+            buttonAddClient.TabIndex = 5;
+            buttonAddClient.Text = "Add New Client";
+            buttonAddClient.UseVisualStyleBackColor = true;
+            buttonAddClient.Click += buttonAddClient_Click;
             // 
             // groupBoxPackages
             // 
-            this.groupBoxPackages.Controls.Add(this.listBoxPackages);
-            this.groupBoxPackages.Controls.Add(this.buttonAddPackage);
-            this.groupBoxPackages.Location = new System.Drawing.Point(360, 12);
-            this.groupBoxPackages.Name = "groupBoxPackages";
-            this.groupBoxPackages.Size = new System.Drawing.Size(360, 360);
-            this.groupBoxPackages.TabIndex = 4;
-            this.groupBoxPackages.TabStop = false;
-            this.groupBoxPackages.Text = "Travel Packages";
+            groupBoxPackages.Controls.Add(listBoxPackages);
+            groupBoxPackages.Controls.Add(buttonAddPackage);
+            groupBoxPackages.Location = new Point(360, 12);
+            groupBoxPackages.Name = "groupBoxPackages";
+            groupBoxPackages.Size = new Size(399, 334);
+            groupBoxPackages.TabIndex = 4;
+            groupBoxPackages.TabStop = false;
+            groupBoxPackages.Text = "Travel Packages";
             // 
             // buttonAddPackage
             // 
-            this.buttonAddPackage.Location = new System.Drawing.Point(6, 296);
-            this.buttonAddPackage.Name = "buttonAddPackage";
-            this.buttonAddPackage.Size = new System.Drawing.Size(340, 38);
-            this.buttonAddPackage.TabIndex = 6;
-            this.buttonAddPackage.Text = "Add New Package";
-            this.buttonAddPackage.UseVisualStyleBackColor = true;
-            this.buttonAddPackage.Click += new System.EventHandler(this.buttonAddPackage_Click);
+            buttonAddPackage.Location = new Point(6, 285);
+            buttonAddPackage.Name = "buttonAddPackage";
+            buttonAddPackage.Size = new Size(160, 35);
+            buttonAddPackage.TabIndex = 6;
+            buttonAddPackage.Text = "Add New Package";
+            buttonAddPackage.UseVisualStyleBackColor = true;
+            buttonAddPackage.Click += buttonAddPackage_Click;
             // 
             // groupBoxReservations
             // 
-            this.groupBoxReservations.Controls.Add(this.listBoxReservations);
-            this.groupBoxReservations.Controls.Add(this.buttonReservePackage);
-            this.groupBoxReservations.Controls.Add(this.buttonCancelReservation);
-            this.groupBoxReservations.Location = new System.Drawing.Point(740, 12);
-            this.groupBoxReservations.Name = "groupBoxReservations";
-            this.groupBoxReservations.Size = new System.Drawing.Size(360, 360);
-            this.groupBoxReservations.TabIndex = 5;
-            this.groupBoxReservations.TabStop = false;
-            this.groupBoxReservations.Text = "Client Reservations";
+            groupBoxReservations.Controls.Add(listBoxReservations);
+            groupBoxReservations.Controls.Add(buttonReservePackage);
+            groupBoxReservations.Controls.Add(buttonCancelReservation);
+            groupBoxReservations.Location = new Point(765, 12);
+            groupBoxReservations.Name = "groupBoxReservations";
+            groupBoxReservations.Size = new Size(403, 334);
+            groupBoxReservations.TabIndex = 5;
+            groupBoxReservations.TabStop = false;
+            groupBoxReservations.Text = "Client Reservations";
             // 
             // buttonReservePackage
             // 
-            this.buttonReservePackage.Location = new System.Drawing.Point(6, 296);
-            this.buttonReservePackage.Name = "buttonReservePackage";
-            this.buttonReservePackage.Size = new System.Drawing.Size(150, 38);
-            this.buttonReservePackage.TabIndex = 7;
-            this.buttonReservePackage.Text = "Reserve Package";
-            this.buttonReservePackage.UseVisualStyleBackColor = true;
-            this.buttonReservePackage.Click += new System.EventHandler(this.buttonReservePackage_Click);
+            buttonReservePackage.Location = new Point(6, 285);
+            buttonReservePackage.Name = "buttonReservePackage";
+            buttonReservePackage.Size = new Size(160, 35);
+            buttonReservePackage.TabIndex = 7;
+            buttonReservePackage.Text = "Reserve Package";
+            buttonReservePackage.UseVisualStyleBackColor = true;
+            buttonReservePackage.Click += buttonReservePackage_Click;
             // 
             // buttonCancelReservation
             // 
-            this.buttonCancelReservation.Location = new System.Drawing.Point(162, 296);
-            this.buttonCancelReservation.Name = "buttonCancelReservation";
-            this.buttonCancelReservation.Size = new System.Drawing.Size(150, 38);
-            this.buttonCancelReservation.TabIndex = 8;
-            this.buttonCancelReservation.Text = "Cancel Reservation";
-            this.buttonCancelReservation.UseVisualStyleBackColor = true;
-            this.buttonCancelReservation.Click += new System.EventHandler(this.buttonCancelReservation_Click);
+            buttonCancelReservation.Location = new Point(237, 285);
+            buttonCancelReservation.Name = "buttonCancelReservation";
+            buttonCancelReservation.Size = new Size(160, 35);
+            buttonCancelReservation.TabIndex = 8;
+            buttonCancelReservation.Text = "Cancel Reservation";
+            buttonCancelReservation.UseVisualStyleBackColor = true;
+            buttonCancelReservation.Click += buttonCancelReservation_Click;
             // 
             // groupBoxClientInfo
             // 
-            this.groupBoxClientInfo.Controls.Add(this.labelClientPhone);
-            this.groupBoxClientInfo.Controls.Add(this.labelClientEmail);
-            this.groupBoxClientInfo.Controls.Add(this.labelClientName);
-            this.groupBoxClientInfo.Controls.Add(this.textBoxClientPhone);
-            this.groupBoxClientInfo.Controls.Add(this.textBoxClientEmail);
-            this.groupBoxClientInfo.Controls.Add(this.textBoxClientName);
-            this.groupBoxClientInfo.Location = new System.Drawing.Point(12, 420);
-            this.groupBoxClientInfo.Name = "groupBoxClientInfo";
-            this.groupBoxClientInfo.Size = new System.Drawing.Size(320, 150);
-            this.groupBoxClientInfo.TabIndex = 6;
-            this.groupBoxClientInfo.TabStop = false;
-            this.groupBoxClientInfo.Text = "Selected Client Information";
-            this.groupBoxClientInfo.Visible = false;
-            // 
-            // textBoxClientName
-            // 
-            this.textBoxClientName.Location = new System.Drawing.Point(100, 25);
-            this.textBoxClientName.Name = "textBoxClientName";
-            this.textBoxClientName.ReadOnly = true;
-            this.textBoxClientName.Size = new System.Drawing.Size(200, 23);
-            this.textBoxClientName.TabIndex = 0;
-            // 
-            // textBoxClientEmail
-            // 
-            this.textBoxClientEmail.Location = new System.Drawing.Point(100, 60);
-            this.textBoxClientEmail.Name = "textBoxClientEmail";
-            this.textBoxClientEmail.ReadOnly = true;
-            this.textBoxClientEmail.Size = new System.Drawing.Size(200, 23);
-            this.textBoxClientEmail.TabIndex = 1;
-            // 
-            // textBoxClientPhone
-            // 
-            this.textBoxClientPhone.Location = new System.Drawing.Point(100, 95);
-            this.textBoxClientPhone.Name = "textBoxClientPhone";
-            this.textBoxClientPhone.ReadOnly = true;
-            this.textBoxClientPhone.Size = new System.Drawing.Size(200, 23);
-            this.textBoxClientPhone.TabIndex = 2;
-            // 
-            // labelClientName
-            // 
-            this.labelClientName.AutoSize = true;
-            this.labelClientName.Location = new System.Drawing.Point(20, 28);
-            this.labelClientName.Name = "labelClientName";
-            this.labelClientName.Size = new System.Drawing.Size(42, 15);
-            this.labelClientName.TabIndex = 3;
-            this.labelClientName.Text = "Name:";
-            // 
-            // labelClientEmail
-            // 
-            this.labelClientEmail.AutoSize = true;
-            this.labelClientEmail.Location = new System.Drawing.Point(20, 63);
-            this.labelClientEmail.Name = "labelClientEmail";
-            this.labelClientEmail.Size = new System.Drawing.Size(44, 15);
-            this.labelClientEmail.TabIndex = 4;
-            this.labelClientEmail.Text = "Email:";
+            groupBoxClientInfo.Controls.Add(labelClientPhone);
+            groupBoxClientInfo.Controls.Add(labelClientEmail);
+            groupBoxClientInfo.Controls.Add(labelClientName);
+            groupBoxClientInfo.Controls.Add(textBoxClientPhone);
+            groupBoxClientInfo.Controls.Add(textBoxClientEmail);
+            groupBoxClientInfo.Controls.Add(textBoxClientName);
+            groupBoxClientInfo.Location = new Point(12, 364);
+            groupBoxClientInfo.Name = "groupBoxClientInfo";
+            groupBoxClientInfo.Size = new Size(320, 129);
+            groupBoxClientInfo.TabIndex = 6;
+            groupBoxClientInfo.TabStop = false;
+            groupBoxClientInfo.Text = "Selected Client Information";
+            groupBoxClientInfo.Visible = false;
             // 
             // labelClientPhone
             // 
-            this.labelClientPhone.AutoSize = true;
-            this.labelClientPhone.Location = new System.Drawing.Point(20, 98);
-            this.labelClientPhone.Name = "labelClientPhone";
-            this.labelClientPhone.Size = new System.Drawing.Size(47, 15);
-            this.labelClientPhone.TabIndex = 5;
-            this.labelClientPhone.Text = "Phone:";
+            labelClientPhone.AutoSize = true;
+            labelClientPhone.Location = new Point(20, 98);
+            labelClientPhone.Name = "labelClientPhone";
+            labelClientPhone.Size = new Size(44, 15);
+            labelClientPhone.TabIndex = 5;
+            labelClientPhone.Text = "Phone:";
+            // 
+            // labelClientEmail
+            // 
+            labelClientEmail.AutoSize = true;
+            labelClientEmail.Location = new Point(20, 63);
+            labelClientEmail.Name = "labelClientEmail";
+            labelClientEmail.Size = new Size(39, 15);
+            labelClientEmail.TabIndex = 4;
+            labelClientEmail.Text = "Email:";
+            // 
+            // labelClientName
+            // 
+            labelClientName.AutoSize = true;
+            labelClientName.Location = new Point(20, 28);
+            labelClientName.Name = "labelClientName";
+            labelClientName.Size = new Size(42, 15);
+            labelClientName.TabIndex = 3;
+            labelClientName.Text = "Name:";
+            // 
+            // textBoxClientPhone
+            // 
+            textBoxClientPhone.Location = new Point(100, 95);
+            textBoxClientPhone.Name = "textBoxClientPhone";
+            textBoxClientPhone.ReadOnly = true;
+            textBoxClientPhone.Size = new Size(200, 23);
+            textBoxClientPhone.TabIndex = 2;
+            // 
+            // textBoxClientEmail
+            // 
+            textBoxClientEmail.Location = new Point(100, 60);
+            textBoxClientEmail.Name = "textBoxClientEmail";
+            textBoxClientEmail.ReadOnly = true;
+            textBoxClientEmail.Size = new Size(200, 23);
+            textBoxClientEmail.TabIndex = 1;
+            // 
+            // textBoxClientName
+            // 
+            textBoxClientName.Location = new Point(100, 25);
+            textBoxClientName.Name = "textBoxClientName";
+            textBoxClientName.ReadOnly = true;
+            textBoxClientName.Size = new Size(200, 23);
+            textBoxClientName.TabIndex = 0;
             // 
             // groupBoxActions
             // 
-            this.groupBoxActions.Controls.Add(this.buttonBackup);
-            this.groupBoxActions.Controls.Add(this.buttonViewDestinations);
-
-
-            this.groupBoxActions.Location = new System.Drawing.Point(360, 420);
-            this.groupBoxActions.Name = "groupBoxActions";
-            this.groupBoxActions.Size = new System.Drawing.Size(320, 240);
-            this.groupBoxActions.TabIndex = 7;
-            this.groupBoxActions.TabStop = false;
-            this.groupBoxActions.Text = "Actions";
-            // 
-            // buttonViewDestinations
-            // 
-            this.buttonViewDestinations.Location = new System.Drawing.Point(6, 160);
-            this.buttonViewDestinations.Name = "buttonViewDestinations";
-            this.buttonViewDestinations.Size = new System.Drawing.Size(300, 35);
-            this.buttonViewDestinations.TabIndex = 5;
-            this.buttonViewDestinations.Text = "View Destinations";
-            this.buttonViewDestinations.UseVisualStyleBackColor = true;
-            this.buttonViewDestinations.Click += new System.EventHandler(this.buttonViewDestinations_Click);
-
+            groupBoxActions.Controls.Add(buttonBackup);
+            groupBoxActions.Controls.Add(buttonViewDestinations);
+            groupBoxActions.Location = new Point(765, 352);
+            groupBoxActions.Name = "groupBoxActions";
+            groupBoxActions.Size = new Size(403, 64);
+            groupBoxActions.TabIndex = 7;
+            groupBoxActions.TabStop = false;
+            groupBoxActions.Text = "Actions";
             // 
             // buttonBackup
             // 
-            this.buttonBackup.Location = new System.Drawing.Point(6, 75);
-            this.buttonBackup.Name = "buttonBackup";
-            this.buttonBackup.Size = new System.Drawing.Size(300, 35);
-            this.buttonBackup.TabIndex = 2;
-            this.buttonBackup.Text = "Create Database Backup";
-            this.buttonBackup.UseVisualStyleBackColor = true;
-            this.buttonBackup.Click += new System.EventHandler(this.buttonBackup_Click);
-            
+            buttonBackup.Location = new Point(6, 18);
+            buttonBackup.Name = "buttonBackup";
+            buttonBackup.Size = new Size(160, 35);
+            buttonBackup.TabIndex = 2;
+            buttonBackup.Text = "Create Database Backup";
+            buttonBackup.UseVisualStyleBackColor = true;
+            buttonBackup.Click += buttonBackup_Click;
+            // 
+            // buttonViewDestinations
+            // 
+            buttonViewDestinations.Location = new Point(237, 18);
+            buttonViewDestinations.Name = "buttonViewDestinations";
+            buttonViewDestinations.Size = new Size(160, 35);
+            buttonViewDestinations.TabIndex = 5;
+            buttonViewDestinations.Text = "View Destinations";
+            buttonViewDestinations.UseVisualStyleBackColor = true;
+            buttonViewDestinations.Click += buttonViewDestinations_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 700);
-
-            this.Controls.Add(this.groupBoxActions);
-            this.Controls.Add(this.groupBoxClientInfo);
-            this.Controls.Add(this.groupBoxReservations);
-            this.Controls.Add(this.groupBoxPackages);
-            this.Controls.Add(this.groupBoxClients);
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Travel Agency Management System";
-            this.groupBoxClients.ResumeLayout(false);
-            this.groupBoxClients.PerformLayout();
-            this.groupBoxPackages.ResumeLayout(false);
-            this.groupBoxReservations.ResumeLayout(false);
-            this.groupBoxClientInfo.ResumeLayout(false);
-            this.groupBoxClientInfo.PerformLayout();
-            this.groupBoxActions.ResumeLayout(false);
-
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1180, 511);
+            Controls.Add(groupBoxActions);
+            Controls.Add(groupBoxClientInfo);
+            Controls.Add(groupBoxReservations);
+            Controls.Add(groupBoxPackages);
+            Controls.Add(groupBoxClients);
+            Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Travel Agency Management System";
+            groupBoxClients.ResumeLayout(false);
+            groupBoxClients.PerformLayout();
+            groupBoxPackages.ResumeLayout(false);
+            groupBoxReservations.ResumeLayout(false);
+            groupBoxClientInfo.ResumeLayout(false);
+            groupBoxClientInfo.PerformLayout();
+            groupBoxActions.ResumeLayout(false);
+            ResumeLayout(false);
 
         }
 

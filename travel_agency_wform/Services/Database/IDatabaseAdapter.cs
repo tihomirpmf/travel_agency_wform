@@ -9,7 +9,6 @@ namespace travel_agency_wform.Services.Database
         Task<bool> InitializeDatabaseAsync();
         Task<List<Client>> GetAllClientsAsync();
         Task<Client?> GetClientByIdAsync(int id);
-        Task<Client?> GetClientByPassportAsync(string passportNumber);
         Task<int> AddClientAsync(Client client);
         Task<List<TravelPackage>> GetAllPackagesAsync();
         Task<TravelPackage?> GetPackageByIdAsync(int id);

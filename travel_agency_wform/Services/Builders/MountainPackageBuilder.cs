@@ -4,7 +4,7 @@ namespace travel_agency_wform.Services.Builders
 {
     // Builder Pattern: Concrete builder for MountainPackage objects
     // Purpose: Encapsulates MountainPackage creation logic with fluent interface
-    public class MountainPackageBuilder : IPackageBuilder
+    public class MountainPackageBuilder
     {
         private int _id;
         private string _name = string.Empty;
@@ -16,37 +16,37 @@ namespace travel_agency_wform.Services.Builders
         private string _transportationType = string.Empty;
         private List<string> _activities = new List<string>();
         
-        public IPackageBuilder SetId(int id)
+        public MountainPackageBuilder SetId(int id)
         {
             _id = id;
             return this;
         }
         
-        public IPackageBuilder SetName(string name)
+        public MountainPackageBuilder SetName(string name)
         {
-            _name = name;
+            _name = name ?? string.Empty;
             return this;
         }
         
-        public IPackageBuilder SetPrice(decimal price)
+        public MountainPackageBuilder SetPrice(decimal price)
         {
             _price = price;
             return this;
         }
         
-        public IPackageBuilder SetDestination(string destination)
+        public MountainPackageBuilder SetDestination(string destination)
         {
-            _destination = destination;
+            _destination = destination ?? string.Empty;
             return this;
         }
         
-        public IPackageBuilder SetNumberOfDays(int days)
+        public MountainPackageBuilder SetNumberOfDays(int days)
         {
             _numberOfDays = days;
             return this;
         }
         
-        public IPackageBuilder SetCreatedAt(DateTime createdAt)
+        public MountainPackageBuilder SetCreatedAt(DateTime createdAt)
         {
             _createdAt = createdAt;
             return this;
@@ -54,25 +54,28 @@ namespace travel_agency_wform.Services.Builders
         
         public MountainPackageBuilder SetAccommodationType(string accommodationType)
         {
-            _accommodationType = accommodationType;
+            _accommodationType = accommodationType ?? string.Empty;
             return this;
         }
         
         public MountainPackageBuilder SetTransportationType(string transportationType)
         {
-            _transportationType = transportationType;
+            _transportationType = transportationType ?? string.Empty;
             return this;
         }
         
         public MountainPackageBuilder AddActivity(string activity)
         {
-            _activities.Add(activity);
+            if (activity != null)
+            {
+                _activities.Add(activity);
+            }
             return this;
         }
         
         public MountainPackageBuilder SetActivities(List<string> activities)
         {
-            _activities = activities;
+            _activities = activities ?? new List<string>();
             return this;
         }
         

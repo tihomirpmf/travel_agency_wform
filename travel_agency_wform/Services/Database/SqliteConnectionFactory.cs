@@ -24,18 +24,5 @@ namespace travel_agency_wform.Services.Database
             return _connectionString;
         }
         
-        public bool TestConnection()
-        {
-            try
-            {
-                using var connection = CreateConnection();
-                connection.Open();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 }

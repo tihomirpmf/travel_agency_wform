@@ -141,28 +141,41 @@ namespace travel_agency_wform.Forms
                 try
                 {
                     var packages = await _agencyService.GetAllPackagesAsync();
+                    System.Diagnostics.Debug.WriteLine($"Loaded {packages.Count} packages for reservation {_reservation.Id} with PackageId {_reservation.PackageId}");
+                    
                     _comboPackages.Items.Clear();
                     foreach (var p in packages)
                     {
                         _comboPackages.Items.Add(p);
                     }
                     _comboPackages.DisplayMember = nameof(TravelPackage.Name);
-                    // select current
-                    if (_reservation.Package != null)
+                    
+                    // select current package by ID
+                    var currentPackage = packages.FirstOrDefault(x => x.Id == _reservation.PackageId);
+                    if (currentPackage != null)
                     {
-                        var found = packages.FirstOrDefault(x => x.Id == _reservation.Package.Id);
-                        if (found != null) _comboPackages.SelectedItem = found;
+                        _comboPackages.SelectedItem = currentPackage;
+                        System.Diagnostics.Debug.WriteLine($"Selected package: {currentPackage.Name} (ID: {currentPackage.Id})");
                     }
                     else
                     {
+                        System.Diagnostics.Debug.WriteLine($"Package with ID {_reservation.PackageId} not found in available packages");
                         _comboPackages.SelectedIndex = packages.Count > 0 ? 0 : -1;
                     }
                     
                     // initialize price from package
-                    var initialPackage = _comboPackages.SelectedItem as TravelPackage ?? _reservation.Package;
+                    var initialPackage = _comboPackages.SelectedItem as TravelPackage;
                     if (initialPackage != null)
                     {
                         _numericPrice.Value = initialPackage.Price;
+                    }
+                    else
+                    {
+                        // Fallback to reservation's total price divided by number of travelers
+                        if (_reservation.NumberOfTravelers > 0)
+                        {
+                            _numericPrice.Value = _reservation.TotalPrice / _reservation.NumberOfTravelers;
+                        }
                     }
                     UpdateTotalLabel();
                     

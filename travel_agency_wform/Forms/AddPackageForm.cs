@@ -1,5 +1,6 @@
 using travel_agency_wform.Models;
 using travel_agency_wform.Services;
+using travel_agency_wform.Services.Builders;
 
 namespace travel_agency_wform.Forms
 {
@@ -8,49 +9,49 @@ namespace travel_agency_wform.Forms
     public partial class AddPackageForm : Form
     {
         private readonly ITravelAgencyService _agencyService;
-        
+
         public AddPackageForm(ITravelAgencyService agencyService)
         {
             InitializeComponent();
             _agencyService = agencyService;
-            
+
             // Set up package type combo box
             comboBoxPackageType.DataSource = Enum.GetValues(typeof(PackageType));
             comboBoxPackageType.SelectedIndex = 0;
-            
+
             // Set up numeric up down controls
             numericUpDownPrice.Minimum = 1;
             numericUpDownPrice.Maximum = 100000;
             numericUpDownPrice.Value = 1000;
-            
+
             numericUpDownNumberOfDays.Minimum = 1;
             numericUpDownNumberOfDays.Maximum = 365;
             numericUpDownNumberOfDays.Value = 7;
-            
+
             numericUpDownNumberOfTravelers.Minimum = 1;
             numericUpDownNumberOfTravelers.Maximum = 100;
             numericUpDownNumberOfTravelers.Value = 1;
-            
+
             // Set up date picker
             dateTimePickerCruiseDepartureDate.MinDate = DateTime.Today;
             dateTimePickerCruiseDepartureDate.Value = DateTime.Today.AddDays(30);
-            
+
             // Show/hide controls based on package type
             comboBoxPackageType.SelectedIndexChanged += ComboBoxPackageType_SelectedIndexChanged;
             ComboBoxPackageType_SelectedIndexChanged(null, null);
         }
-        
+
         private void ComboBoxPackageType_SelectedIndexChanged(object? sender, EventArgs? e)
         {
             if (comboBoxPackageType.SelectedItem == null) return;
             var selectedType = (PackageType)comboBoxPackageType.SelectedItem;
-            
+
             // Hide all type-specific panels first
             panelSeaside.Visible = false;
             panelMountain.Visible = false;
             panelExcursion.Visible = false;
             panelCruise.Visible = false;
-            
+
             // Show appropriate panel
             switch (selectedType)
             {
@@ -68,7 +69,7 @@ namespace travel_agency_wform.Forms
                     break;
             }
         }
-        
+
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (ValidateInput())
@@ -82,71 +83,67 @@ namespace travel_agency_wform.Forms
                     }
                     var packageType = (PackageType)comboBoxPackageType.SelectedItem;
                     TravelPackage package;
-                    
+
                     switch (packageType)
                     {
                         case PackageType.Seaside:
-                            package = new SeasidePackage
-                            {
-                                Name = textBoxPackageName.Text.Trim(),
-                                Price = numericUpDownPrice.Value,
-                                Type = packageType,
-                                Destination = textBoxDestination.Text.Trim(),
-                                NumberOfDays = (int)numericUpDownNumberOfDays.Value,
-                                AccommodationType = textBoxSeasideAccommodationType.Text.Trim(),
-                                TransportationType = textBoxSeasideTransportationType.Text.Trim()
-                            };
+                            var seasideBuilder = _agencyService.CreateSeasidePackage();
+                            package = seasideBuilder
+                                .SetName(textBoxPackageName.Text.Trim())
+                                .SetPrice(numericUpDownPrice.Value)
+                                .SetDestination(textBoxDestination.Text.Trim())
+                                .SetNumberOfDays((int)numericUpDownNumberOfDays.Value)
+                                .SetAccommodationType(textBoxSeasideAccommodationType.Text.Trim())
+                                .SetTransportationType(textBoxSeasideTransportationType.Text.Trim())
+                                .Build();
                             break;
-                            
+
                         case PackageType.Mountain:
                             var activities = textBoxMountainActivities.Text.Split(',', StringSplitOptions.RemoveEmptyEntries)
                                 .Select(a => a.Trim()).ToList();
-                            package = new MountainPackage
-                            {
-                                Name = textBoxPackageName.Text.Trim(),
-                                Price = numericUpDownPrice.Value,
-                                Type = packageType,
-                                Destination = textBoxDestination.Text.Trim(),
-                                NumberOfDays = (int)numericUpDownNumberOfDays.Value,
-                                AccommodationType = textBoxMountainAccommodationType.Text.Trim(),
-                                TransportationType = textBoxMountainTransportation.Text.Trim(),
-                                Activities = activities
-                            };
+                            var mountainBuilder = _agencyService.CreateMountainPackage();
+                            package = mountainBuilder
+                                .SetName(textBoxPackageName.Text.Trim())
+                                .SetPrice(numericUpDownPrice.Value)
+                                .SetDestination(textBoxDestination.Text.Trim())
+                                .SetNumberOfDays((int)numericUpDownNumberOfDays.Value)
+                                .SetAccommodationType(textBoxMountainAccommodationType.Text.Trim())
+                                .SetTransportationType(textBoxMountainTransportation.Text.Trim())
+                                .SetActivities(activities)
+                                .Build();
                             break;
-                            
+
                         case PackageType.Excursion:
-                            package = new ExcursionPackage
-                            {
-                                Name = textBoxPackageName.Text.Trim(),
-                                Price = numericUpDownPrice.Value,
-                                Type = packageType,
-                                Destination = textBoxDestination.Text.Trim(),
-                                NumberOfDays = (int)numericUpDownNumberOfDays.Value,
-                                TransportationType = textBoxExcursionTransportation.Text.Trim(),
-                                Guide = textBoxExcursionGuide.Text.Trim()
-                            };
+                            var excursionBuilder = _agencyService.CreateExcursionPackage();
+                            package = excursionBuilder
+                                .SetName(textBoxPackageName.Text.Trim())
+                                .SetPrice(numericUpDownPrice.Value)
+                                .SetDestination(textBoxDestination.Text.Trim())
+                                .SetNumberOfDays((int)numericUpDownNumberOfDays.Value)
+                                .SetTransportationType(textBoxExcursionTransportation.Text.Trim())
+                                .SetGuide(textBoxExcursionGuide.Text.Trim())
+                                .Build();
                             break;
-                            
+
                         case PackageType.Cruise:
-                            package = new CruisePackage
-                            {
-                                Name = textBoxPackageName.Text.Trim(),
-                                Price = numericUpDownPrice.Value,
-                                Type = packageType,
-                                Destination = textBoxDestination.Text.Trim(),
-                                NumberOfDays = (int)numericUpDownNumberOfDays.Value,
-                                Ship = textBoxCruiseShip.Text.Trim(),
-                                Route = textBoxCruiseRoute.Text.Trim(),
-                                DepartureDate = dateTimePickerCruiseDepartureDate.Value.Date,
-                                CabinType = textBoxCruiseCabinType.Text.Trim(),
-                                TransportationType = textBoxCruiseTransportation.Text.Trim()
-                            };
+                            var cruiseBuilder = _agencyService.CreateCruisePackage();
+                            package = cruiseBuilder
+                                .SetName(textBoxPackageName.Text.Trim())
+                                .SetPrice(numericUpDownPrice.Value)
+                                .SetDestination(textBoxDestination.Text.Trim())
+                                .SetNumberOfDays((int)numericUpDownNumberOfDays.Value)
+                                .SetShip(textBoxCruiseShip.Text.Trim())
+                                .SetRoute(textBoxCruiseRoute.Text.Trim())
+                                .SetDepartureDate(dateTimePickerCruiseDepartureDate.Value)
+                                .SetCabinType(textBoxCruiseCabinType.Text.Trim())
+                                .SetTransportationType(textBoxCruiseTransportation.Text.Trim())
+                                .Build();
                             break;
-                            
+
                         default:
                             throw new ArgumentException("Invalid package type");
                     }
-                    
+
                     _ = Task.Run(async () =>
                     {
                         var packageId = await _agencyService.AddPackageAsync(package);
@@ -174,7 +171,7 @@ namespace travel_agency_wform.Forms
                 }
             }
         }
-        
+
         private bool ValidateInput()
         {
             if (string.IsNullOrWhiteSpace(textBoxPackageName.Text))
@@ -183,21 +180,21 @@ namespace travel_agency_wform.Forms
                 textBoxPackageName.Focus();
                 return false;
             }
-            
+
             if (string.IsNullOrWhiteSpace(textBoxDestination.Text))
             {
                 MessageBox.Show("Destination is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBoxDestination.Focus();
                 return false;
             }
-            
+
             if (comboBoxPackageType.SelectedItem == null)
             {
                 MessageBox.Show("Please select a package type.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             var packageType = (PackageType)comboBoxPackageType.SelectedItem;
-            
+
             switch (packageType)
             {
                 case PackageType.Seaside:
@@ -214,7 +211,7 @@ namespace travel_agency_wform.Forms
                         return false;
                     }
                     break;
-                    
+
                 case PackageType.Mountain:
                     if (string.IsNullOrWhiteSpace(textBoxMountainAccommodationType.Text))
                     {
@@ -235,7 +232,7 @@ namespace travel_agency_wform.Forms
                         return false;
                     }
                     break;
-                    
+
                 case PackageType.Excursion:
                     if (string.IsNullOrWhiteSpace(textBoxExcursionTransportation.Text))
                     {
@@ -250,7 +247,7 @@ namespace travel_agency_wform.Forms
                         return false;
                     }
                     break;
-                    
+
                 case PackageType.Cruise:
                     if (string.IsNullOrWhiteSpace(textBoxCruiseShip.Text))
                     {
@@ -272,14 +269,19 @@ namespace travel_agency_wform.Forms
                     }
                     break;
             }
-            
+
             return true;
         }
-        
+
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void textBoxPackageName_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -15,6 +15,11 @@ namespace travel_agency_wform.Models
         public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
         
         public abstract string GetPackageDetails();
+        
+        public override string ToString()
+        {
+            return $"{Name} - {Destination} - ${Price} - {NumberOfDays} days";
+        }
     }
     
     public enum PackageType

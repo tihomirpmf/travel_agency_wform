@@ -13,8 +13,6 @@ namespace travel_agency_wform.Services.Database
         {
         }
         
-
-        
         protected override DbCommand CreateCommand(string sql, DbConnection connection)
         {
             return new MySqlCommand(sql, (MySqlConnection)connection);

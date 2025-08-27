@@ -130,27 +130,7 @@ namespace travel_agency_wform.Services.Database
             return null;
         }
         
-        public async Task<Client?> GetClientByPassportAsync(string passportNumber)
-        {
-            using var connection = CreateConnection();
-            await connection.OpenAsync();
-            
-            // Search by encrypted passport number
-            var encryptionService = travel_agency_wform.Services.Security.DataEncryptionService.Instance;
-            var encryptedPassport = encryptionService.Encrypt(passportNumber);
-            
-            var sql = "SELECT * FROM Clients WHERE PassportNumber = @PassportNumber";
-            using var command = CreateCommand(sql, connection);
-            AddParameter(command, "@PassportNumber", encryptedPassport);
-            
-            using var reader = await command.ExecuteReaderAsync();
-            if (await reader.ReadAsync())
-            {
-                return CreateClientFromReader(reader);
-            }
-            
-            return null;
-        }
+
         
         public async Task<int> AddClientAsync(Client client)
         {
@@ -328,23 +308,39 @@ namespace travel_agency_wform.Services.Database
         
         public async Task<int> AddReservationAsync(Reservation reservation)
         {
-            using var connection = CreateConnection();
-            await connection.OpenAsync();
-            
-            var sql = $@"INSERT INTO Reservations (ClientId, PackageId, ReservationDate, NumberOfTravelers, TotalPrice, Status) 
-                       VALUES (@ClientId, @PackageId, @ReservationDate, @NumberOfTravelers, @TotalPrice, @Status);
-                       {GetLastInsertIdSql()};";
-            
-            using var command = CreateCommand(sql, connection);
-            AddParameter(command, "@ClientId", reservation.ClientId);
-            AddParameter(command, "@PackageId", reservation.PackageId);
-            AddParameter(command, "@ReservationDate", reservation.ReservationDate.ToString(GetDateTimeFormat()));
-            AddParameter(command, "@NumberOfTravelers", reservation.NumberOfTravelers);
-            AddParameter(command, "@TotalPrice", reservation.TotalPrice);
-            AddParameter(command, "@Status", (int)reservation.Status);
-            
-            var result = await command.ExecuteScalarAsync();
-            return Convert.ToInt32(result);
+            try
+            {
+                using var connection = CreateConnection();
+                await connection.OpenAsync();
+                
+                var sql = $@"INSERT INTO Reservations (ClientId, PackageId, ReservationDate, NumberOfTravelers, TotalPrice, Status) 
+                           VALUES (@ClientId, @PackageId, @ReservationDate, @NumberOfTravelers, @TotalPrice, @Status);
+                           {GetLastInsertIdSql()};";
+                
+                System.Diagnostics.Debug.WriteLine($"SQL: {sql}");
+                System.Diagnostics.Debug.WriteLine($"Parameters: ClientId={reservation.ClientId}, PackageId={reservation.PackageId}, Date={reservation.ReservationDate}, Travelers={reservation.NumberOfTravelers}, Price={reservation.TotalPrice}, Status={reservation.Status}");
+                
+                using var command = CreateCommand(sql, connection);
+                AddParameter(command, "@ClientId", reservation.ClientId);
+                AddParameter(command, "@PackageId", reservation.PackageId);
+                AddParameter(command, "@ReservationDate", reservation.ReservationDate.ToString(GetDateTimeFormat()));
+                AddParameter(command, "@NumberOfTravelers", reservation.NumberOfTravelers);
+                AddParameter(command, "@TotalPrice", reservation.TotalPrice);
+                AddParameter(command, "@Status", (int)reservation.Status);
+                
+                var result = await command.ExecuteScalarAsync();
+                var reservationId = Convert.ToInt32(result);
+                
+                System.Diagnostics.Debug.WriteLine($"Reservation inserted with ID: {reservationId}");
+                
+                return reservationId;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in AddReservationAsync: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
+                throw;
+            }
         }
         
         public async Task<bool> UpdateReservationAsync(Reservation reservation)
@@ -469,56 +465,67 @@ namespace travel_agency_wform.Services.Database
         protected virtual TravelPackage? CreatePackageFromReader(DbDataReader reader)
         {
             var type = (PackageType)reader.GetInt32(reader.GetOrdinal("Type"));
-            var builder = GetPackageBuilder(type);
             
-            // Set common properties
-            builder.SetId(reader.GetInt32(reader.GetOrdinal("Id")))
-                   .SetName(reader.GetString(reader.GetOrdinal("Name")))
-                   .SetPrice(reader.GetDecimal(reader.GetOrdinal("Price")))
-                   .SetDestination(reader.GetString(reader.GetOrdinal("Destination")))
-                   .SetNumberOfDays(reader.GetInt32(reader.GetOrdinal("NumberOfDays")))
-                   .SetCreatedAt(GetDateTime(reader, "CreatedAt"));
-            
-            // Set type-specific properties using template method pattern
-            SetTypeSpecificProperties(builder, reader, type);
-            
-            return builder.Build();
-        }
-        
-        // Template method for setting type-specific properties
-        protected virtual void SetTypeSpecificProperties(IPackageBuilder builder, DbDataReader reader, PackageType type)
-        {
             switch (type)
             {
                 case PackageType.Seaside:
-                    var seasideBuilder = (SeasidePackageBuilder)builder;
-                    seasideBuilder.SetAccommodationType(GetStringOrEmpty(reader, "AccommodationType"))
+                    var seasideBuilder = new SeasidePackageBuilder();
+                    seasideBuilder.SetId(reader.GetInt32(reader.GetOrdinal("Id")))
+                                 .SetName(reader.GetString(reader.GetOrdinal("Name")))
+                                 .SetPrice(reader.GetDecimal(reader.GetOrdinal("Price")))
+                                 .SetDestination(reader.GetString(reader.GetOrdinal("Destination")))
+                                 .SetNumberOfDays(reader.GetInt32(reader.GetOrdinal("NumberOfDays")))
+                                 .SetCreatedAt(GetDateTime(reader, "CreatedAt"))
+                                 .SetAccommodationType(GetStringOrEmpty(reader, "AccommodationType"))
                                  .SetTransportationType(GetStringOrEmpty(reader, "TransportationType"));
-                    break;
+                    return seasideBuilder.Build();
                     
                 case PackageType.Mountain:
-                    var mountainBuilder = (MountainPackageBuilder)builder;
-                    mountainBuilder.SetAccommodationType(GetStringOrEmpty(reader, "AccommodationType"))
+                    var mountainBuilder = new MountainPackageBuilder();
+                    mountainBuilder.SetId(reader.GetInt32(reader.GetOrdinal("Id")))
+                                  .SetName(reader.GetString(reader.GetOrdinal("Name")))
+                                  .SetPrice(reader.GetDecimal(reader.GetOrdinal("Price")))
+                                  .SetDestination(reader.GetString(reader.GetOrdinal("Destination")))
+                                  .SetNumberOfDays(reader.GetInt32(reader.GetOrdinal("NumberOfDays")))
+                                  .SetCreatedAt(GetDateTime(reader, "CreatedAt"))
+                                  .SetAccommodationType(GetStringOrEmpty(reader, "AccommodationType"))
                                   .SetTransportationType(GetStringOrEmpty(reader, "TransportationType"))
                                   .SetActivities(GetStringListOrEmpty(reader, "Activities"));
-                    break;
+                    return mountainBuilder.Build();
                     
                 case PackageType.Excursion:
-                    var excursionBuilder = (ExcursionPackageBuilder)builder;
-                    excursionBuilder.SetTransportationType(GetStringOrEmpty(reader, "TransportationType"))
+                    var excursionBuilder = new ExcursionPackageBuilder();
+                    excursionBuilder.SetId(reader.GetInt32(reader.GetOrdinal("Id")))
+                                   .SetName(reader.GetString(reader.GetOrdinal("Name")))
+                                   .SetPrice(reader.GetDecimal(reader.GetOrdinal("Price")))
+                                   .SetDestination(reader.GetString(reader.GetOrdinal("Destination")))
+                                   .SetNumberOfDays(reader.GetInt32(reader.GetOrdinal("NumberOfDays")))
+                                   .SetCreatedAt(GetDateTime(reader, "CreatedAt"))
+                                   .SetTransportationType(GetStringOrEmpty(reader, "TransportationType"))
                                    .SetGuide(GetStringOrEmpty(reader, "Guide"));
-                    break;
+                    return excursionBuilder.Build();
                     
                 case PackageType.Cruise:
-                    var cruiseBuilder = (CruisePackageBuilder)builder;
-                    cruiseBuilder.SetShip(GetStringOrEmpty(reader, "Ship"))
+                    var cruiseBuilder = new CruisePackageBuilder();
+                    cruiseBuilder.SetId(reader.GetInt32(reader.GetOrdinal("Id")))
+                                .SetName(reader.GetString(reader.GetOrdinal("Name")))
+                                .SetPrice(reader.GetDecimal(reader.GetOrdinal("Price")))
+                                .SetDestination(reader.GetString(reader.GetOrdinal("Destination")))
+                                .SetNumberOfDays(reader.GetInt32(reader.GetOrdinal("NumberOfDays")))
+                                .SetCreatedAt(GetDateTime(reader, "CreatedAt"))
+                                .SetShip(GetStringOrEmpty(reader, "Ship"))
                                 .SetRoute(GetStringOrEmpty(reader, "Route"))
                                 .SetDepartureDate(GetDateTimeOrMinValue(reader, "DepartureDate"))
                                 .SetCabinType(GetStringOrEmpty(reader, "CabinType"))
                                 .SetTransportationType(GetStringOrEmpty(reader, "TransportationType"));
-                    break;
+                    return cruiseBuilder.Build();
+                    
+                default:
+                    throw new ArgumentException($"Unknown package type: {type}");
             }
         }
+        
+
         
         protected virtual Reservation CreateReservationFromReader(DbDataReader reader)
         {
@@ -535,17 +542,7 @@ namespace travel_agency_wform.Services.Database
                 .Build();
         }
         
-        protected virtual IPackageBuilder GetPackageBuilder(PackageType type)
-        {
-            return type switch
-            {
-                PackageType.Seaside => new SeasidePackageBuilder(),
-                PackageType.Mountain => new MountainPackageBuilder(),
-                PackageType.Excursion => new ExcursionPackageBuilder(),
-                PackageType.Cruise => new CruisePackageBuilder(),
-                _ => throw new ArgumentException($"Unknown package type: {type}")
-            };
-        }
+
         
         // Package type-specific helper methods
         protected virtual string GetAccommodationType(TravelPackage package)

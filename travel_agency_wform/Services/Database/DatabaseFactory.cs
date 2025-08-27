@@ -1,50 +1,59 @@
 using travel_agency_wform.Services;
+using System.Data.Common;
 
 namespace travel_agency_wform.Services.Database
 {
-    // Abstract Factory Pattern: Interface for creating database-related objects
-    // Purpose: Encapsulates database provider creation logic
-    public interface IDatabaseProviderFactory
-    {
-        IDatabaseConnection CreateConnection(string connectionString);
-        IDatabaseAdapter CreateAdapter(string connectionString);
-    }
-
-    // Abstract Factory Pattern: Concrete factory for SQLite database objects
-    public class SqliteProviderFactory : IDatabaseProviderFactory
-    {
-        public IDatabaseConnection CreateConnection(string connectionString) => new SqliteConnectionFactory(connectionString);
-        public IDatabaseAdapter CreateAdapter(string connectionString) => new SqliteDatabaseAdapter(connectionString);
-    }
-
-    // Abstract Factory Pattern: Concrete factory for MySQL database objects
-    public class MySqlProviderFactory : IDatabaseProviderFactory
-    {
-        public IDatabaseConnection CreateConnection(string connectionString) => new MySqlConnectionFactory(connectionString);
-        public IDatabaseAdapter CreateAdapter(string connectionString) => new MySqlDatabaseAdapter(connectionString);
-    }
-
-    // Factory Method Pattern: Creates appropriate database provider factory based on connection string
+    // Factory Method Pattern: Creates appropriate database objects based on connection string
+    // Purpose: User doesn't care which database system, just wants a connection or adapter
     public class DatabaseFactory
     {
-        public static IDatabaseProviderFactory CreateProvider()
+        public static DbConnection CreateConnection(string connectionString)
         {
-            var config = ConfigurationManager.Instance;
-            var connectionString = config.ConnectionString;
-            
-            if (connectionString.Contains("Data Source=") || connectionString.Contains(".db"))
+            if (IsSqliteConnection(connectionString))
             {
-                return new SqliteProviderFactory();
+                var factory = new SqliteConnectionFactory(connectionString);
+                return factory.CreateConnection();
             }
-            else if (connectionString.Contains("Server=") || connectionString.Contains("Database="))
+            else if (IsMySqlConnection(connectionString))
             {
-                return new MySqlProviderFactory();
+                var factory = new MySqlConnectionFactory(connectionString);
+                return factory.CreateConnection();
             }
             else
             {
                 // Default to SQLite
-                return new SqliteProviderFactory();
+                var factory = new SqliteConnectionFactory(connectionString);
+                return factory.CreateConnection();
             }
+        }
+        
+        public static IDatabaseAdapter CreateAdapter(string connectionString)
+        {
+            if (IsSqliteConnection(connectionString))
+            {
+                return new SqliteDatabaseAdapter(connectionString);
+            }
+            else if (IsMySqlConnection(connectionString))
+            {
+                return new MySqlDatabaseAdapter(connectionString);
+            }
+            else
+            {
+                // Default to SQLite
+                return new SqliteDatabaseAdapter(connectionString);
+            }
+        }
+        
+
+        
+        private static bool IsSqliteConnection(string connectionString)
+        {
+            return connectionString.Contains("Data Source=") || connectionString.Contains(".db");
+        }
+        
+        private static bool IsMySqlConnection(string connectionString)
+        {
+            return connectionString.Contains("Server=") || connectionString.Contains("Database=");
         }
     }
 }
