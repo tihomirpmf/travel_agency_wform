@@ -92,7 +92,7 @@ namespace travel_agency_wform.Forms
                         };
                         
                         // Create and execute command
-                        var command = new ReservePackageCommand(_agencyService.GetDatabaseAdapter(), reservation);
+                        var command = new ReservePackageCommand(_agencyService, reservation);
                         var success = await _commandInvoker.ExecuteCommandAsync(command);
                         
                         if (InvokeRequired)

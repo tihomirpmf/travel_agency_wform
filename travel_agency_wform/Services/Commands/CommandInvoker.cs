@@ -19,71 +19,85 @@ namespace travel_agency_wform.Services.Commands
         {
             if (command == null)
                 return false;
-                
-            lock (_lockObject)
+            
+            try
             {
-                try
+                var result = await command.ExecuteAsync();
+                if (result)
                 {
-                    var result = command.ExecuteAsync().Result;
-                    if (result)
+                    lock (_lockObject)
                     {
                         _undoStack.Push(command);
                         _redoStack.Clear(); // Clear redo stack when new command is executed
                     }
-                    return result;
                 }
-                catch
-                {
-                    return false;
-                }
+                return result;
+            }
+            catch
+            {
+                return false;
             }
         }
         
         public async Task<bool> UndoAsync()
         {
+            ICommand? command = null;
             lock (_lockObject)
             {
-                if (_undoStack.Count == 0)
-                    return false;
-                    
-                try
+                if (_undoStack.Count > 0)
                 {
-                    var command = _undoStack.Pop();
-                    var result = command.UndoAsync().Result;
-                    if (result)
+                    command = _undoStack.Pop();
+                }
+            }
+            if (command == null)
+                return false;
+            
+            try
+            {
+                var result = await command.UndoAsync();
+                if (result)
+                {
+                    lock (_lockObject)
                     {
                         _redoStack.Push(command);
                     }
-                    return result;
                 }
-                catch
-                {
-                    return false;
-                }
+                return result;
+            }
+            catch
+            {
+                return false;
             }
         }
         
         public async Task<bool> RedoAsync()
         {
+            ICommand? command = null;
             lock (_lockObject)
             {
-                if (_redoStack.Count == 0)
-                    return false;
-                    
-                try
+                if (_redoStack.Count > 0)
                 {
-                    var command = _redoStack.Pop();
-                    var result = command.ExecuteAsync().Result;
-                    if (result)
+                    command = _redoStack.Pop();
+                }
+            }
+            if (command == null)
+                return false;
+            
+            try
+            {
+                var result = await command.ExecuteAsync();
+                if (result)
+                {
+                    lock (_lockObject)
                     {
                         _undoStack.Push(command);
                     }
-                    return result;
                 }
-                catch
-                {
-                    return false;
-                }
+                return result;
+            }
+            catch
+            {
+                return false;
             }
         }
         

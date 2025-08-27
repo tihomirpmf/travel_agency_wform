@@ -15,21 +15,10 @@ namespace travel_agency_wform.Services
             _configManager = ConfigurationManager.Instance;
             var connectionString = _configManager.ConnectionString;
             
-            // Use the Factory Method pattern to create the appropriate database adapter
-            var databaseConnection = DatabaseFactory.CreateConnection();
-            if (databaseConnection is SqliteConnectionFactory sqliteFactory)
-            {
-                _databaseAdapter = new SqliteDatabaseAdapter(connectionString);
-            }
-            else if (databaseConnection is MySqlConnectionFactory mysqlFactory)
-            {
-                _databaseAdapter = new MySqlDatabaseAdapter(connectionString);
-            }
-            else
-            {
-                // Default to SQLite
-                _databaseAdapter = new SqliteDatabaseAdapter(connectionString);
-            }
+            // Abstract Factory: choose provider and get matching adapter
+            var provider = DatabaseFactory.CreateProvider();
+            _ = provider.CreateConnection(connectionString); // ensure provider is valid; connection can be used as needed
+            _databaseAdapter = provider.CreateAdapter(connectionString);
         }
         
         public async Task<bool> InitializeAsync()
@@ -344,17 +333,29 @@ namespace travel_agency_wform.Services
             return success;
         }
         
+        public async Task<bool> DeleteReservationAsync(int reservationId)
+        {
+            var reservation = await _databaseAdapter.GetReservationByIdAsync(reservationId);
+            if (reservation == null)
+                throw new ArgumentException("Reservation not found.");
+            
+            if (reservation.Status != ReservationStatus.Cancelled)
+                throw new InvalidOperationException("Only cancelled reservations can be deleted.");
+            
+            var success = await _databaseAdapter.DeleteReservationAsync(reservationId);
+            if (success)
+            {
+                DataChangeNotifier.Instance.NotifyReservationCancelled(reservationId);
+            }
+            return success;
+        }
+        
         public async Task<bool> UpdateReservationAsync(Reservation reservation)
         {
             if (reservation.Id <= 0)
                 throw new ArgumentException("Invalid reservation ID.");
             
-            // Recalculate total price if number of travelers changed
-            var package = await _databaseAdapter.GetPackageByIdAsync(reservation.PackageId);
-            if (package != null)
-            {
-                reservation.TotalPrice = package.Price * reservation.NumberOfTravelers;
-            }
+            // Trust caller-provided TotalPrice to allow manual overrides in the UI
             
             var success = await _databaseAdapter.UpdateReservationAsync(reservation);
             

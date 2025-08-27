@@ -40,7 +40,7 @@ namespace travel_agency_wform.Forms
                     _ = Task.Run(async () =>
                     {
                         // Create and execute command
-                        var command = new AddClientCommand(_agencyService.GetDatabaseAdapter(), client);
+                        var command = new AddClientCommand(_agencyService, client);
                         var success = await _commandInvoker.ExecuteCommandAsync(command);
                         
                         if (InvokeRequired)

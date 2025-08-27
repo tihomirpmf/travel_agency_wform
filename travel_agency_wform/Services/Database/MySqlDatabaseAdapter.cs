@@ -94,12 +94,12 @@ namespace travel_agency_wform.Services.Database
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
                     DateOfBirth = reader.GetDateTime(reader.GetOrdinal("DateOfBirth")),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
-                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
+                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
+                    PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"))
                 };
                 
                 // Handle encrypted data
                 client.SetEncryptedPassportNumber(reader.GetString(reader.GetOrdinal("PassportNumber")));
-                client.SetEncryptedPhoneNumber(reader.GetString(reader.GetOrdinal("PhoneNumber")));
                 
                 clients.Add(client);
             }
@@ -126,12 +126,12 @@ namespace travel_agency_wform.Services.Database
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
                     DateOfBirth = reader.GetDateTime(reader.GetOrdinal("DateOfBirth")),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
-                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
+                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
+                    PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"))
                 };
                 
                 // Handle encrypted data
                 client.SetEncryptedPassportNumber(reader.GetString(reader.GetOrdinal("PassportNumber")));
-                client.SetEncryptedPhoneNumber(reader.GetString(reader.GetOrdinal("PhoneNumber")));
                 
                 return client;
             }
@@ -162,12 +162,12 @@ namespace travel_agency_wform.Services.Database
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
                     DateOfBirth = reader.GetDateTime(reader.GetOrdinal("DateOfBirth")),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
-                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
+                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
+                    PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"))
                 };
                 
                 // Handle encrypted data
                 client.SetEncryptedPassportNumber(reader.GetString(reader.GetOrdinal("PassportNumber")));
-                client.SetEncryptedPhoneNumber(reader.GetString(reader.GetOrdinal("PhoneNumber")));
                 
                 return client;
             }
@@ -190,7 +190,7 @@ namespace travel_agency_wform.Services.Database
             command.Parameters.AddWithValue("@PassportNumber", client.GetEncryptedPassportNumber());
             command.Parameters.AddWithValue("@DateOfBirth", client.DateOfBirth);
             command.Parameters.AddWithValue("@Email", client.Email);
-            command.Parameters.AddWithValue("@PhoneNumber", client.GetEncryptedPhoneNumber());
+            command.Parameters.AddWithValue("@PhoneNumber", client.PhoneNumber);
             command.Parameters.AddWithValue("@CreatedAt", client.CreatedAt);
             
             var result = await command.ExecuteScalarAsync();
@@ -213,7 +213,7 @@ namespace travel_agency_wform.Services.Database
             command.Parameters.AddWithValue("@PassportNumber", client.GetEncryptedPassportNumber());
             command.Parameters.AddWithValue("@DateOfBirth", client.DateOfBirth);
             command.Parameters.AddWithValue("@Email", client.Email);
-            command.Parameters.AddWithValue("@PhoneNumber", client.GetEncryptedPhoneNumber());
+            command.Parameters.AddWithValue("@PhoneNumber", client.PhoneNumber);
             
             var rowsAffected = await command.ExecuteNonQueryAsync();
             return rowsAffected > 0;
@@ -414,7 +414,7 @@ namespace travel_agency_wform.Services.Database
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
                     Email = reader.GetString(reader.GetOrdinal("Email"))
                 };
-                client.SetEncryptedPhoneNumber(reader.GetString(reader.GetOrdinal("PhoneNumber")));
+                client.PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"));
                 reservation.Client = client;
                 
                 // Create package
@@ -465,7 +465,7 @@ namespace travel_agency_wform.Services.Database
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
                     Email = reader.GetString(reader.GetOrdinal("Email"))
                 };
-                client.SetEncryptedPhoneNumber(reader.GetString(reader.GetOrdinal("PhoneNumber")));
+                client.PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"));
                 reservation.Client = client;
                 
                 // Create package
@@ -513,7 +513,7 @@ namespace travel_agency_wform.Services.Database
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
                     Email = reader.GetString(reader.GetOrdinal("Email"))
                 };
-                client.SetEncryptedPhoneNumber(reader.GetString(reader.GetOrdinal("PhoneNumber")));
+                client.PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"));
                 reservation.Client = client;
                 
                 // Create package
@@ -583,6 +583,17 @@ namespace travel_agency_wform.Services.Database
             return rowsAffected > 0;
         }
         
+        public async Task<bool> DeleteReservationAsync(int id)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            await connection.OpenAsync();
+            var sql = "DELETE FROM Reservations WHERE Id = @Id";
+            using var command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Id", id);
+            var rows = await command.ExecuteNonQueryAsync();
+            return rows > 0;
+        }
+        
         public async Task<List<string>> GetAllDestinationsAsync()
         {
             var destinations = new List<string>();
@@ -604,28 +615,8 @@ namespace travel_agency_wform.Services.Database
         
         public async Task<bool> CreateBackupAsync()
         {
-            try
-            {
-                var backupPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "backups");
-                Directory.CreateDirectory(backupPath);
-                
-                var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                var backupFile = Path.Combine(backupPath, $"backup_{timestamp}.sql");
-                
-                using var connection = new MySqlConnection(_connectionString);
-                await connection.OpenAsync();
-                
-                // For MySQL, we would typically use mysqldump command
-                // For this demo, we'll create a simple backup by exporting data
-                var backupSql = await GenerateBackupSqlAsync(connection);
-                await File.WriteAllTextAsync(backupFile, backupSql);
-                
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            var template = new Templates.MySqlBackupTemplate(_connectionString);
+            return await template.RunAsync();
         }
         
         private async Task<string> GenerateBackupSqlAsync(MySqlConnection connection)

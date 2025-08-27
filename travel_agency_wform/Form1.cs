@@ -28,6 +28,9 @@ namespace travel_agency_wform
             // Subscribe to data changes
             _dataNotifier.Subscribe(this);
             
+            // Wire reservation edit on double-click
+            this.listBoxReservations.DoubleClick += listBoxReservations_DoubleClick;
+
             // Initialize the form
             InitializeFormAsync();
             
@@ -356,7 +359,7 @@ namespace travel_agency_wform
                     try
                     {
                         // Create and execute command
-                        var command = new CancelReservationCommand(_agencyService.GetDatabaseAdapter(), selectedReservation.Id);
+                        var command = new CancelReservationCommand(_agencyService, selectedReservation.Id);
                         var success = await _commandInvoker.ExecuteCommandAsync(command);
                         
                         if (InvokeRequired)
@@ -389,6 +392,19 @@ namespace travel_agency_wform
                         }
                     }
                 });
+            }
+        }
+
+        private void listBoxReservations_DoubleClick(object sender, EventArgs e)
+        {
+            var reservation = listBoxReservations.SelectedItem as Reservation;
+            if (reservation == null)
+                return;
+            var editForm = new ReservationEditForm(_agencyService, reservation);
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                UpdateUndoRedoButtons();
+                UpdateCommandHistoryDisplay();
             }
         }
         
@@ -431,6 +447,12 @@ namespace travel_agency_wform
                     }));
                 }
             });
+        }
+        
+        private void buttonViewDestinations_Click(object sender, EventArgs e)
+        {
+            var dlg = new DestinationsForm(_agencyService);
+            dlg.ShowDialog(this);
         }
         
         private void buttonUndo_Click(object sender, EventArgs e)

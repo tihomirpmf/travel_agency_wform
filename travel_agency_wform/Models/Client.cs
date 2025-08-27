@@ -1,11 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using travel_agency_wform.Services.Security;
 
 namespace travel_agency_wform.Models
 {
     public class Client
     {
-        private readonly DataEncryptionService _encryptionService = DataEncryptionService.Instance;
         
         public int Id { get; set; }
         
@@ -25,6 +23,7 @@ namespace travel_agency_wform.Models
             set => _encryptedPassportNumber = _encryptionService.Encrypt(value);
         }
         
+        private readonly Services.Security.DataEncryptionService _encryptionService = Services.Security.DataEncryptionService.Instance;
         private string _encryptedPassportNumber = string.Empty;
         
         [Required]
@@ -38,13 +37,7 @@ namespace travel_agency_wform.Models
         [Required]
         [Phone]
         [StringLength(20)]
-        public string PhoneNumber 
-        { 
-            get => _encryptionService.Decrypt(_encryptedPhoneNumber);
-            set => _encryptedPhoneNumber = _encryptionService.Encrypt(value);
-        }
-        
-        private string _encryptedPhoneNumber = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
         
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         
@@ -54,10 +47,8 @@ namespace travel_agency_wform.Models
         
         // For database operations - get encrypted values
         public string GetEncryptedPassportNumber() => _encryptedPassportNumber;
-        public string GetEncryptedPhoneNumber() => _encryptedPhoneNumber;
         
         // For database operations - set encrypted values
         public void SetEncryptedPassportNumber(string encryptedValue) => _encryptedPassportNumber = encryptedValue;
-        public void SetEncryptedPhoneNumber(string encryptedValue) => _encryptedPhoneNumber = encryptedValue;
     }
 }

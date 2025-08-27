@@ -93,12 +93,12 @@ namespace travel_agency_wform.Services.Database
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
                     DateOfBirth = DateTime.Parse(reader.GetString(reader.GetOrdinal("DateOfBirth"))),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
-                    CreatedAt = DateTime.Parse(reader.GetString(reader.GetOrdinal("CreatedAt")))
+                    CreatedAt = DateTime.Parse(reader.GetString(reader.GetOrdinal("CreatedAt"))),
+                    PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"))
                 };
                 
                 // Handle encrypted data
                 client.SetEncryptedPassportNumber(reader.GetString(reader.GetOrdinal("PassportNumber")));
-                client.SetEncryptedPhoneNumber(reader.GetString(reader.GetOrdinal("PhoneNumber")));
                 
                 clients.Add(client);
             }
@@ -125,12 +125,12 @@ namespace travel_agency_wform.Services.Database
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
                     DateOfBirth = DateTime.Parse(reader.GetString(reader.GetOrdinal("DateOfBirth"))),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
-                    CreatedAt = DateTime.Parse(reader.GetString(reader.GetOrdinal("CreatedAt")))
+                    CreatedAt = DateTime.Parse(reader.GetString(reader.GetOrdinal("CreatedAt"))),
+                    PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"))
                 };
                 
                 // Handle encrypted data
                 client.SetEncryptedPassportNumber(reader.GetString(reader.GetOrdinal("PassportNumber")));
-                client.SetEncryptedPhoneNumber(reader.GetString(reader.GetOrdinal("PhoneNumber")));
                 
                 return client;
             }
@@ -161,12 +161,12 @@ namespace travel_agency_wform.Services.Database
                     LastName = reader.GetString(reader.GetOrdinal("LastName")),
                     DateOfBirth = DateTime.Parse(reader.GetString(reader.GetOrdinal("DateOfBirth"))),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
-                    CreatedAt = DateTime.Parse(reader.GetString(reader.GetOrdinal("CreatedAt")))
+                    CreatedAt = DateTime.Parse(reader.GetString(reader.GetOrdinal("CreatedAt"))),
+                    PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"))
                 };
                 
                 // Handle encrypted data
                 client.SetEncryptedPassportNumber(reader.GetString(reader.GetOrdinal("PassportNumber")));
-                client.SetEncryptedPhoneNumber(reader.GetString(reader.GetOrdinal("PhoneNumber")));
                 
                 return client;
             }
@@ -189,7 +189,7 @@ namespace travel_agency_wform.Services.Database
             command.Parameters.AddWithValue("@PassportNumber", client.GetEncryptedPassportNumber());
             command.Parameters.AddWithValue("@DateOfBirth", client.DateOfBirth.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("@Email", client.Email);
-            command.Parameters.AddWithValue("@PhoneNumber", client.GetEncryptedPhoneNumber());
+            command.Parameters.AddWithValue("@PhoneNumber", client.PhoneNumber);
             command.Parameters.AddWithValue("@CreatedAt", client.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"));
             
             var result = await command.ExecuteScalarAsync();
@@ -212,7 +212,7 @@ namespace travel_agency_wform.Services.Database
             command.Parameters.AddWithValue("@PassportNumber", client.GetEncryptedPassportNumber());
             command.Parameters.AddWithValue("@DateOfBirth", client.DateOfBirth.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("@Email", client.Email);
-            command.Parameters.AddWithValue("@PhoneNumber", client.GetEncryptedPhoneNumber());
+            command.Parameters.AddWithValue("@PhoneNumber", client.PhoneNumber);
             
             var rowsAffected = await command.ExecuteNonQueryAsync();
             return rowsAffected > 0;
@@ -544,6 +544,17 @@ namespace travel_agency_wform.Services.Database
             }
         }
         
+        public async Task<bool> DeleteReservationAsync(int id)
+        {
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+            var sql = "DELETE FROM Reservations WHERE Id = @Id";
+            using var command = new SqliteCommand(sql, connection);
+            command.Parameters.AddWithValue("@Id", id);
+            var rows = await command.ExecuteNonQueryAsync();
+            return rows > 0;
+        }
+        
         public async Task<List<string>> GetAllDestinationsAsync()
         {
             var destinations = new List<string>();
@@ -565,18 +576,8 @@ namespace travel_agency_wform.Services.Database
         
         public async Task<bool> CreateBackupAsync()
         {
-            try
-            {
-                var backupPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, 
-                    $"backup_{DateTime.Now:yyyyMMdd_HHmmss}.db");
-                
-                File.Copy(_connectionString.Replace("Data Source=", ""), backupPath);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            var template = new Templates.SqliteBackupTemplate(_connectionString);
+            return await template.RunAsync();
         }
         
         private TravelPackage? CreatePackageFromReader(SqliteDataReader reader)

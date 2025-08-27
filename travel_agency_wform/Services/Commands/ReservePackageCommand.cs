@@ -1,17 +1,16 @@
 using travel_agency_wform.Models;
-using travel_agency_wform.Services.Database;
 
 namespace travel_agency_wform.Services.Commands
 {
     public class ReservePackageCommand : ICommand
     {
-        private readonly IDatabaseAdapter _databaseAdapter;
+        private readonly TravelAgencyService _service;
         private readonly Reservation _reservation;
         private int _addedReservationId = -1;
         
-        public ReservePackageCommand(IDatabaseAdapter databaseAdapter, Reservation reservation)
+        public ReservePackageCommand(TravelAgencyService service, Reservation reservation)
         {
-            _databaseAdapter = databaseAdapter;
+            _service = service;
             _reservation = reservation;
         }
         
@@ -21,7 +20,7 @@ namespace travel_agency_wform.Services.Commands
         {
             try
             {
-                _addedReservationId = await _databaseAdapter.AddReservationAsync(_reservation);
+                _addedReservationId = await _service.ReservePackageAsync(_reservation.ClientId, _reservation.PackageId, _reservation.NumberOfTravelers);
                 return _addedReservationId > 0;
             }
             catch
@@ -37,7 +36,7 @@ namespace travel_agency_wform.Services.Commands
                 
             try
             {
-                return await _databaseAdapter.CancelReservationAsync(_addedReservationId);
+                return await _service.CancelReservationAsync(_addedReservationId);
             }
             catch
             {

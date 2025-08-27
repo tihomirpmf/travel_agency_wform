@@ -1,17 +1,16 @@
 using travel_agency_wform.Models;
-using travel_agency_wform.Services.Database;
 
 namespace travel_agency_wform.Services.Commands
 {
     public class AddClientCommand : ICommand
     {
-        private readonly IDatabaseAdapter _databaseAdapter;
+        private readonly TravelAgencyService _service;
         private readonly Client _client;
         private int _addedClientId = -1;
         
-        public AddClientCommand(IDatabaseAdapter databaseAdapter, Client client)
+        public AddClientCommand(TravelAgencyService service, Client client)
         {
-            _databaseAdapter = databaseAdapter;
+            _service = service;
             _client = client;
         }
         
@@ -21,7 +20,7 @@ namespace travel_agency_wform.Services.Commands
         {
             try
             {
-                _addedClientId = await _databaseAdapter.AddClientAsync(_client);
+                _addedClientId = await _service.AddClientAsync(_client);
                 return _addedClientId > 0;
             }
             catch
@@ -37,7 +36,7 @@ namespace travel_agency_wform.Services.Commands
                 
             try
             {
-                return await _databaseAdapter.DeleteClientAsync(_addedClientId);
+                return await _service.DeleteClientAsync(_addedClientId);
             }
             catch
             {

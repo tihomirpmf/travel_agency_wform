@@ -25,6 +25,7 @@ namespace travel_agency_wform.Services.Database
         Task<int> AddReservationAsync(Reservation reservation);
         Task<bool> UpdateReservationAsync(Reservation reservation);
         Task<bool> CancelReservationAsync(int id);
+        Task<bool> DeleteReservationAsync(int id);
         
         Task<List<string>> GetAllDestinationsAsync();
         Task<bool> CreateBackupAsync();
