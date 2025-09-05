@@ -95,7 +95,7 @@ namespace travel_agency_wform
             listBoxClients.Items.Clear();
             foreach (var client in _clients.OrderBy(c => c.LastName).ThenBy(c => c.FirstName))
             {
-                listBoxClients.Items.Add($"{client.FullName} - {client.PassportNumber}");
+                listBoxClients.Items.Add(client);
             }
         }
 
@@ -204,21 +204,18 @@ namespace travel_agency_wform
         // Event handlers
         private void listBoxClients_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxClients.SelectedIndex >= 0 && listBoxClients.SelectedItem != null)
+            if (listBoxClients.SelectedIndex >= 0 && listBoxClients.SelectedItem is Client client)
             {
-                var selectedText = listBoxClients.SelectedItem?.ToString() ?? "";
-                var passportNumber = selectedText.Split(" - ").Last();
-                _selectedClient = _clients.FirstOrDefault(c => c.PassportNumber == passportNumber);
+                _selectedClient = client;
 
-                if (_selectedClient != null)
-                {
-                    RefreshReservationList();
-                    groupBoxClientInfo.Visible = true;
-                    textBoxClientName.Text = _selectedClient.FullName;
-                    textBoxClientEmail.Text = _selectedClient.Email;
-                    textBoxClientPhone.Text = _selectedClient.PhoneNumber;
-                    textBoxClientDob.Text = _selectedClient.DateOfBirth.ToString("dd/MM/yyyy");
-                }
+                RefreshReservationList();
+                groupBoxClientInfo.Visible = true;
+                labelClientText.Text =
+                    $"Name: {client.FullName}\r\n" +
+                    $"Passport: {client.PassportNumber}\r\n" +
+                    $"Email: {client.Email}\r\n" +
+                    $"Phone: {client.PhoneNumber}\r\n" +
+                    $"Date of birth: {client.DateOfBirth:dd/MM/yyyy}";
             }
         }
 
@@ -238,6 +235,64 @@ namespace travel_agency_wform
             {
                 // Data will be refreshed via observer pattern
             }
+        }
+
+        private void listBoxPackages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxPackages.SelectedIndex < 0 || listBoxPackages.SelectedItem == null)
+                return;
+
+            // Ignore category headers like === SEASIDE PACKAGES ===
+            if (listBoxPackages.SelectedItem is string header && header.StartsWith("==="))
+            {
+                groupBoxPackageInfo.Visible = false;
+                labelPackageText.Text = string.Empty;
+                return;
+            }
+
+            var package = listBoxPackages.SelectedItem as TravelPackage;
+            if (package == null)
+            {
+                groupBoxPackageInfo.Visible = false;
+                labelPackageText.Text = string.Empty;
+                return;
+            }
+
+            groupBoxPackageInfo.Visible = true;
+
+            var baseInfo = $"Name: {package.Name}\r\n" +
+                          $"Type: {package.Type}\r\n" +
+                          $"Destination: {package.Destination}\r\n" +
+                          $"Price: {package.Price:C}\r\n" +
+                          $"Days: {package.NumberOfDays}\r\n";
+
+            string extraInfo = string.Empty;
+            switch (package)
+            {
+                case SeasidePackage seaside:
+                    extraInfo = $"Accommodation: {seaside.AccommodationType}\r\n" +
+                               $"Transport: {seaside.TransportationType}";
+                    break;
+                case MountainPackage mountain:
+                    var activities = mountain.Activities != null && mountain.Activities.Count > 0 ? string.Join(", ", mountain.Activities) : "None";
+                    extraInfo = $"Accommodation: {mountain.AccommodationType}\r\n" +
+                               $"Transport: {mountain.TransportationType}\r\n" +
+                               $"Activities: {activities}";
+                    break;
+                case ExcursionPackage excursion:
+                    extraInfo = $"Transport: {excursion.TransportationType}\r\n" +
+                               $"Guide: {excursion.Guide}";
+                    break;
+                case CruisePackage cruise:
+                    extraInfo = $"Ship: {cruise.Ship}\r\n" +
+                               $"Route: {cruise.Route}\r\n" +
+                               $"Departure: {cruise.DepartureDate:dd/MM/yyyy}\r\n" +
+                               $"Cabin: {cruise.CabinType}\r\n" +
+                               $"Transport: {cruise.TransportationType}";
+                    break;
+            }
+
+            labelPackageText.Text = baseInfo + extraInfo;
         }
 
         private void buttonReservePackage_Click(object sender, EventArgs e)
@@ -381,9 +436,9 @@ namespace travel_agency_wform
                 c.PassportNumber.ToLower().Contains(searchTerm)).ToList();
 
             listBoxClients.Items.Clear();
-            foreach (var client in filteredClients)
+            foreach (var client in filteredClients.OrderBy(c => c.LastName).ThenBy(c => c.FirstName))
             {
-                listBoxClients.Items.Add($"{client.FullName} - {client.PassportNumber}");
+                listBoxClients.Items.Add(client);
             }
         }
 

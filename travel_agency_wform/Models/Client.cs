@@ -43,6 +43,10 @@ namespace travel_agency_wform.Models
         public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
         
         public string FullName => $"{FirstName} {LastName}";
+        public override string ToString()
+        {
+            return FullName;
+        }
         
         // For database operations - get encrypted values
         public string GetEncryptedPassportNumber() => _encryptedPassportNumber;

@@ -41,6 +41,7 @@
             buttonReservePackage = new Button();
             buttonCancelReservation = new Button();
             groupBoxClientInfo = new GroupBox();
+            labelClientText = new Label();
             labelClientPhone = new Label();
             labelClientEmail = new Label();
             labelClientName = new Label();
@@ -49,6 +50,8 @@
             textBoxClientName = new TextBox();
             labelClientDob = new Label();
             textBoxClientDob = new TextBox();
+            groupBoxPackageInfo = new GroupBox();
+            labelPackageText = new Label();
             groupBoxActions = new GroupBox();
             buttonBackup = new Button();
             buttonViewDestinations = new Button();
@@ -56,6 +59,7 @@
             groupBoxPackages.SuspendLayout();
             groupBoxReservations.SuspendLayout();
             groupBoxClientInfo.SuspendLayout();
+            groupBoxPackageInfo.SuspendLayout();
             groupBoxActions.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,6 +81,7 @@
             listBoxPackages.Name = "listBoxPackages";
             listBoxPackages.Size = new Size(387, 229);
             listBoxPackages.TabIndex = 1;
+            listBoxPackages.SelectedIndexChanged += listBoxPackages_SelectedIndexChanged;
             // 
             // listBoxReservations
             // 
@@ -184,14 +189,7 @@
             // 
             // groupBoxClientInfo
             // 
-            groupBoxClientInfo.Controls.Add(labelClientPhone);
-            groupBoxClientInfo.Controls.Add(labelClientEmail);
-            groupBoxClientInfo.Controls.Add(labelClientName);
-            groupBoxClientInfo.Controls.Add(textBoxClientPhone);
-            groupBoxClientInfo.Controls.Add(textBoxClientEmail);
-            groupBoxClientInfo.Controls.Add(textBoxClientName);
-            groupBoxClientInfo.Controls.Add(labelClientDob);
-            groupBoxClientInfo.Controls.Add(textBoxClientDob);
+            groupBoxClientInfo.Controls.Add(labelClientText);
             groupBoxClientInfo.Location = new Point(12, 364);
             groupBoxClientInfo.Name = "groupBoxClientInfo";
             groupBoxClientInfo.Size = new Size(320, 164);
@@ -200,79 +198,92 @@
             groupBoxClientInfo.Text = "Selected Client Information";
             groupBoxClientInfo.Visible = false;
             // 
+            // labelClientText
+            // 
+            labelClientText.Location = new Point(20, 22);
+            labelClientText.Name = "labelClientText";
+            labelClientText.Size = new Size(280, 132);
+            labelClientText.TabIndex = 8;
+            // 
             // labelClientPhone
             // 
-            labelClientPhone.AutoSize = true;
-            labelClientPhone.Location = new Point(20, 98);
+            labelClientPhone.Location = new Point(0, 0);
             labelClientPhone.Name = "labelClientPhone";
-            labelClientPhone.Size = new Size(44, 15);
-            labelClientPhone.TabIndex = 5;
-            labelClientPhone.Text = "Phone:";
+            labelClientPhone.Size = new Size(100, 23);
+            labelClientPhone.TabIndex = 0;
             // 
             // labelClientEmail
             // 
-            labelClientEmail.AutoSize = true;
-            labelClientEmail.Location = new Point(20, 63);
+            labelClientEmail.Location = new Point(0, 0);
             labelClientEmail.Name = "labelClientEmail";
-            labelClientEmail.Size = new Size(39, 15);
-            labelClientEmail.TabIndex = 4;
-            labelClientEmail.Text = "Email:";
+            labelClientEmail.Size = new Size(100, 23);
+            labelClientEmail.TabIndex = 0;
             // 
             // labelClientName
             // 
-            labelClientName.AutoSize = true;
-            labelClientName.Location = new Point(20, 28);
+            labelClientName.Location = new Point(0, 0);
             labelClientName.Name = "labelClientName";
-            labelClientName.Size = new Size(42, 15);
-            labelClientName.TabIndex = 3;
-            labelClientName.Text = "Name:";
+            labelClientName.Size = new Size(100, 23);
+            labelClientName.TabIndex = 0;
             // 
             // textBoxClientPhone
             // 
-            textBoxClientPhone.Location = new Point(100, 95);
+            textBoxClientPhone.Location = new Point(0, 0);
             textBoxClientPhone.Name = "textBoxClientPhone";
-            textBoxClientPhone.ReadOnly = true;
-            textBoxClientPhone.Size = new Size(200, 23);
-            textBoxClientPhone.TabIndex = 2;
+            textBoxClientPhone.Size = new Size(100, 23);
+            textBoxClientPhone.TabIndex = 0;
             // 
             // textBoxClientEmail
             // 
-            textBoxClientEmail.Location = new Point(100, 60);
+            textBoxClientEmail.Location = new Point(0, 0);
             textBoxClientEmail.Name = "textBoxClientEmail";
-            textBoxClientEmail.ReadOnly = true;
-            textBoxClientEmail.Size = new Size(200, 23);
-            textBoxClientEmail.TabIndex = 1;
+            textBoxClientEmail.Size = new Size(100, 23);
+            textBoxClientEmail.TabIndex = 0;
             // 
             // textBoxClientName
             // 
-            textBoxClientName.Location = new Point(100, 25);
+            textBoxClientName.Location = new Point(0, 0);
             textBoxClientName.Name = "textBoxClientName";
-            textBoxClientName.ReadOnly = true;
-            textBoxClientName.Size = new Size(200, 23);
+            textBoxClientName.Size = new Size(100, 23);
             textBoxClientName.TabIndex = 0;
             // 
             // labelClientDob
             // 
-            labelClientDob.AutoSize = true;
-            labelClientDob.Location = new Point(20, 133);
+            labelClientDob.Location = new Point(0, 0);
             labelClientDob.Name = "labelClientDob";
-            labelClientDob.Size = new Size(74, 15);
-            labelClientDob.TabIndex = 6;
-            labelClientDob.Text = "Date of birth:";
+            labelClientDob.Size = new Size(100, 23);
+            labelClientDob.TabIndex = 0;
             // 
             // textBoxClientDob
             // 
-            textBoxClientDob.Location = new Point(100, 130);
+            textBoxClientDob.Location = new Point(0, 0);
             textBoxClientDob.Name = "textBoxClientDob";
-            textBoxClientDob.ReadOnly = true;
-            textBoxClientDob.Size = new Size(200, 23);
-            textBoxClientDob.TabIndex = 7;
+            textBoxClientDob.Size = new Size(100, 23);
+            textBoxClientDob.TabIndex = 0;
+            // 
+            // groupBoxPackageInfo
+            // 
+            groupBoxPackageInfo.Controls.Add(labelPackageText);
+            groupBoxPackageInfo.Location = new Point(360, 364);
+            groupBoxPackageInfo.Name = "groupBoxPackageInfo";
+            groupBoxPackageInfo.Size = new Size(399, 164);
+            groupBoxPackageInfo.TabIndex = 8;
+            groupBoxPackageInfo.TabStop = false;
+            groupBoxPackageInfo.Text = "Selected Package Information";
+            groupBoxPackageInfo.Visible = false;
+            // 
+            // labelPackageText
+            // 
+            labelPackageText.Location = new Point(20, 22);
+            labelPackageText.Name = "labelPackageText";
+            labelPackageText.Size = new Size(360, 132);
+            labelPackageText.TabIndex = 1;
             // 
             // groupBoxActions
             // 
             groupBoxActions.Controls.Add(buttonBackup);
             groupBoxActions.Controls.Add(buttonViewDestinations);
-            groupBoxActions.Location = new Point(765, 352);
+            groupBoxActions.Location = new Point(765, 364);
             groupBoxActions.Name = "groupBoxActions";
             groupBoxActions.Size = new Size(403, 64);
             groupBoxActions.TabIndex = 7;
@@ -305,6 +316,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1180, 540);
             Controls.Add(groupBoxActions);
+            Controls.Add(groupBoxPackageInfo);
             Controls.Add(groupBoxClientInfo);
             Controls.Add(groupBoxReservations);
             Controls.Add(groupBoxPackages);
@@ -317,7 +329,7 @@
             groupBoxPackages.ResumeLayout(false);
             groupBoxReservations.ResumeLayout(false);
             groupBoxClientInfo.ResumeLayout(false);
-            groupBoxClientInfo.PerformLayout();
+            groupBoxPackageInfo.ResumeLayout(false);
             groupBoxActions.ResumeLayout(false);
             ResumeLayout(false);
 
@@ -350,5 +362,8 @@
         private System.Windows.Forms.Button buttonViewDestinations;
         private System.Windows.Forms.Label labelClientDob;
         private System.Windows.Forms.TextBox textBoxClientDob;
+        private System.Windows.Forms.GroupBox groupBoxPackageInfo;
+        private System.Windows.Forms.Label labelPackageText;
+        private System.Windows.Forms.Label labelClientText;
     }
 }
