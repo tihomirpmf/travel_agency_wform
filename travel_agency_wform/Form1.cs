@@ -217,6 +217,7 @@ namespace travel_agency_wform
                     textBoxClientName.Text = _selectedClient.FullName;
                     textBoxClientEmail.Text = _selectedClient.Email;
                     textBoxClientPhone.Text = _selectedClient.PhoneNumber;
+                    textBoxClientDob.Text = _selectedClient.DateOfBirth.ToString("dd/MM/yyyy");
                 }
             }
         }

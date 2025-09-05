@@ -75,20 +75,5 @@ namespace travel_agency_wform.Services.Security
             }
         }
         
-        public bool IsEncrypted(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return false;
-                
-            try
-            {
-                var bytes = Convert.FromBase64String(text);
-                return bytes.Length > 0;
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 }

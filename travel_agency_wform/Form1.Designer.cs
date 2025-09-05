@@ -47,6 +47,8 @@
             textBoxClientPhone = new TextBox();
             textBoxClientEmail = new TextBox();
             textBoxClientName = new TextBox();
+            labelClientDob = new Label();
+            textBoxClientDob = new TextBox();
             groupBoxActions = new GroupBox();
             buttonBackup = new Button();
             buttonViewDestinations = new Button();
@@ -188,9 +190,11 @@
             groupBoxClientInfo.Controls.Add(textBoxClientPhone);
             groupBoxClientInfo.Controls.Add(textBoxClientEmail);
             groupBoxClientInfo.Controls.Add(textBoxClientName);
+            groupBoxClientInfo.Controls.Add(labelClientDob);
+            groupBoxClientInfo.Controls.Add(textBoxClientDob);
             groupBoxClientInfo.Location = new Point(12, 364);
             groupBoxClientInfo.Name = "groupBoxClientInfo";
-            groupBoxClientInfo.Size = new Size(320, 129);
+            groupBoxClientInfo.Size = new Size(320, 164);
             groupBoxClientInfo.TabIndex = 6;
             groupBoxClientInfo.TabStop = false;
             groupBoxClientInfo.Text = "Selected Client Information";
@@ -247,6 +251,23 @@
             textBoxClientName.Size = new Size(200, 23);
             textBoxClientName.TabIndex = 0;
             // 
+            // labelClientDob
+            // 
+            labelClientDob.AutoSize = true;
+            labelClientDob.Location = new Point(20, 133);
+            labelClientDob.Name = "labelClientDob";
+            labelClientDob.Size = new Size(74, 15);
+            labelClientDob.TabIndex = 6;
+            labelClientDob.Text = "Date of birth:";
+            // 
+            // textBoxClientDob
+            // 
+            textBoxClientDob.Location = new Point(100, 130);
+            textBoxClientDob.Name = "textBoxClientDob";
+            textBoxClientDob.ReadOnly = true;
+            textBoxClientDob.Size = new Size(200, 23);
+            textBoxClientDob.TabIndex = 7;
+            // 
             // groupBoxActions
             // 
             groupBoxActions.Controls.Add(buttonBackup);
@@ -282,7 +303,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1180, 511);
+            ClientSize = new Size(1180, 540);
             Controls.Add(groupBoxActions);
             Controls.Add(groupBoxClientInfo);
             Controls.Add(groupBoxReservations);
@@ -327,5 +348,7 @@
         private System.Windows.Forms.Button buttonBackup;
 
         private System.Windows.Forms.Button buttonViewDestinations;
+        private System.Windows.Forms.Label labelClientDob;
+        private System.Windows.Forms.TextBox textBoxClientDob;
     }
 }
