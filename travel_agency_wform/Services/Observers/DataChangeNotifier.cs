@@ -2,8 +2,6 @@ using System.Collections.Concurrent;
 
 namespace travel_agency_wform.Services.Observers
 {
-    // Observer Pattern + Singleton Pattern: Subject that manages observer subscriptions and notifications
-    // Purpose: Centralized notification system for data changes across the application
     public class DataChangeNotifier
     {
         private static readonly Lazy<DataChangeNotifier> _instance = 

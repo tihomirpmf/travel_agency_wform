@@ -4,11 +4,8 @@ using travel_agency_wform.Services.Database;
 
 namespace travel_agency_wform.Services
 {
-    // Service Layer Pattern: Main business logic interface
-    // Purpose: Provides high-level operations combining multiple patterns (Builder, Strategy, etc.)
     public interface ITravelAgencyService
     {
-        // Initialization
         Task<bool> InitializeAsync();
         
         // Package Builder Methods

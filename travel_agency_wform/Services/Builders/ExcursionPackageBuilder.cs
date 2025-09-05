@@ -2,8 +2,6 @@ using travel_agency_wform.Models;
 
 namespace travel_agency_wform.Services.Builders
 {
-    // Builder Pattern: Concrete builder for ExcursionPackage objects
-    // Purpose: Encapsulates ExcursionPackage creation logic with fluent interface
     public class ExcursionPackageBuilder
     {
         private int _id;

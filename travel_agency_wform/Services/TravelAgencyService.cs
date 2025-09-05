@@ -5,8 +5,6 @@ using travel_agency_wform.Services.Observers;
 
 namespace travel_agency_wform.Services
 {
-    // Service Layer Pattern: Main business logic implementation
-    // Purpose: Orchestrates multiple patterns (Abstract Factory, Builder, Observer, Strategy)
     public class TravelAgencyService : ITravelAgencyService
     {
         private readonly IDatabaseAdapter _databaseAdapter;
@@ -17,7 +15,6 @@ namespace travel_agency_wform.Services
             _configManager = ConfigurationManager.Instance;
             var connectionString = _configManager.ConnectionString;
             
-            // Factory Method: create appropriate database adapter
             _databaseAdapter = DatabaseFactory.CreateAdapter(connectionString);
         }
         
@@ -26,7 +23,6 @@ namespace travel_agency_wform.Services
             return await _databaseAdapter.InitializeDatabaseAsync();
         }
         
-        // Package Builder Methods
         public SeasidePackageBuilder CreateSeasidePackage()
         {
             return new SeasidePackageBuilder();
@@ -52,7 +48,6 @@ namespace travel_agency_wform.Services
             return new ClientBuilder();
         }
         
-        // Client Management
         public async Task<List<Client>> GetAllClientsAsync()
         {
             return await _databaseAdapter.GetAllClientsAsync();
@@ -67,7 +62,6 @@ namespace travel_agency_wform.Services
         
         public async Task<int> AddClientAsync(Client client)
         {
-            // Validate client data
             if (string.IsNullOrWhiteSpace(client.FirstName) || string.IsNullOrWhiteSpace(client.LastName))
                 throw new ArgumentException("First name and last name are required.");
             
@@ -81,7 +75,6 @@ namespace travel_agency_wform.Services
             
             var clientId = await _databaseAdapter.AddClientAsync(client);
             
-            // Notify observers about the change
             DataChangeNotifier.Instance.NotifyClientAdded(clientId);
             
             return clientId;
@@ -118,7 +111,6 @@ namespace travel_agency_wform.Services
             
             var packageId = await _databaseAdapter.AddPackageAsync(package);
             
-            // Notify observers about the change
             DataChangeNotifier.Instance.NotifyPackageAdded(packageId);
             
             return packageId;
@@ -271,9 +263,5 @@ namespace travel_agency_wform.Services
         {
             return _databaseAdapter;
         }
-        
-
-        
-
     }
 }

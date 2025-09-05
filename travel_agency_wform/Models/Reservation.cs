@@ -1,7 +1,5 @@
 namespace travel_agency_wform.Models
 {
-    // Entity Pattern: Reservation entity with navigation properties
-    // Purpose: Represents reservation data with relationships to Client and TravelPackage
     public class Reservation
     {
         public int Id { get; set; }

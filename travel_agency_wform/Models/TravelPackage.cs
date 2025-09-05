@@ -1,7 +1,5 @@
 namespace travel_agency_wform.Models
 {
-    // Inheritance and Polymorphism Pattern: Abstract base class for travel packages
-    // Purpose: Provides common interface and behavior for different package types
     public abstract class TravelPackage
     {
         public int Id { get; set; }

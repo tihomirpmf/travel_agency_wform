@@ -2,8 +2,6 @@ using MySql.Data.MySqlClient;
 
 namespace travel_agency_wform.Services.Database.Templates
 {
-    // Template Method Pattern: Concrete implementation for MySQL backup operations
-    // Purpose: Provides MySQL-specific backup functionality
     public class MySqlBackupTemplate : BackupTemplate
     {
         private readonly string _connectionString;

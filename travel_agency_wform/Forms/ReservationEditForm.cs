@@ -3,8 +3,6 @@ using travel_agency_wform.Services;
 
 namespace travel_agency_wform.Forms
 {
-    // Service Layer Integration: Form that uses TravelAgencyService for reservation editing
-    // Purpose: Demonstrates UI integration with service layer for data modification operations
     public partial class ReservationEditForm : Form
     {
         private readonly ITravelAgencyService _agencyService;

@@ -2,8 +2,6 @@ using System.Text;
 
 namespace travel_agency_wform.Services
 {
-    // Singleton Pattern: Ensures only one instance of ConfigurationManager exists
-    // Purpose: Centralized configuration management with lazy initialization
     public sealed class ConfigurationManager
     {
         private static readonly Lazy<ConfigurationManager> _instance = 

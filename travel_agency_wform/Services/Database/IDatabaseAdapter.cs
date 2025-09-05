@@ -2,8 +2,6 @@ using travel_agency_wform.Models;
 
 namespace travel_agency_wform.Services.Database
 {
-    // Strategy Pattern + Adapter Pattern: Interface for database operations
-    // Purpose: Provides consistent interface for different database implementations
     public interface IDatabaseAdapter
     {
         Task<bool> InitializeDatabaseAsync();

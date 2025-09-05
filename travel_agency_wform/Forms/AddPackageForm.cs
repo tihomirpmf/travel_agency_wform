@@ -4,8 +4,6 @@ using travel_agency_wform.Services.Builders;
 
 namespace travel_agency_wform.Forms
 {
-    // Builder Pattern Usage: Form that creates different package types using builders
-    // Purpose: Demonstrates how the Builder pattern is used in the UI layer
     public partial class AddPackageForm : Form
     {
         private readonly ITravelAgencyService _agencyService;

@@ -3,8 +3,6 @@ using travel_agency_wform.Services;
 
 namespace travel_agency_wform.Forms
 {
-    // Service Layer Integration + Builder Pattern: Form that uses TravelAgencyService and ClientBuilder
-    // Purpose: Demonstrates UI integration with service layer and builder pattern for object creation
     public partial class AddClientForm : Form
     {
         private readonly ITravelAgencyService _agencyService;

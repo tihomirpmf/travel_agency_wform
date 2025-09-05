@@ -5,8 +5,6 @@ using travel_agency_wform.Services.Builders;
 
 namespace travel_agency_wform.Services.Database
 {
-    // Strategy Pattern: Concrete implementation for SQLite database operations
-    // Purpose: Provides SQLite-specific database functionality
     public class SqliteDatabaseAdapter : BaseDatabaseAdapter
     {
         public SqliteDatabaseAdapter(string connectionString) : base(new SqliteConnectionFactory(connectionString))

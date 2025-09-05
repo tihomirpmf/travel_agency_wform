@@ -3,8 +3,6 @@ using System.Data.Common;
 
 namespace travel_agency_wform.Services.Database
 {
-    // Strategy Pattern: Concrete implementation for MySQL connection strategy
-    // Purpose: Encapsulates MySQL-specific connection creation and management
     public class MySqlConnectionFactory : IDatabaseConnection
     {
         private readonly string _connectionString;

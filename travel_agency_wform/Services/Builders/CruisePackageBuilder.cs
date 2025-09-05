@@ -2,8 +2,6 @@ using travel_agency_wform.Models;
 
 namespace travel_agency_wform.Services.Builders
 {
-    // Builder Pattern: Concrete builder for CruisePackage objects
-    // Purpose: Encapsulates CruisePackage creation logic with fluent interface
     public class CruisePackageBuilder
     {
         private int _id;

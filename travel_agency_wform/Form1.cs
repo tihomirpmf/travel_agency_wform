@@ -5,8 +5,6 @@ using travel_agency_wform.Forms;
 
 namespace travel_agency_wform
 {
-    // Observer Pattern: Main form implements IDataObserver to react to data changes
-    // Purpose: Enables automatic UI updates when underlying data changes
     public partial class Form1 : Form, IDataObserver
     {
         private readonly ITravelAgencyService _agencyService;
@@ -39,7 +37,6 @@ namespace travel_agency_wform
         {
             try
             {
-                // Show loading message
                 this.Text = "Initializing...";
 
                 // Initialize database

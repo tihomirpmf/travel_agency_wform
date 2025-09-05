@@ -5,8 +5,6 @@ using travel_agency_wform.Services.Builders;
 
 namespace travel_agency_wform.Services.Database
 {
-    // Strategy Pattern: Concrete implementation for MySQL database operations
-    // Purpose: Provides MySQL-specific database functionality
     public class MySqlDatabaseAdapter : BaseDatabaseAdapter
     {
         public MySqlDatabaseAdapter(string connectionString) : base(new MySqlConnectionFactory(connectionString))

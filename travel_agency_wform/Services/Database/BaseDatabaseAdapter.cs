@@ -4,8 +4,6 @@ using travel_agency_wform.Services.Builders;
 
 namespace travel_agency_wform.Services.Database
 {
-    // Template Method Pattern + Strategy Pattern: Abstract base class for database operations
-    // Purpose: Provides common database functionality with database-specific implementations
     public abstract class BaseDatabaseAdapter : IDatabaseAdapter
     {
         protected readonly IDatabaseConnection _connectionFactory;
@@ -129,9 +127,6 @@ namespace travel_agency_wform.Services.Database
             
             return null;
         }
-        
-
-        
         public async Task<int> AddClientAsync(Client client)
         {
             using var connection = CreateConnection();
@@ -153,8 +148,6 @@ namespace travel_agency_wform.Services.Database
             var result = await command.ExecuteScalarAsync();
             return Convert.ToInt32(result);
         }
-        
-
         
         // Package operations
         public async Task<List<TravelPackage>> GetAllPackagesAsync()
@@ -195,9 +188,6 @@ namespace travel_agency_wform.Services.Database
             
             return null;
         }
-        
-
-        
         public async Task<int> AddPackageAsync(TravelPackage package)
         {
             using var connection = CreateConnection();
@@ -230,8 +220,6 @@ namespace travel_agency_wform.Services.Database
             var result = await command.ExecuteScalarAsync();
             return Convert.ToInt32(result);
         }
-        
-
         
         // Reservation operations
         public async Task<List<Reservation>> GetAllReservationsAsync()
@@ -525,8 +513,6 @@ namespace travel_agency_wform.Services.Database
             }
         }
         
-
-        
         protected virtual Reservation CreateReservationFromReader(DbDataReader reader)
         {
             return new ReservationBuilder()
@@ -541,8 +527,6 @@ namespace travel_agency_wform.Services.Database
                 .SetPackage(new SeasidePackage { Name = reader.GetString(reader.GetOrdinal("PackageName")) })
                 .Build();
         }
-        
-
         
         // Package type-specific helper methods
         protected virtual string GetAccommodationType(TravelPackage package)

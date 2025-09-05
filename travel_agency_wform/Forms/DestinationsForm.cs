@@ -2,8 +2,6 @@ using travel_agency_wform.Services;
 
 namespace travel_agency_wform.Forms
 {
-    // Service Layer Integration: Form that uses TravelAgencyService for destination operations
-    // Purpose: Demonstrates UI integration with service layer for data retrieval operations
     public partial class DestinationsForm : Form
     {
         private readonly ITravelAgencyService _agencyService;

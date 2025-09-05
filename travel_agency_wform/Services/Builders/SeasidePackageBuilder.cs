@@ -2,8 +2,6 @@ using travel_agency_wform.Models;
 
 namespace travel_agency_wform.Services.Builders
 {
-    // Builder Pattern: Concrete builder for SeasidePackage objects
-    // Purpose: Encapsulates SeasidePackage creation logic with fluent interface
     public class SeasidePackageBuilder
     {
         private int _id;

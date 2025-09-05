@@ -2,8 +2,6 @@ using travel_agency_wform.Models;
 
 namespace travel_agency_wform.Services.Builders
 {
-    // Builder Pattern: For constructing Reservation objects
-    // Purpose: Provides fluent interface for creating Reservation instances with proper Client and Package objects
     public class ReservationBuilder
     {
         private int _id;

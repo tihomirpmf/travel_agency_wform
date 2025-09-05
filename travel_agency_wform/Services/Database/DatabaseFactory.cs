@@ -3,8 +3,6 @@ using System.Data.Common;
 
 namespace travel_agency_wform.Services.Database
 {
-    // Factory Method Pattern: Creates appropriate database objects based on connection string
-    // Purpose: User doesn't care which database system, just wants a connection or adapter
     public class DatabaseFactory
     {
         public static DbConnection CreateConnection(string connectionString)

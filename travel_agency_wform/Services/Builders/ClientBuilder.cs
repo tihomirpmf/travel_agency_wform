@@ -2,8 +2,6 @@ using travel_agency_wform.Models;
 
 namespace travel_agency_wform.Services.Builders
 {
-    // Builder Pattern: For constructing Client objects
-    // Purpose: Provides fluent interface for creating Client instances
     public class ClientBuilder
     {
         private string _firstName = string.Empty;
