@@ -1,6 +1,6 @@
 using travel_agency_wform.Models;
 
-namespace travel_agency_wform.Services.Database
+namespace travel_agency_wform.Services.Database.Adapters
 {
     public interface IDatabaseAdapter
     {

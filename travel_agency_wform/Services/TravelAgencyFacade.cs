@@ -1,16 +1,18 @@
 using travel_agency_wform.Models;
-using travel_agency_wform.Services.Database;
 using travel_agency_wform.Services.Builders;
 using travel_agency_wform.Services.Observers;
+using travel_agency_wform.Services.Builders.PackageBuilders;
+using travel_agency_wform.Services.Database.Adapters;
+using travel_agency_wform.Services.Database.Factories;
 
 namespace travel_agency_wform.Services
 {
-    public class TravelAgencyService : ITravelAgencyService
+    public class TravelAgencyFacade : ITravelAgencyFacade
     {
         private readonly IDatabaseAdapter _databaseAdapter;
         private readonly ConfigurationManager _configManager;
         
-        public TravelAgencyService()
+        public TravelAgencyFacade()
         {
             _configManager = ConfigurationManager.Instance;
             var connectionString = _configManager.ConnectionString;

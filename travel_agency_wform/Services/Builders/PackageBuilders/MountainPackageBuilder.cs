@@ -1,8 +1,8 @@
 using travel_agency_wform.Models;
 
-namespace travel_agency_wform.Services.Builders
+namespace travel_agency_wform.Services.Builders.PackageBuilders
 {
-    public class SeasidePackageBuilder
+    public class MountainPackageBuilder
     {
         private int _id;
         private string _name = string.Empty;
@@ -12,58 +12,74 @@ namespace travel_agency_wform.Services.Builders
         private DateTime _createdAt = DateTime.Now;
         private string _accommodationType = string.Empty;
         private string _transportationType = string.Empty;
+        private List<string> _activities = new List<string>();
         
-        public SeasidePackageBuilder SetId(int id)
+        public MountainPackageBuilder SetId(int id)
         {
             _id = id;
             return this;
         }
         
-        public SeasidePackageBuilder SetName(string name)
+        public MountainPackageBuilder SetName(string name)
         {
             _name = name ?? string.Empty;
             return this;
         }
         
-        public SeasidePackageBuilder SetPrice(decimal price)
+        public MountainPackageBuilder SetPrice(decimal price)
         {
             _price = price;
             return this;
         }
         
-        public SeasidePackageBuilder SetDestination(string destination)
+        public MountainPackageBuilder SetDestination(string destination)
         {
             _destination = destination ?? string.Empty;
             return this;
         }
         
-        public SeasidePackageBuilder SetNumberOfDays(int days)
+        public MountainPackageBuilder SetNumberOfDays(int days)
         {
             _numberOfDays = days;
             return this;
         }
         
-        public SeasidePackageBuilder SetCreatedAt(DateTime createdAt)
+        public MountainPackageBuilder SetCreatedAt(DateTime createdAt)
         {
             _createdAt = createdAt;
             return this;
         }
         
-        public SeasidePackageBuilder SetAccommodationType(string accommodationType)
+        public MountainPackageBuilder SetAccommodationType(string accommodationType)
         {
             _accommodationType = accommodationType ?? string.Empty;
             return this;
         }
         
-        public SeasidePackageBuilder SetTransportationType(string transportationType)
+        public MountainPackageBuilder SetTransportationType(string transportationType)
         {
             _transportationType = transportationType ?? string.Empty;
             return this;
         }
         
+        public MountainPackageBuilder AddActivity(string activity)
+        {
+            if (activity != null)
+            {
+                _activities.Add(activity);
+            }
+            return this;
+        }
+        
+        public MountainPackageBuilder SetActivities(List<string> activities)
+        {
+            _activities = activities ?? new List<string>();
+            return this;
+        }
+        
         public TravelPackage Build()
         {
-            return new SeasidePackage
+            return new MountainPackage
             {
                 Id = _id,
                 Name = _name,
@@ -71,9 +87,10 @@ namespace travel_agency_wform.Services.Builders
                 Destination = _destination,
                 NumberOfDays = _numberOfDays,
                 CreatedAt = _createdAt,
-                Type = PackageType.Seaside,
+                Type = PackageType.Mountain,
                 AccommodationType = _accommodationType,
-                TransportationType = _transportationType
+                TransportationType = _transportationType,
+                Activities = _activities
             };
         }
     }

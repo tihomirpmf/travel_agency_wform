@@ -1,7 +1,7 @@
 using Microsoft.Data.Sqlite;
 using System.Data.Common;
 
-namespace travel_agency_wform.Services.Database
+namespace travel_agency_wform.Services.Database.Adapters
 {
     public class SqliteDatabaseAdapter : BaseDatabaseAdapter
     {

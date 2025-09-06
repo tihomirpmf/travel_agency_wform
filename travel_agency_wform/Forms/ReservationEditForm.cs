@@ -5,7 +5,7 @@ namespace travel_agency_wform.Forms
 {
     public partial class ReservationEditForm : Form
     {
-        private readonly ITravelAgencyService _agencyService;
+        private readonly ITravelAgencyFacade _agencyService;
         private readonly Reservation _reservation;
         
         private ComboBox _comboPackages = null!;
@@ -14,7 +14,7 @@ namespace travel_agency_wform.Forms
         private Label _labelTotal = null!;
         private NumericUpDown _numericPrice = null!;
         
-        public ReservationEditForm(ITravelAgencyService service, Reservation reservation)
+        public ReservationEditForm(ITravelAgencyFacade service, Reservation reservation)
         {
             _agencyService = service;
             _reservation = reservation;

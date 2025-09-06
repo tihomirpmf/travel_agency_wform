@@ -124,7 +124,7 @@ namespace travel_agency_wform.Forms
             groupBoxClientDetails.Controls.Add(labelClientInfo);
             groupBoxClientDetails.Location = new Point(20, 20);
             groupBoxClientDetails.Name = "groupBoxClientDetails";
-            groupBoxClientDetails.Size = new Size(442, 70);
+            groupBoxClientDetails.Size = new Size(760, 70);
             groupBoxClientDetails.TabIndex = 6;
             groupBoxClientDetails.TabStop = false;
             groupBoxClientDetails.Text = "Client Details";
@@ -134,7 +134,7 @@ namespace travel_agency_wform.Forms
             groupBoxPackageDetails.Controls.Add(labelPackageInfo);
             groupBoxPackageDetails.Location = new Point(20, 100);
             groupBoxPackageDetails.Name = "groupBoxPackageDetails";
-            groupBoxPackageDetails.Size = new Size(442, 70);
+            groupBoxPackageDetails.Size = new Size(760, 70);
             groupBoxPackageDetails.TabIndex = 7;
             groupBoxPackageDetails.TabStop = false;
             groupBoxPackageDetails.Text = "Package Details";
@@ -147,7 +147,7 @@ namespace travel_agency_wform.Forms
             groupBoxReservationDetails.Controls.Add(labelNumberOfTravelers);
             groupBoxReservationDetails.Location = new Point(20, 180);
             groupBoxReservationDetails.Name = "groupBoxReservationDetails";
-            groupBoxReservationDetails.Size = new Size(442, 110);
+            groupBoxReservationDetails.Size = new Size(760, 110);
             groupBoxReservationDetails.TabIndex = 8;
             groupBoxReservationDetails.TabStop = false;
             groupBoxReservationDetails.Text = "Reservation Details";
@@ -156,7 +156,7 @@ namespace travel_agency_wform.Forms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(474, 336);
+            ClientSize = new Size(800, 336);
             Controls.Add(groupBoxReservationDetails);
             Controls.Add(groupBoxPackageDetails);
             Controls.Add(groupBoxClientDetails);

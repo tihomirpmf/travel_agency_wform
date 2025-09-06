@@ -1,7 +1,7 @@
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 
-namespace travel_agency_wform.Services.Database
+namespace travel_agency_wform.Services.Database.Factories
 {
     public class MySqlConnectionFactory : IDatabaseConnection
     {

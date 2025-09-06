@@ -1,6 +1,7 @@
 using System.Data.Common;
+using travel_agency_wform.Services.Database.Adapters;
 
-namespace travel_agency_wform.Services.Database
+namespace travel_agency_wform.Services.Database.Factories
 {
     public class DatabaseFactory
     {

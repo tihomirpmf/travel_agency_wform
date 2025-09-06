@@ -1,10 +1,11 @@
 using travel_agency_wform.Models;
 using travel_agency_wform.Services.Builders;
-using travel_agency_wform.Services.Database;
+using travel_agency_wform.Services.Builders.PackageBuilders;
+using travel_agency_wform.Services.Database.Adapters;
 
 namespace travel_agency_wform.Services
 {
-    public interface ITravelAgencyService
+    public interface ITravelAgencyFacade
     {
         Task<bool> InitializeAsync();
         

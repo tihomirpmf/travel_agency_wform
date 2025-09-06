@@ -1,6 +1,6 @@
 using travel_agency_wform.Models;
 
-namespace travel_agency_wform.Services.Builders
+namespace travel_agency_wform.Services.Builders.PackageBuilders
 {
     public class CruisePackageBuilder
     {

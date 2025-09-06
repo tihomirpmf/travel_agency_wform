@@ -1,8 +1,9 @@
 using System.Data.Common;
 using travel_agency_wform.Models;
+using travel_agency_wform.Services.Builders.PackageBuilders;
 using travel_agency_wform.Services.Builders;
 
-namespace travel_agency_wform.Services.Database
+namespace travel_agency_wform.Services.Database.Adapters
 {
     public abstract class BaseDatabaseAdapter : IDatabaseAdapter
     {

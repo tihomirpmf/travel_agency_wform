@@ -7,7 +7,7 @@ namespace travel_agency_wform
 {
     public partial class Form1 : Form, IDataObserver
     {
-        private readonly ITravelAgencyService _agencyService;
+        private readonly ITravelAgencyFacade _agencyService;
         private readonly DataChangeNotifier _dataNotifier;
 
         private List<Client> _clients = new();
@@ -19,7 +19,7 @@ namespace travel_agency_wform
         {
             InitializeComponent();
 
-            _agencyService = new TravelAgencyService();
+            _agencyService = new TravelAgencyFacade();
             _dataNotifier = DataChangeNotifier.Instance;
 
             // Subscribe to data changes

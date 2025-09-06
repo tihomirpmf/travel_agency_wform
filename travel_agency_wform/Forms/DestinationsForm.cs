@@ -4,9 +4,9 @@ namespace travel_agency_wform.Forms
 {
     public partial class DestinationsForm : Form
     {
-        private readonly ITravelAgencyService _agencyService;
+        private readonly ITravelAgencyFacade _agencyService;
         
-        public DestinationsForm(ITravelAgencyService service)
+        public DestinationsForm(ITravelAgencyFacade service)
         {
             _agencyService = service;
             InitializeComponent();

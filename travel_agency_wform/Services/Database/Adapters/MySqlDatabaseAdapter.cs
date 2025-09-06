@@ -1,7 +1,8 @@
 using MySql.Data.MySqlClient;
 using System.Data.Common;
+using travel_agency_wform.Services.Database.Factories;
 
-namespace travel_agency_wform.Services.Database
+namespace travel_agency_wform.Services.Database.Adapters
 {
     public class MySqlDatabaseAdapter : BaseDatabaseAdapter
     {
