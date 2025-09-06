@@ -21,7 +21,6 @@ namespace travel_agency_wform.Models
     public enum ReservationStatus
     {
         Active,
-        Cancelled,
-        Completed
+        Cancelled
     }
 }

@@ -1,7 +1,5 @@
 using MySql.Data.MySqlClient;
 using System.Data.Common;
-using travel_agency_wform.Models;
-using travel_agency_wform.Services.Builders;
 
 namespace travel_agency_wform.Services.Database
 {

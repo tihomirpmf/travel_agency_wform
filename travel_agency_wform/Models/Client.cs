@@ -48,10 +48,7 @@ namespace travel_agency_wform.Models
             return FullName;
         }
         
-        // For database operations - get encrypted values
         public string GetEncryptedPassportNumber() => _encryptedPassportNumber;
-        
-        // For database operations - set encrypted values
         public void SetEncryptedPassportNumber(string encryptedValue) => _encryptedPassportNumber = encryptedValue;
     }
 }

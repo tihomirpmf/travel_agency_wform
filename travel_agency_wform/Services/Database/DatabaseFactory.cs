@@ -1,4 +1,3 @@
-using travel_agency_wform.Services;
 using System.Data.Common;
 
 namespace travel_agency_wform.Services.Database
@@ -41,8 +40,6 @@ namespace travel_agency_wform.Services.Database
                 return new SqliteDatabaseAdapter(connectionString);
             }
         }
-        
-
         
         private static bool IsSqliteConnection(string connectionString)
         {

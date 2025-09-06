@@ -1,5 +1,3 @@
-using Microsoft.Data.Sqlite;
-
 namespace travel_agency_wform.Services.Database.Templates
 {
     public class SqliteBackupTemplate : BackupTemplate

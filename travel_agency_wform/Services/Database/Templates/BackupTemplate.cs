@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace travel_agency_wform.Services.Database.Templates
 {
     public abstract class BackupTemplate

@@ -61,6 +61,7 @@ namespace travel_agency_wform.Forms
                     }
                     _reservation.Status = (ReservationStatus)_comboStatus.SelectedItem!;
                     _reservation.NumberOfTravelers = (int)_numericTravelers.Value;
+
                     // set explicit total using price * travelers
                     var perPerson = (decimal)_numericPrice.Value;
                     _reservation.TotalPrice = perPerson * _reservation.NumberOfTravelers;
