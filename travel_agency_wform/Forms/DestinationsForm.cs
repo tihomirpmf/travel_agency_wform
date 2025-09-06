@@ -4,37 +4,33 @@ namespace travel_agency_wform.Forms
 {
     public partial class DestinationsForm : Form
     {
-        private readonly ITravelAgencyFacade _agencyService;
-        
-        public DestinationsForm(ITravelAgencyFacade service)
+        private readonly ITravelAgencyFacade _agencyService = null!;
+
+        public DestinationsForm()
         {
-            _agencyService = service;
             InitializeComponent();
         }
-        
-        private void InitializeComponent()
+
+        public DestinationsForm(ITravelAgencyFacade service)
         {
-            this.Text = "Available Destinations";
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.Width = 420;
-            this.Height = 480;
-            
-            var list = new ListBox { Left = 10, Top = 10, Width = 380, Height = 380 };
-            var buttonClose = new Button { Left = 270, Top = 400, Width = 120, Text = "Close" };
+            InitializeComponent();
+            _agencyService = service;
+            InitializeRuntimeBindings();
+        }
+
+        private void InitializeRuntimeBindings()
+        {
             buttonClose.Click += (s, e) => this.Close();
-            
-            this.Controls.Add(list);
-            this.Controls.Add(buttonClose);
-            
+
             this.Load += async (s, e) =>
             {
                 try
                 {
                     var destinations = await _agencyService.GetAllDestinationsAsync();
-                    list.Items.Clear();
+                    listBoxDestinations.Items.Clear();
                     foreach (var d in destinations)
                     {
-                        list.Items.Add(d);
+                        listBoxDestinations.Items.Add(d);
                     }
                 }
                 catch (Exception ex)
