@@ -417,7 +417,7 @@ namespace travel_agency_wform.Forms
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(20, 440);
+            buttonSave.Location = new Point(187, 439);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 16;
@@ -427,7 +427,7 @@ namespace travel_agency_wform.Forms
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(129, 440);
+            buttonCancel.Location = new Point(281, 439);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 17;
