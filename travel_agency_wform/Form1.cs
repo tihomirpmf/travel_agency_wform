@@ -128,7 +128,7 @@ namespace travel_agency_wform
                 var categoryNode = new TreeNode(categoryName);
                 foreach (var package in items)
                 {
-                    var child = new TreeNode(package.Name) { Tag = package };
+                    var child = new TreeNode(package.ToString()) { Tag = package };
                     categoryNode.Nodes.Add(child);
                 }
                 treeViewPackages.Nodes.Add(categoryNode);

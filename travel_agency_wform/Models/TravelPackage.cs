@@ -37,6 +37,11 @@ namespace travel_agency_wform.Models
         {
             return $"Seaside Package: {Destination}, {AccommodationType} accommodation, {TransportationType} transport, {NumberOfDays} days";
         }
+
+        public override string ToString()
+        {
+            return $"{Name} - {Destination} - {NumberOfDays} days - {Price:C}";
+        }
     }
     
     public class MountainPackage : TravelPackage
@@ -50,6 +55,11 @@ namespace travel_agency_wform.Models
             var activities = string.Join(", ", Activities);
             return $"Mountain Package: {Destination}, {AccommodationType} accommodation, {TransportationType} transport, Activities: {activities}, {NumberOfDays} days";
         }
+
+        public override string ToString()
+        {
+            return $"{Name} - {Destination} - {NumberOfDays} days - {Price:C}";
+        }
     }
     
     public class ExcursionPackage : TravelPackage
@@ -60,6 +70,11 @@ namespace travel_agency_wform.Models
         public override string GetPackageDetails()
         {
             return $"Excursion Package: {Destination}, {TransportationType} transport, Guide: {Guide}, {NumberOfDays} days";
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} - {Destination} - {NumberOfDays} days - {Price:C}";
         }
     }
     
@@ -73,6 +88,11 @@ namespace travel_agency_wform.Models
         public override string GetPackageDetails()
         {
             return $"Cruise Package: {Ship}, Route: {Route}, Departure: {DepartureDate:dd/MM/yyyy}, Cabin: {CabinType}, {NumberOfDays} days";
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} - {Route} - {NumberOfDays} days - {Price:C}";
         }
     }
 }
