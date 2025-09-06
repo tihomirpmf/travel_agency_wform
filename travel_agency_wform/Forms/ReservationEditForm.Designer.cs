@@ -28,163 +28,146 @@ namespace travel_agency_wform.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelPackage = new System.Windows.Forms.Label();
-            this._comboPackages = new System.Windows.Forms.ComboBox();
-            this.labelStatus = new System.Windows.Forms.Label();
-            this._comboStatus = new System.Windows.Forms.ComboBox();
-            this.labelTravelers = new System.Windows.Forms.Label();
-            this._numericTravelers = new System.Windows.Forms.NumericUpDown();
-            this.labelPrice = new System.Windows.Forms.Label();
-            this._numericPrice = new System.Windows.Forms.NumericUpDown();
-            this._labelTotal = new System.Windows.Forms.Label();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this._numericTravelers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numericPrice)).BeginInit();
-            this.SuspendLayout();
+            labelPackage = new Label();
+            _comboPackages = new ComboBox();
+            labelStatus = new Label();
+            _comboStatus = new ComboBox();
+            labelTravelers = new Label();
+            _numericTravelers = new NumericUpDown();
+            labelPrice = new Label();
+            _numericPrice = new NumericUpDown();
+            _labelTotal = new Label();
+            buttonSave = new Button();
+            buttonDelete = new Button();
+            ((System.ComponentModel.ISupportInitialize)_numericTravelers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)_numericPrice).BeginInit();
+            SuspendLayout();
             // 
             // labelPackage
             // 
-            this.labelPackage.AutoSize = true;
-            this.labelPackage.Location = new System.Drawing.Point(20, 20);
-            this.labelPackage.Name = "labelPackage";
-            this.labelPackage.Size = new System.Drawing.Size(56, 15);
-            this.labelPackage.TabIndex = 0;
-            this.labelPackage.Text = "Package:";
+            labelPackage.AutoSize = true;
+            labelPackage.Location = new Point(20, 20);
+            labelPackage.Name = "labelPackage";
+            labelPackage.Size = new Size(54, 15);
+            labelPackage.TabIndex = 0;
+            labelPackage.Text = "Package:";
             // 
             // _comboPackages
             // 
-            this._comboPackages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this._comboPackages.FormattingEnabled = true;
-            this._comboPackages.Location = new System.Drawing.Point(180, 18);
-            this._comboPackages.Name = "_comboPackages";
-            this._comboPackages.Size = new System.Drawing.Size(320, 23);
-            this._comboPackages.TabIndex = 1;
+            _comboPackages.DropDownStyle = ComboBoxStyle.DropDownList;
+            _comboPackages.FormattingEnabled = true;
+            _comboPackages.Location = new Point(180, 18);
+            _comboPackages.Name = "_comboPackages";
+            _comboPackages.Size = new Size(320, 23);
+            _comboPackages.TabIndex = 1;
             // 
             // labelStatus
             // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(20, 55);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(42, 15);
-            this.labelStatus.TabIndex = 2;
-            this.labelStatus.Text = "Status:";
+            labelStatus.AutoSize = true;
+            labelStatus.Location = new Point(20, 55);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Size = new Size(42, 15);
+            labelStatus.TabIndex = 2;
+            labelStatus.Text = "Status:";
             // 
             // _comboStatus
             // 
-            this._comboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this._comboStatus.FormattingEnabled = true;
-            this._comboStatus.Location = new System.Drawing.Point(180, 53);
-            this._comboStatus.Name = "_comboStatus";
-            this._comboStatus.Size = new System.Drawing.Size(200, 23);
-            this._comboStatus.TabIndex = 3;
+            _comboStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            _comboStatus.FormattingEnabled = true;
+            _comboStatus.Location = new Point(180, 53);
+            _comboStatus.Name = "_comboStatus";
+            _comboStatus.Size = new Size(200, 23);
+            _comboStatus.TabIndex = 3;
             // 
             // labelTravelers
             // 
-            this.labelTravelers.AutoSize = true;
-            this.labelTravelers.Location = new System.Drawing.Point(20, 90);
-            this.labelTravelers.Name = "labelTravelers";
-            this.labelTravelers.Size = new System.Drawing.Size(123, 15);
-            this.labelTravelers.TabIndex = 4;
-            this.labelTravelers.Text = "Number of travelers:";
+            labelTravelers.AutoSize = true;
+            labelTravelers.Location = new Point(20, 90);
+            labelTravelers.Name = "labelTravelers";
+            labelTravelers.Size = new Size(115, 15);
+            labelTravelers.TabIndex = 4;
+            labelTravelers.Text = "Number of travelers:";
             // 
             // _numericTravelers
             // 
-            this._numericTravelers.Location = new System.Drawing.Point(180, 88);
-            this._numericTravelers.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this._numericTravelers.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this._numericTravelers.Name = "_numericTravelers";
-            this._numericTravelers.Size = new System.Drawing.Size(120, 23);
-            this._numericTravelers.TabIndex = 5;
-            this._numericTravelers.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            _numericTravelers.Location = new Point(180, 88);
+            _numericTravelers.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            _numericTravelers.Name = "_numericTravelers";
+            _numericTravelers.Size = new Size(120, 23);
+            _numericTravelers.TabIndex = 5;
+            _numericTravelers.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // labelPrice
             // 
-            this.labelPrice.AutoSize = true;
-            this.labelPrice.Location = new System.Drawing.Point(20, 125);
-            this.labelPrice.Name = "labelPrice";
-            this.labelPrice.Size = new System.Drawing.Size(93, 15);
-            this.labelPrice.TabIndex = 6;
-            this.labelPrice.Text = "Price per person:";
+            labelPrice.AutoSize = true;
+            labelPrice.Location = new Point(20, 125);
+            labelPrice.Name = "labelPrice";
+            labelPrice.Size = new Size(95, 15);
+            labelPrice.TabIndex = 6;
+            labelPrice.Text = "Price per person:";
             // 
             // _numericPrice
             // 
-            this._numericPrice.DecimalPlaces = 2;
-            this._numericPrice.Location = new System.Drawing.Point(180, 123);
-            this._numericPrice.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this._numericPrice.Name = "_numericPrice";
-            this._numericPrice.Size = new System.Drawing.Size(120, 23);
-            this._numericPrice.TabIndex = 7;
+            _numericPrice.DecimalPlaces = 2;
+            _numericPrice.Location = new Point(180, 123);
+            _numericPrice.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+            _numericPrice.Name = "_numericPrice";
+            _numericPrice.Size = new Size(120, 23);
+            _numericPrice.TabIndex = 7;
             // 
             // _labelTotal
             // 
-            this._labelTotal.AutoSize = true;
-            this._labelTotal.Location = new System.Drawing.Point(320, 125);
-            this._labelTotal.Name = "_labelTotal";
-            this._labelTotal.Size = new System.Drawing.Size(49, 15);
-            this._labelTotal.TabIndex = 8;
-            this._labelTotal.Text = "Total: -";
+            _labelTotal.AutoSize = true;
+            _labelTotal.Location = new Point(320, 125);
+            _labelTotal.Name = "_labelTotal";
+            _labelTotal.Size = new Size(44, 15);
+            _labelTotal.TabIndex = 8;
+            _labelTotal.Text = "Total: -";
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(380, 210);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(120, 23);
-            this.buttonSave.TabIndex = 9;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Location = new Point(380, 210);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(120, 23);
+            buttonSave.TabIndex = 9;
+            buttonSave.Text = "Save";
+            buttonSave.UseVisualStyleBackColor = true;
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(20, 210);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(120, 23);
-            this.buttonDelete.TabIndex = 10;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Location = new Point(244, 210);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(120, 23);
+            buttonDelete.TabIndex = 10;
+            buttonDelete.Text = "Delete";
+            buttonDelete.UseVisualStyleBackColor = true;
             // 
             // ReservationEditForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 260);
-            this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this._labelTotal);
-            this.Controls.Add(this._numericPrice);
-            this.Controls.Add(this.labelPrice);
-            this.Controls.Add(this._numericTravelers);
-            this.Controls.Add(this.labelTravelers);
-            this.Controls.Add(this._comboStatus);
-            this.Controls.Add(this.labelStatus);
-            this.Controls.Add(this._comboPackages);
-            this.Controls.Add(this.labelPackage);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "ReservationEditForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit Reservation";
-            ((System.ComponentModel.ISupportInitialize)(this._numericTravelers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numericPrice)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(514, 244);
+            Controls.Add(buttonDelete);
+            Controls.Add(buttonSave);
+            Controls.Add(_labelTotal);
+            Controls.Add(_numericPrice);
+            Controls.Add(labelPrice);
+            Controls.Add(_numericTravelers);
+            Controls.Add(labelTravelers);
+            Controls.Add(_comboStatus);
+            Controls.Add(labelStatus);
+            Controls.Add(_comboPackages);
+            Controls.Add(labelPackage);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "ReservationEditForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Edit Reservation";
+            ((System.ComponentModel.ISupportInitialize)_numericTravelers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)_numericPrice).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

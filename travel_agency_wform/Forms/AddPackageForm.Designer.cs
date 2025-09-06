@@ -439,7 +439,7 @@ namespace travel_agency_wform.Forms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(379, 474);
+            ClientSize = new Size(366, 474);
             Controls.Add(buttonCancel);
             Controls.Add(buttonSave);
             Controls.Add(panelCruise);

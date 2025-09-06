@@ -101,7 +101,7 @@ namespace travel_agency_wform.Forms
             // 
             // buttonConfirm
             // 
-            buttonConfirm.Location = new Point(292, 301);
+            buttonConfirm.Location = new Point(519, 301);
             buttonConfirm.Name = "buttonConfirm";
             buttonConfirm.Size = new Size(75, 23);
             buttonConfirm.TabIndex = 4;
@@ -111,7 +111,7 @@ namespace travel_agency_wform.Forms
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(387, 301);
+            buttonCancel.Location = new Point(618, 301);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 5;
@@ -124,7 +124,7 @@ namespace travel_agency_wform.Forms
             groupBoxClientDetails.Controls.Add(labelClientInfo);
             groupBoxClientDetails.Location = new Point(20, 20);
             groupBoxClientDetails.Name = "groupBoxClientDetails";
-            groupBoxClientDetails.Size = new Size(760, 70);
+            groupBoxClientDetails.Size = new Size(673, 70);
             groupBoxClientDetails.TabIndex = 6;
             groupBoxClientDetails.TabStop = false;
             groupBoxClientDetails.Text = "Client Details";
@@ -134,7 +134,7 @@ namespace travel_agency_wform.Forms
             groupBoxPackageDetails.Controls.Add(labelPackageInfo);
             groupBoxPackageDetails.Location = new Point(20, 100);
             groupBoxPackageDetails.Name = "groupBoxPackageDetails";
-            groupBoxPackageDetails.Size = new Size(760, 70);
+            groupBoxPackageDetails.Size = new Size(673, 70);
             groupBoxPackageDetails.TabIndex = 7;
             groupBoxPackageDetails.TabStop = false;
             groupBoxPackageDetails.Text = "Package Details";
@@ -147,7 +147,7 @@ namespace travel_agency_wform.Forms
             groupBoxReservationDetails.Controls.Add(labelNumberOfTravelers);
             groupBoxReservationDetails.Location = new Point(20, 180);
             groupBoxReservationDetails.Name = "groupBoxReservationDetails";
-            groupBoxReservationDetails.Size = new Size(760, 110);
+            groupBoxReservationDetails.Size = new Size(673, 110);
             groupBoxReservationDetails.TabIndex = 8;
             groupBoxReservationDetails.TabStop = false;
             groupBoxReservationDetails.Text = "Reservation Details";
@@ -156,7 +156,7 @@ namespace travel_agency_wform.Forms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 336);
+            ClientSize = new Size(711, 336);
             Controls.Add(groupBoxReservationDetails);
             Controls.Add(groupBoxPackageDetails);
             Controls.Add(groupBoxClientDetails);
