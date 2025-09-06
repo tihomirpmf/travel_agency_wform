@@ -109,7 +109,7 @@
             // 
             textBoxSearch.Location = new Point(6, 22);
             textBoxSearch.Name = "textBoxSearch";
-            textBoxSearch.PlaceholderText = "Search by name or surname";
+            textBoxSearch.PlaceholderText = "Search by name/surname/passport";
             textBoxSearch.Size = new Size(200, 23);
             textBoxSearch.TabIndex = 3;
             textBoxSearch.TextChanged += textBoxSearch_TextChanged;

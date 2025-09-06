@@ -45,7 +45,7 @@ namespace travel_agency_wform.Models
         public string FullName => $"{FirstName} {LastName}";
         public override string ToString()
         {
-            return FullName;
+            return FullName + " - " + PassportNumber;
         }
         
         public string GetEncryptedPassportNumber() => _encryptedPassportNumber;

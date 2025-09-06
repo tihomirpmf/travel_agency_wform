@@ -16,7 +16,7 @@ namespace travel_agency_wform.Models
         
         public override string ToString()
         {
-            return $"{Name} - {Destination}";
+            return $"{Name} - {Destination} - {Price}";
         }
     }
     

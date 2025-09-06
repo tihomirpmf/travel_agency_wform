@@ -34,22 +34,6 @@ namespace travel_agency_wform.Services.Observers
             }
         }
         
-        public void NotifyDataChanged(string dataType)
-        {
-            foreach (var observer in _observers)
-            {
-                try
-                {
-                    observer.OnDataChanged(dataType);
-                }
-                catch (Exception ex)
-                {
-                    // Log error but don't stop other observers
-                    System.Diagnostics.Debug.WriteLine($"Error notifying observer: {ex.Message}");
-                }
-            }
-        }
-        
         public void NotifyClientAdded(int clientId)
         {
             foreach (var observer in _observers)
