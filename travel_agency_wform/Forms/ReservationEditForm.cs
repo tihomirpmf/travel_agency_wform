@@ -10,7 +10,6 @@ namespace travel_agency_wform.Forms
         
         private ComboBox _comboPackages = null!;
         private ComboBox _comboStatus = null!;
-        private DateTimePicker _datePicker = null!;
         private NumericUpDown _numericTravelers = null!;
         private Label _labelTotal = null!;
         private NumericUpDown _numericPrice = null!;
@@ -37,20 +36,16 @@ namespace travel_agency_wform.Forms
             _comboStatus.Items.AddRange(new object[] { ReservationStatus.Active, ReservationStatus.Cancelled });
             _comboStatus.SelectedItem = _reservation.Status;
             
-            var labelDate = new Label { Left = 20, Top = 90, Width = 150, Text = "Reservation date:" };
-            _datePicker = new DateTimePicker { Left = 180, Top = 88, Width = 200, Format = DateTimePickerFormat.Custom, CustomFormat = "yyyy-MM-dd HH:mm" };
-            _datePicker.Value = _reservation.ReservationDate == default ? DateTime.Now : _reservation.ReservationDate;
-            
-            var labelTravelers = new Label { Left = 20, Top = 125, Width = 150, Text = "Number of travelers:" };
-            _numericTravelers = new NumericUpDown { Left = 180, Top = 123, Width = 120, Minimum = 1, Maximum = 100 };
+            var labelTravelers = new Label { Left = 20, Top = 90, Width = 150, Text = "Number of travelers:" };
+            _numericTravelers = new NumericUpDown { Left = 180, Top = 88, Width = 120, Minimum = 1, Maximum = 100 };
             _numericTravelers.Value = _reservation.NumberOfTravelers > 0 ? _reservation.NumberOfTravelers : 1;
             _numericTravelers.ValueChanged += (s, e) => UpdateTotalLabel();
             
-            var labelPrice = new Label { Left = 20, Top = 160, Width = 150, Text = "Price per person:" };
-            _numericPrice = new NumericUpDown { Left = 180, Top = 158, Width = 120, Minimum = 0, Maximum = 1000000, DecimalPlaces = 2, Increment = 1 };
+            var labelPrice = new Label { Left = 20, Top = 125, Width = 150, Text = "Price per person:" };
+            _numericPrice = new NumericUpDown { Left = 180, Top = 123, Width = 120, Minimum = 0, Maximum = 1000000, DecimalPlaces = 2, Increment = 1 };
             _numericPrice.ValueChanged += (s, e) => UpdateTotalLabel();
             
-            _labelTotal = new Label { Left = 320, Top = 160, Width = 180, Text = "Total: -" };
+            _labelTotal = new Label { Left = 320, Top = 125, Width = 180, Text = "Total: -" };
             
             var buttonSave = new Button { Left = 380, Top = 210, Width = 120, Text = "Save" };
             buttonSave.Click += async (s, e) =>
@@ -65,7 +60,6 @@ namespace travel_agency_wform.Forms
                         _reservation.Package = selectedPackage;
                     }
                     _reservation.Status = (ReservationStatus)_comboStatus.SelectedItem!;
-                    _reservation.ReservationDate = _datePicker.Value;
                     _reservation.NumberOfTravelers = (int)_numericTravelers.Value;
                     // set explicit total using price * travelers
                     var perPerson = (decimal)_numericPrice.Value;
@@ -93,8 +87,6 @@ namespace travel_agency_wform.Forms
             this.Controls.Add(_comboPackages);
             this.Controls.Add(labelStatus);
             this.Controls.Add(_comboStatus);
-            this.Controls.Add(labelDate);
-            this.Controls.Add(_datePicker);
             this.Controls.Add(labelTravelers);
             this.Controls.Add(_numericTravelers);
             this.Controls.Add(labelPrice);

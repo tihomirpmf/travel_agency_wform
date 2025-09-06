@@ -171,7 +171,7 @@ namespace travel_agency_wform
                 var clientReservations = _reservations.Where(r => r.ClientId == _selectedClient.Id).ToList();
                 System.Diagnostics.Debug.WriteLine($"Refreshing reservations for client {_selectedClient.Id}. Found {clientReservations.Count} reservations.");
                 
-                foreach (var reservation in clientReservations.OrderByDescending(r => r.ReservationDate))
+                foreach (var reservation in clientReservations.OrderByDescending(r => r.Id))
                 {
                     var package = _packages.FirstOrDefault(p => p.Id == reservation.PackageId);
                     var status = reservation.Status == ReservationStatus.Active ? "Active" :
@@ -430,7 +430,6 @@ namespace travel_agency_wform
                 // Data will be refreshed via observer pattern
             }
         }
-
 
 
         private void buttonSearch_Click(object sender, EventArgs e)

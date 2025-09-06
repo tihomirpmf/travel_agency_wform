@@ -5,7 +5,6 @@ namespace travel_agency_wform.Models
         public int Id { get; set; }
         public int ClientId { get; set; }
         public int PackageId { get; set; }
-        public DateTime ReservationDate { get; set; } = DateTime.Now;
         public int NumberOfTravelers { get; set; } = 1;
         public decimal TotalPrice { get; set; }
         public ReservationStatus Status { get; set; } = ReservationStatus.Active;

@@ -80,7 +80,6 @@ namespace travel_agency_wform.Services.Database
                     Id {GetAutoIncrementSql()},
                     ClientId INTEGER NOT NULL,
                     PackageId INTEGER NOT NULL,
-                    ReservationDate TEXT NOT NULL,
                     NumberOfTravelers INTEGER NOT NULL,
                     TotalPrice REAL NOT NULL,
                     Status INTEGER NOT NULL,
@@ -234,7 +233,7 @@ namespace travel_agency_wform.Services.Database
                        FROM Reservations r 
                        JOIN Clients c ON r.ClientId = c.Id 
                        JOIN TravelPackages p ON r.PackageId = p.Id 
-                       ORDER BY r.ReservationDate DESC";
+                       ORDER BY r.Id DESC";
             
             using var command = CreateCommand(sql, connection);
             using var reader = await command.ExecuteReaderAsync();
@@ -258,7 +257,7 @@ namespace travel_agency_wform.Services.Database
                        FROM Reservations r 
                        JOIN TravelPackages p ON r.PackageId = p.Id 
                        WHERE r.ClientId = @ClientId 
-                       ORDER BY r.ReservationDate DESC";
+                       ORDER BY r.Id DESC";
             
             using var command = CreateCommand(sql, connection);
             AddParameter(command, "@ClientId", clientId);
@@ -302,17 +301,16 @@ namespace travel_agency_wform.Services.Database
                 using var connection = CreateConnection();
                 await connection.OpenAsync();
                 
-                var sql = $@"INSERT INTO Reservations (ClientId, PackageId, ReservationDate, NumberOfTravelers, TotalPrice, Status) 
-                           VALUES (@ClientId, @PackageId, @ReservationDate, @NumberOfTravelers, @TotalPrice, @Status);
+                var sql = $@"INSERT INTO Reservations (ClientId, PackageId, NumberOfTravelers, TotalPrice, Status) 
+                           VALUES (@ClientId, @PackageId, @NumberOfTravelers, @TotalPrice, @Status);
                            {GetLastInsertIdSql()};";
                 
                 System.Diagnostics.Debug.WriteLine($"SQL: {sql}");
-                System.Diagnostics.Debug.WriteLine($"Parameters: ClientId={reservation.ClientId}, PackageId={reservation.PackageId}, Date={reservation.ReservationDate}, Travelers={reservation.NumberOfTravelers}, Price={reservation.TotalPrice}, Status={reservation.Status}");
+                System.Diagnostics.Debug.WriteLine($"Parameters: ClientId={reservation.ClientId}, PackageId={reservation.PackageId}, Travelers={reservation.NumberOfTravelers}, Price={reservation.TotalPrice}, Status={reservation.Status}");
                 
                 using var command = CreateCommand(sql, connection);
                 AddParameter(command, "@ClientId", reservation.ClientId);
                 AddParameter(command, "@PackageId", reservation.PackageId);
-                AddParameter(command, "@ReservationDate", reservation.ReservationDate.ToString(GetDateTimeFormat()));
                 AddParameter(command, "@NumberOfTravelers", reservation.NumberOfTravelers);
                 AddParameter(command, "@TotalPrice", reservation.TotalPrice);
                 AddParameter(command, "@Status", (int)reservation.Status);
@@ -338,14 +336,13 @@ namespace travel_agency_wform.Services.Database
             await connection.OpenAsync();
             
             var sql = @"UPDATE Reservations SET ClientId = @ClientId, PackageId = @PackageId, 
-                       ReservationDate = @ReservationDate, NumberOfTravelers = @NumberOfTravelers, 
+                       NumberOfTravelers = @NumberOfTravelers, 
                        TotalPrice = @TotalPrice, Status = @Status WHERE Id = @Id";
             
             using var command = CreateCommand(sql, connection);
             AddParameter(command, "@Id", reservation.Id);
             AddParameter(command, "@ClientId", reservation.ClientId);
             AddParameter(command, "@PackageId", reservation.PackageId);
-            AddParameter(command, "@ReservationDate", reservation.ReservationDate.ToString(GetDateTimeFormat()));
             AddParameter(command, "@NumberOfTravelers", reservation.NumberOfTravelers);
             AddParameter(command, "@TotalPrice", reservation.TotalPrice);
             AddParameter(command, "@Status", (int)reservation.Status);
@@ -518,7 +515,6 @@ namespace travel_agency_wform.Services.Database
                 .SetId(reader.GetInt32(reader.GetOrdinal("Id")))
                 .SetClientId(reader.GetInt32(reader.GetOrdinal("ClientId")))
                 .SetPackageId(reader.GetInt32(reader.GetOrdinal("PackageId")))
-                .SetReservationDate(GetDateTime(reader, "ReservationDate"))
                 .SetNumberOfTravelers(reader.GetInt32(reader.GetOrdinal("NumberOfTravelers")))
                 .SetTotalPrice(reader.GetDecimal(reader.GetOrdinal("TotalPrice")))
                 .SetStatus((ReservationStatus)reader.GetInt32(reader.GetOrdinal("Status")))

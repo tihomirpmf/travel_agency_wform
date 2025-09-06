@@ -84,7 +84,7 @@ namespace travel_agency_wform.Services.Database.Templates
             using var reservationReader = (MySqlDataReader)await reservationCommand.ExecuteReaderAsync();
             while (await reservationReader.ReadAsync())
             {
-                backupSql.AppendLine($"INSERT INTO Reservations VALUES ({reservationReader.GetInt32(reservationReader.GetOrdinal("Id"))}, {reservationReader.GetInt32(reservationReader.GetOrdinal("ClientId"))}, {reservationReader.GetInt32(reservationReader.GetOrdinal("PackageId"))}, '{reservationReader.GetDateTime(reservationReader.GetOrdinal("ReservationDate")):yyyy-MM-dd HH:mm:ss}', {reservationReader.GetInt32(reservationReader.GetOrdinal("NumberOfTravelers"))}, {reservationReader.GetDecimal(reservationReader.GetOrdinal("TotalPrice"))}, {reservationReader.GetInt32(reservationReader.GetOrdinal("Status"))});");
+                backupSql.AppendLine($"INSERT INTO Reservations VALUES ({reservationReader.GetInt32(reservationReader.GetOrdinal("Id"))}, {reservationReader.GetInt32(reservationReader.GetOrdinal("ClientId"))}, {reservationReader.GetInt32(reservationReader.GetOrdinal("PackageId"))}, {reservationReader.GetInt32(reservationReader.GetOrdinal("NumberOfTravelers"))}, {reservationReader.GetDecimal(reservationReader.GetOrdinal("TotalPrice"))}, {reservationReader.GetInt32(reservationReader.GetOrdinal("Status"))});");
             }
             reservationReader.Close();
             

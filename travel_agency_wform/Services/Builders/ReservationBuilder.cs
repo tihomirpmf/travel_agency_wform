@@ -7,7 +7,6 @@ namespace travel_agency_wform.Services.Builders
         private int _id;
         private int _clientId;
         private int _packageId;
-        private DateTime _reservationDate;
         private int _numberOfTravelers;
         private decimal _totalPrice;
         private ReservationStatus _status;
@@ -29,12 +28,6 @@ namespace travel_agency_wform.Services.Builders
         public ReservationBuilder SetPackageId(int packageId)
         {
             _packageId = packageId;
-            return this;
-        }
-
-        public ReservationBuilder SetReservationDate(DateTime reservationDate)
-        {
-            _reservationDate = reservationDate;
             return this;
         }
 
@@ -75,7 +68,6 @@ namespace travel_agency_wform.Services.Builders
                 Id = _id,
                 ClientId = _clientId,
                 PackageId = _packageId,
-                ReservationDate = _reservationDate,
                 NumberOfTravelers = _numberOfTravelers,
                 TotalPrice = _totalPrice,
                 Status = _status,
