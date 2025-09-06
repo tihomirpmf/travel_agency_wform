@@ -365,3 +365,4 @@ FodyWeavers.xsd
 /travel_agency_wform/Forms/ReservationForm.resx
 /travel_agency_wform/Forms/AddPackageForm.resx
 /travel_agency_wform/Form1.resx
+*.resx
