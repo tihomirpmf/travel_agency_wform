@@ -132,7 +132,6 @@ namespace travel_agency_wform.Forms
                 try
                 {
                     var packages = await _agencyService.GetAllPackagesAsync();
-                    System.Diagnostics.Debug.WriteLine($"Loaded {packages.Count} packages for reservation {_reservation.Id} with PackageId {_reservation.PackageId}");
                     
                     _comboPackages.Items.Clear();
                     foreach (var p in packages)
@@ -146,11 +145,9 @@ namespace travel_agency_wform.Forms
                     if (currentPackage != null)
                     {
                         _comboPackages.SelectedItem = currentPackage;
-                        System.Diagnostics.Debug.WriteLine($"Selected package: {currentPackage.Name} (ID: {currentPackage.Id})");
                     }
                     else
                     {
-                        System.Diagnostics.Debug.WriteLine($"Package with ID {_reservation.PackageId} not found in available packages");
                         _comboPackages.SelectedIndex = packages.Count > 0 ? 0 : -1;
                     }
                     

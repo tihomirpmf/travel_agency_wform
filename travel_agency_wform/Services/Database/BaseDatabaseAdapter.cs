@@ -305,9 +305,6 @@ namespace travel_agency_wform.Services.Database
                            VALUES (@ClientId, @PackageId, @NumberOfTravelers, @TotalPrice, @Status);
                            {GetLastInsertIdSql()};";
                 
-                System.Diagnostics.Debug.WriteLine($"SQL: {sql}");
-                System.Diagnostics.Debug.WriteLine($"Parameters: ClientId={reservation.ClientId}, PackageId={reservation.PackageId}, Travelers={reservation.NumberOfTravelers}, Price={reservation.TotalPrice}, Status={reservation.Status}");
-                
                 using var command = CreateCommand(sql, connection);
                 AddParameter(command, "@ClientId", reservation.ClientId);
                 AddParameter(command, "@PackageId", reservation.PackageId);
@@ -317,15 +314,10 @@ namespace travel_agency_wform.Services.Database
                 
                 var result = await command.ExecuteScalarAsync();
                 var reservationId = Convert.ToInt32(result);
-                
-                System.Diagnostics.Debug.WriteLine($"Reservation inserted with ID: {reservationId}");
-                
                 return reservationId;
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in AddReservationAsync: {ex.Message}");
-                System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
                 throw;
             }
         }

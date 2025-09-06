@@ -169,15 +169,12 @@ namespace travel_agency_wform
             if (_selectedClient != null)
             {
                 var clientReservations = _reservations.Where(r => r.ClientId == _selectedClient.Id).ToList();
-                System.Diagnostics.Debug.WriteLine($"Refreshing reservations for client {_selectedClient.Id}. Found {clientReservations.Count} reservations.");
                 
                 foreach (var reservation in clientReservations.OrderByDescending(r => r.Id))
                 {
                     var package = _packages.FirstOrDefault(p => p.Id == reservation.PackageId);
                     var status = reservation.Status == ReservationStatus.Active ? "Active" :
                                 reservation.Status == ReservationStatus.Cancelled ? "Cancelled" : "Completed";
-
-                    System.Diagnostics.Debug.WriteLine($"Adding reservation: ID={reservation.Id}, Package={package?.Name ?? "Unknown"}, Status={status}");
                     
                     // Assign the package object to the reservation for the edit form
                     reservation.Package = package ?? new SeasidePackage { Name = "Unknown Package" };
@@ -188,7 +185,6 @@ namespace travel_agency_wform
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("No client selected, clearing reservation list");
             }
         }
 
@@ -332,21 +328,17 @@ namespace travel_agency_wform
             var package = selectedItem as TravelPackage;
             if (package != null)
             {
-                System.Diagnostics.Debug.WriteLine($"Opening reservation form for Client ID: {_selectedClient.Id}, Package ID: {package.Id}");
                 var reservationForm = new ReservationForm(_agencyService, _selectedClient.Id, package.Id);
                 if (reservationForm.ShowDialog() == DialogResult.OK)
                 {
-                    System.Diagnostics.Debug.WriteLine("Reservation form closed with OK result");
                     // Data will be refreshed via observer pattern
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("Reservation form closed with Cancel result");
                 }
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine($"Invalid package selection: {selectedItem?.GetType().Name ?? "null"}");
                 MessageBox.Show("Invalid package selection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
