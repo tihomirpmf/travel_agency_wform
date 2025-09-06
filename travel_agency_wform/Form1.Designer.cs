@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             listBoxClients = new ListBox();
-            listBoxPackages = new ListBox();
+            treeViewPackages = new TreeView();
             listBoxReservations = new ListBox();
             groupBoxClients = new GroupBox();
             textBoxSearch = new TextBox();
@@ -73,15 +73,13 @@
             listBoxClients.TabIndex = 0;
             listBoxClients.SelectedIndexChanged += listBoxClients_SelectedIndexChanged;
             // 
-            // listBoxPackages
-            // 
-            listBoxPackages.FormattingEnabled = true;
-            listBoxPackages.ItemHeight = 15;
-            listBoxPackages.Location = new Point(6, 50);
-            listBoxPackages.Name = "listBoxPackages";
-            listBoxPackages.Size = new Size(387, 229);
-            listBoxPackages.TabIndex = 1;
-            listBoxPackages.SelectedIndexChanged += listBoxPackages_SelectedIndexChanged;
+            // treeViewPackages
+            //
+            treeViewPackages.Location = new Point(6, 50);
+            treeViewPackages.Name = "treeViewPackages";
+            treeViewPackages.Size = new Size(387, 229);
+            treeViewPackages.TabIndex = 1;
+            treeViewPackages.AfterSelect += treeViewPackages_AfterSelect;
             // 
             // listBoxReservations
             // 
@@ -136,7 +134,7 @@
             // 
             // groupBoxPackages
             // 
-            groupBoxPackages.Controls.Add(listBoxPackages);
+            groupBoxPackages.Controls.Add(treeViewPackages);
             groupBoxPackages.Controls.Add(buttonAddPackage);
             groupBoxPackages.Location = new Point(360, 12);
             groupBoxPackages.Name = "groupBoxPackages";
@@ -338,7 +336,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBoxClients;
-        private System.Windows.Forms.ListBox listBoxPackages;
+        private System.Windows.Forms.TreeView treeViewPackages;
         private System.Windows.Forms.ListBox listBoxReservations;
         private System.Windows.Forms.GroupBox groupBoxClients;
         private System.Windows.Forms.TextBox textBoxSearch;

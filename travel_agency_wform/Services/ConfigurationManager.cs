@@ -72,9 +72,5 @@ namespace travel_agency_wform.Services
             File.WriteAllLines(configPath, defaultConfig, Encoding.UTF8);
         }
         
-        public void ReloadConfiguration()
-        {
-            LoadConfiguration();
-        }
     }
 }

@@ -114,53 +114,33 @@ namespace travel_agency_wform
 
         private void RefreshPackageList()
         {
-            listBoxPackages.Items.Clear();
+            treeViewPackages.BeginUpdate();
+            treeViewPackages.Nodes.Clear();
 
-            // Group packages by type
             var seasidePackages = _packages.Where(p => p.Type == PackageType.Seaside).ToList();
             var mountainPackages = _packages.Where(p => p.Type == PackageType.Mountain).ToList();
             var excursionPackages = _packages.Where(p => p.Type == PackageType.Excursion).ToList();
             var cruisePackages = _packages.Where(p => p.Type == PackageType.Cruise).ToList();
 
-            if (seasidePackages.Any())
+            void AddCategory(string categoryName, List<TravelPackage> items)
             {
-                listBoxPackages.Items.Add("=== SEASIDE PACKAGES ===");
-                foreach (var package in seasidePackages)
+                if (!items.Any()) return;
+                var categoryNode = new TreeNode(categoryName);
+                foreach (var package in items)
                 {
-                    // Store the package object directly in the list box for easy access
-                    listBoxPackages.Items.Add(package);
+                    var child = new TreeNode(package.Name) { Tag = package };
+                    categoryNode.Nodes.Add(child);
                 }
+                treeViewPackages.Nodes.Add(categoryNode);
             }
 
-            if (mountainPackages.Any())
-            {
-                listBoxPackages.Items.Add("=== MOUNTAIN PACKAGES ===");
-                foreach (var package in mountainPackages)
-                {
-                    // Store the package object directly in the list box for easy access
-                    listBoxPackages.Items.Add(package);
-                }
-            }
+            AddCategory("Seaside", seasidePackages);
+            AddCategory("Mountain", mountainPackages);
+            AddCategory("Excursion", excursionPackages);
+            AddCategory("Cruise", cruisePackages);
 
-            if (excursionPackages.Any())
-            {
-                listBoxPackages.Items.Add("=== EXCURSION PACKAGES ===");
-                foreach (var package in excursionPackages)
-                {
-                    // Store the package object directly in the list box for easy access
-                    listBoxPackages.Items.Add(package);
-                }
-            }
-
-            if (cruisePackages.Any())
-            {
-                listBoxPackages.Items.Add("=== CRUISE PACKAGES ===");
-                foreach (var package in cruisePackages)
-                {
-                    // Store the package object directly in the list box for easy access
-                    listBoxPackages.Items.Add(package);
-                }
-            }
+            treeViewPackages.ExpandAll();
+            treeViewPackages.EndUpdate();
         }
 
         private void RefreshReservationList()
@@ -246,21 +226,10 @@ namespace travel_agency_wform
             }
         }
 
-        private void listBoxPackages_SelectedIndexChanged(object sender, EventArgs e)
+        private void treeViewPackages_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (listBoxPackages.SelectedIndex < 0 || listBoxPackages.SelectedItem == null)
-                return;
-
-            // Ignore category headers like === SEASIDE PACKAGES ===
-            if (listBoxPackages.SelectedItem is string header && header.StartsWith("==="))
-            {
-                groupBoxPackageInfo.Visible = false;
-                labelPackageText.Text = string.Empty;
-                return;
-            }
-
-            var package = listBoxPackages.SelectedItem as TravelPackage;
-            if (package == null)
+            var node = e.Node;
+            if (node == null || node.Tag is not TravelPackage package)
             {
                 groupBoxPackageInfo.Visible = false;
                 labelPackageText.Text = string.Empty;
@@ -311,21 +280,14 @@ namespace travel_agency_wform
                 return;
             }
 
-            if (listBoxPackages.SelectedIndex < 0)
+            if (treeViewPackages.SelectedNode == null)
             {
                 MessageBox.Show("Please select a package to reserve.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            var selectedItem = listBoxPackages.SelectedItem;
-            if (selectedItem is string selectedText && selectedText.StartsWith("==="))
-            {
-                MessageBox.Show("Please select a specific package, not a category header.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            // Get the selected package object directly
-            var package = selectedItem as TravelPackage;
+            // Get the selected package object from the selected tree node
+            var package = treeViewPackages.SelectedNode.Tag as TravelPackage;
             if (package != null)
             {
                 var reservationForm = new ReservationForm(_agencyService, _selectedClient.Id, package.Id);
