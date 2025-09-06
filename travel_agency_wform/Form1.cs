@@ -92,10 +92,23 @@ namespace travel_agency_wform
 
         private void RefreshClientList()
         {
+            // Remember currently selected client's Id, if any
+            var selectedId = _selectedClient?.Id;
+
             listBoxClients.Items.Clear();
             foreach (var client in _clients.OrderBy(c => c.LastName).ThenBy(c => c.FirstName))
             {
                 listBoxClients.Items.Add(client);
+            }
+
+            // Restore selection highlight if previously selected client still exists
+            if (selectedId.HasValue)
+            {
+                var toSelect = _clients.FirstOrDefault(c => c.Id == selectedId.Value);
+                if (toSelect != null)
+                {
+                    listBoxClients.SelectedItem = toSelect;
+                }
             }
         }
 
