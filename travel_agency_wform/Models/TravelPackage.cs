@@ -73,11 +73,10 @@ namespace travel_agency_wform.Models
         public string Route { get; set; } = string.Empty;
         public DateTime DepartureDate { get; set; }
         public string CabinType { get; set; } = string.Empty;
-        public string TransportationType { get; set; } = string.Empty;
         
         public override string GetPackageDetails()
         {
-            return $"Cruise Package: {Ship}, Route: {Route}, Departure: {DepartureDate:dd/MM/yyyy}, Cabin: {CabinType}, Transport: {TransportationType}, {NumberOfDays} days";
+            return $"Cruise Package: {Ship}, Route: {Route}, Departure: {DepartureDate:dd/MM/yyyy}, Cabin: {CabinType}, {NumberOfDays} days";
         }
     }
 }

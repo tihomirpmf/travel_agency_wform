@@ -66,6 +66,21 @@ namespace travel_agency_wform.Forms
                     panelCruise.Visible = true;
                     break;
             }
+
+            // Destination is always visible; disable for Cruise to avoid layout gaps
+            if (selectedType == PackageType.Cruise)
+            {
+                textBoxDestination.Enabled = false;
+                textBoxDestination.Text = "N/A for Cruise";
+            }
+            else
+            {
+                if (!textBoxDestination.Enabled || textBoxDestination.Text == "N/A for Cruise")
+                {
+                    textBoxDestination.Text = string.Empty;
+                }
+                textBoxDestination.Enabled = true;
+            }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -128,13 +143,11 @@ namespace travel_agency_wform.Forms
                             package = cruiseBuilder
                                 .SetName(textBoxPackageName.Text.Trim())
                                 .SetPrice(numericUpDownPrice.Value)
-                                .SetDestination(textBoxDestination.Text.Trim())
                                 .SetNumberOfDays((int)numericUpDownNumberOfDays.Value)
                                 .SetShip(textBoxCruiseShip.Text.Trim())
                                 .SetRoute(textBoxCruiseRoute.Text.Trim())
                                 .SetDepartureDate(dateTimePickerCruiseDepartureDate.Value)
                                 .SetCabinType(textBoxCruiseCabinType.Text.Trim())
-                                .SetTransportationType(textBoxCruiseTransportation.Text.Trim())
                                 .Build();
                             break;
 
@@ -144,22 +157,35 @@ namespace travel_agency_wform.Forms
 
                     _ = Task.Run(async () =>
                     {
-                        var packageId = await _agencyService.AddPackageAsync(package);
-                        if (InvokeRequired)
+                        try
                         {
-                            Invoke(new Action(() =>
+                            var packageId = await _agencyService.AddPackageAsync(package);
+                            if (InvokeRequired)
                             {
-                                if (packageId > 0)
+                                Invoke(new Action(() =>
                                 {
-                                    MessageBox.Show("Package added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    DialogResult = DialogResult.OK;
-                                    Close();
-                                }
-                                else
+                                    if (packageId > 0)
+                                    {
+                                        MessageBox.Show("Package added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        DialogResult = DialogResult.OK;
+                                        Close();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Failed to add package.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }));
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (InvokeRequired)
+                            {
+                                Invoke(new Action(() =>
                                 {
-                                    MessageBox.Show("Failed to add package.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-                            }));
+                                    MessageBox.Show($"Error adding package: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }));
+                            }
                         }
                     });
                 }
@@ -179,11 +205,14 @@ namespace travel_agency_wform.Forms
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(textBoxDestination.Text))
+            if (comboBoxPackageType.SelectedItem is PackageType pt && pt != PackageType.Cruise)
             {
-                MessageBox.Show("Destination is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBoxDestination.Focus();
-                return false;
+                if (string.IsNullOrWhiteSpace(textBoxDestination.Text))
+                {
+                    MessageBox.Show("Destination is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    textBoxDestination.Focus();
+                    return false;
+                }
             }
 
             if (comboBoxPackageType.SelectedItem == null)

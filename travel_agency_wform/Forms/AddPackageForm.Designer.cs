@@ -58,8 +58,6 @@ namespace travel_agency_wform.Forms
             textBoxExcursionTransportation = new TextBox();
             labelExcursionTransportation = new Label();
             panelCruise = new Panel();
-            textBoxCruiseTransportation = new TextBox();
-            labelCruiseTransportation = new Label();
             textBoxCruiseCabinType = new TextBox();
             labelCruiseCabinType = new Label();
             dateTimePickerCruiseDepartureDate = new DateTimePicker();
@@ -338,8 +336,6 @@ namespace travel_agency_wform.Forms
             // 
             // panelCruise
             // 
-            panelCruise.Controls.Add(textBoxCruiseTransportation);
-            panelCruise.Controls.Add(labelCruiseTransportation);
             panelCruise.Controls.Add(textBoxCruiseCabinType);
             panelCruise.Controls.Add(labelCruiseCabinType);
             panelCruise.Controls.Add(dateTimePickerCruiseDepartureDate);
@@ -353,22 +349,6 @@ namespace travel_agency_wform.Forms
             panelCruise.Size = new Size(336, 160);
             panelCruise.TabIndex = 15;
             panelCruise.Visible = false;
-            // 
-            // textBoxCruiseTransportation
-            // 
-            textBoxCruiseTransportation.Location = new Point(120, 127);
-            textBoxCruiseTransportation.Name = "textBoxCruiseTransportation";
-            textBoxCruiseTransportation.Size = new Size(200, 23);
-            textBoxCruiseTransportation.TabIndex = 9;
-            // 
-            // labelCruiseTransportation
-            // 
-            labelCruiseTransportation.AutoSize = true;
-            labelCruiseTransportation.Location = new Point(0, 130);
-            labelCruiseTransportation.Name = "labelCruiseTransportation";
-            labelCruiseTransportation.Size = new Size(87, 15);
-            labelCruiseTransportation.TabIndex = 8;
-            labelCruiseTransportation.Text = "Transportation:";
             // 
             // textBoxCruiseCabinType
             // 
@@ -538,9 +518,8 @@ namespace travel_agency_wform.Forms
         private System.Windows.Forms.Label labelCruiseDepartureDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerCruiseDepartureDate;
         private System.Windows.Forms.Label labelCruiseCabinType;
-        private System.Windows.Forms.TextBox textBoxCruiseTransportation;
         private System.Windows.Forms.TextBox textBoxCruiseCabinType;
-        private System.Windows.Forms.Label labelCruiseTransportation;
+        
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
     }

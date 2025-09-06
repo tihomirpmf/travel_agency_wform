@@ -63,7 +63,7 @@ namespace travel_agency_wform.Services.Database
                     Name TEXT NOT NULL,
                     Price REAL NOT NULL,
                     Type INTEGER NOT NULL,
-                    Destination TEXT NOT NULL,
+                    Destination TEXT,
                     NumberOfDays INTEGER NOT NULL,
                     CreatedAt TEXT NOT NULL,
                     AccommodationType TEXT,
@@ -203,7 +203,8 @@ namespace travel_agency_wform.Services.Database
             AddParameter(command, "@Name", package.Name);
             AddParameter(command, "@Price", package.Price);
             AddParameter(command, "@Type", (int)package.Type);
-            AddParameter(command, "@Destination", package.Destination);
+            // Destination: for cruises store empty string to support existing NOT NULL schemas
+            AddParameter(command, "@Destination", package.Type == PackageType.Cruise ? "" : package.Destination);
             AddParameter(command, "@NumberOfDays", package.NumberOfDays);
             AddParameter(command, "@CreatedAt", package.CreatedAt.ToString(GetDateTimeFormat()));
             
@@ -385,7 +386,7 @@ namespace travel_agency_wform.Services.Database
             using var connection = CreateConnection();
             await connection.OpenAsync();
             
-            var sql = "SELECT DISTINCT Destination FROM TravelPackages ORDER BY Destination";
+            var sql = "SELECT DISTINCT Destination FROM TravelPackages WHERE Destination IS NOT NULL AND Destination <> '' ORDER BY Destination";
             using var command = CreateCommand(sql, connection);
             using var reader = await command.ExecuteReaderAsync();
             
@@ -498,14 +499,12 @@ namespace travel_agency_wform.Services.Database
                     cruiseBuilder.SetId(reader.GetInt32(reader.GetOrdinal("Id")))
                                 .SetName(reader.GetString(reader.GetOrdinal("Name")))
                                 .SetPrice(reader.GetDecimal(reader.GetOrdinal("Price")))
-                                .SetDestination(reader.GetString(reader.GetOrdinal("Destination")))
                                 .SetNumberOfDays(reader.GetInt32(reader.GetOrdinal("NumberOfDays")))
                                 .SetCreatedAt(GetDateTime(reader, "CreatedAt"))
                                 .SetShip(GetStringOrEmpty(reader, "Ship"))
                                 .SetRoute(GetStringOrEmpty(reader, "Route"))
                                 .SetDepartureDate(GetDateTimeOrMinValue(reader, "DepartureDate"))
-                                .SetCabinType(GetStringOrEmpty(reader, "CabinType"))
-                                .SetTransportationType(GetStringOrEmpty(reader, "TransportationType"));
+                                .SetCabinType(GetStringOrEmpty(reader, "CabinType"));
                     return cruiseBuilder.Build();
                     
                 default:
@@ -546,7 +545,6 @@ namespace travel_agency_wform.Services.Database
                 SeasidePackage seaside => seaside.TransportationType,
                 MountainPackage mountain => mountain.TransportationType,
                 ExcursionPackage excursion => excursion.TransportationType,
-                CruisePackage cruise => cruise.TransportationType,
                 _ => ""
             };
         }

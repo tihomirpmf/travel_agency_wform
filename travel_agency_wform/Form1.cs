@@ -287,8 +287,7 @@ namespace travel_agency_wform
                     extraInfo = $"Ship: {cruise.Ship}\r\n" +
                                $"Route: {cruise.Route}\r\n" +
                                $"Departure: {cruise.DepartureDate:dd/MM/yyyy}\r\n" +
-                               $"Cabin: {cruise.CabinType}\r\n" +
-                               $"Transport: {cruise.TransportationType}";
+                               $"Cabin: {cruise.CabinType}\r\n";
                     break;
             }
 

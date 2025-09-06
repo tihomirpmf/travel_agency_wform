@@ -37,7 +37,7 @@ namespace travel_agency_wform.Forms
                 if (_client != null && _package != null)
                 {
                     labelClientInfo.Text = $"Client: {_client.FullName}";
-                    labelPackageInfo.Text = $"Package: {_package.Name} - {_package.Destination} - {_package.Price:C} - {_package.NumberOfDays} days";
+                    labelPackageInfo.Text = $"Package: {_package.GetPackageDetails()}";
                     
                     // Calculate initial total
                     CalculateTotal();

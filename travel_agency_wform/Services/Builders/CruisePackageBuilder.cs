@@ -7,14 +7,12 @@ namespace travel_agency_wform.Services.Builders
         private int _id;
         private string _name = string.Empty;
         private decimal _price;
-        private string _destination = string.Empty;
         private int _numberOfDays;
         private DateTime _createdAt = DateTime.Now;
         private string _ship = string.Empty;
         private string _route = string.Empty;
         private DateTime _departureDate;
         private string _cabinType = string.Empty;
-        private string _transportationType = string.Empty;
         
         public CruisePackageBuilder SetId(int id)
         {
@@ -31,12 +29,6 @@ namespace travel_agency_wform.Services.Builders
         public CruisePackageBuilder SetPrice(decimal price)
         {
             _price = price;
-            return this;
-        }
-        
-        public CruisePackageBuilder SetDestination(string destination)
-        {
-            _destination = destination ?? string.Empty;
             return this;
         }
         
@@ -76,12 +68,6 @@ namespace travel_agency_wform.Services.Builders
             return this;
         }
         
-        public CruisePackageBuilder SetTransportationType(string transportationType)
-        {
-            _transportationType = transportationType ?? string.Empty;
-            return this;
-        }
-        
         public TravelPackage Build()
         {
             return new CruisePackage
@@ -90,14 +76,12 @@ namespace travel_agency_wform.Services.Builders
                 Name = _name,
                 Price = _price,
                 Type = PackageType.Cruise,
-                Destination = _destination,
                 NumberOfDays = _numberOfDays,
                 CreatedAt = _createdAt,
                 Ship = _ship,
                 Route = _route,
                 DepartureDate = _departureDate,
-                CabinType = _cabinType,
-                TransportationType = _transportationType
+                CabinType = _cabinType
             };
         }
     }

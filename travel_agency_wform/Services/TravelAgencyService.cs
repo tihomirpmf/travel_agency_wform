@@ -103,7 +103,7 @@ namespace travel_agency_wform.Services
             if (package.Price <= 0)
                 throw new ArgumentException("Package price must be greater than zero.");
             
-            if (string.IsNullOrWhiteSpace(package.Destination))
+            if (package.Type != PackageType.Cruise && string.IsNullOrWhiteSpace(package.Destination))
                 throw new ArgumentException("Destination is required.");
             
             if (package.NumberOfDays <= 0)
