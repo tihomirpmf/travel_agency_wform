@@ -1,3 +1,4 @@
 Ticov Travel Agency
 Data Source=travel_agency.db
-# For MySQL, use: Server=localhost;Database=travel_agency;
+# For MySQL: Server=localhost;Port=3306;Database=travel_agency;Uid=root;Pwd=;
+# For SQLite: Data Source=travel_agency.db
