@@ -1,5 +1,6 @@
 using Microsoft.Data.Sqlite;
 using System.Data.Common;
+using travel_agency_wform.Services.Database.Factories;
 
 namespace travel_agency_wform.Services.Database.Adapters
 {

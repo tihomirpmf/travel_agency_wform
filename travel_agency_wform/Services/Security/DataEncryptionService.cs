@@ -15,8 +15,7 @@ namespace travel_agency_wform.Services.Security
         
         private DataEncryptionService()
         {
-            // In a real application, these would be stored securely (e.g., Azure Key Vault, AWS KMS)
-            // For demo purposes, using hardcoded values that are properly sized for AES-256
+            // Keys for demo purposes, using hardcoded values for AES-256
             var keyString = "YourSecretKey12345678901234567890123456789012"; // 32 bytes for AES-256
             var ivString = "YourSecretIV123456"; // 16 bytes for AES
             
