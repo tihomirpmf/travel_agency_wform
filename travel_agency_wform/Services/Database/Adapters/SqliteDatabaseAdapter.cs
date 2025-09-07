@@ -10,8 +10,6 @@ namespace travel_agency_wform.Services.Database.Adapters
         {
         }
         
-
-        
         protected override DbCommand CreateCommand(string sql, DbConnection connection)
         {
             return new SqliteCommand(sql, (SqliteConnection)connection);

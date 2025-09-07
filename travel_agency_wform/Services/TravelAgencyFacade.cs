@@ -82,15 +82,11 @@ namespace travel_agency_wform.Services
             return clientId;
         }
         
-
-        
         // Package Management
         public async Task<List<TravelPackage>> GetAllPackagesAsync()
         {
             return await _databaseAdapter.GetAllPackagesAsync();
         }
-        
-
         
         public async Task<TravelPackage?> GetPackageByIdAsync(int id)
         {
@@ -117,8 +113,6 @@ namespace travel_agency_wform.Services
             
             return packageId;
         }
-        
-
         
         // Reservation Management
         public async Task<List<Reservation>> GetAllReservationsAsync()
@@ -206,8 +200,6 @@ namespace travel_agency_wform.Services
         {
             if (reservation.Id <= 0)
                 throw new ArgumentException("Invalid reservation ID.");
-            
-            // Trust caller-provided TotalPrice to allow manual overrides in the UI
             
             var success = await _databaseAdapter.UpdateReservationAsync(reservation);
             

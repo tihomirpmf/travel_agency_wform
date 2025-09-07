@@ -15,15 +15,15 @@ namespace travel_agency_wform.Services.Security
         
         private DataEncryptionService()
         {
-            // Keys for demo purposes, using hardcoded values for AES-256
+            // Demo keys
             var keyString = "YourSecretKey12345678901234567890123456789012"; // 32 bytes for AES-256
             var ivString = "YourSecretIV123456"; // 16 bytes for AES
             
-            // Ensure proper key size (32 bytes for AES-256)
+            // Proper key size (32 bytes for AES-256)
             using var sha256 = SHA256.Create();
             _key = sha256.ComputeHash(Encoding.UTF8.GetBytes(keyString));
             
-            // Ensure proper IV size (16 bytes)
+            // Pproper IV size (16 bytes)
             using var md5 = MD5.Create();
             _iv = md5.ComputeHash(Encoding.UTF8.GetBytes(ivString));
         }
@@ -69,7 +69,7 @@ namespace travel_agency_wform.Services.Security
             }
             catch
             {
-                // If decryption fails, return the original text (might be unencrypted legacy data)
+                // If decryption fails, return original text
                 return cipherText;
             }
         }

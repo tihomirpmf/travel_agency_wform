@@ -440,7 +440,6 @@ namespace travel_agency_wform.Services.Database.Adapters
             return string.IsNullOrEmpty(value) ? new List<string>() : value.Split(',').ToList();
         }
         
-        // Template method for creating packages from reader
         protected virtual TravelPackage? CreatePackageFromReader(DbDataReader reader)
         {
             var type = (PackageType)reader.GetInt32(reader.GetOrdinal("Type"));

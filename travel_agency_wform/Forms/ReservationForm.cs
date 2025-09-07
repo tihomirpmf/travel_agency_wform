@@ -84,7 +84,6 @@ namespace travel_agency_wform.Forms
                     {
                         try
                         {
-                            // Direct service call instead of command pattern
                             var success = await _agencyService.ReservePackageAsync(_clientId, _packageId, numberOfTravelers);
                             
                             if (InvokeRequired)

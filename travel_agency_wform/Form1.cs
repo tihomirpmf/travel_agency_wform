@@ -92,7 +92,7 @@ namespace travel_agency_wform
 
         private void RefreshClientList()
         {
-            // Remember currently selected client's Id, if any
+            // Remember currently selected client's id
             var selectedId = _selectedClient?.Id;
 
             listBoxClients.Items.Clear();
@@ -163,13 +163,7 @@ namespace travel_agency_wform
                     listBoxReservations.Items.Add(reservation);
                 }
             }
-            else
-            {
-            }
         }
-
-
-
 
 
         // Observer pattern implementation
@@ -295,9 +289,6 @@ namespace travel_agency_wform
                 {
                     // Data will be refreshed via observer pattern
                 }
-                else
-                {
-                }
             }
             else
             {
@@ -384,7 +375,6 @@ namespace travel_agency_wform
                 // Data will be refreshed via observer pattern
             }
         }
-
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
